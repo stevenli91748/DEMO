@@ -6,3 +6,5 @@
 * [4. 在IDEA中配置spring的方法二：通过XML文件来配置]()
 * [5. 在IDEA中 配置Nginx缓冲]()
 * [6. 在IDEA中，配置Redis]()
+
+this is A 
