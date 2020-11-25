@@ -18,4 +18,4 @@
 
 ## Trouble shooting
 
-1. 不能用vagrant ssh node2连接到远程的计算机
+1. 不能用vagrant ssh node2连接到远程的 node2计算机
