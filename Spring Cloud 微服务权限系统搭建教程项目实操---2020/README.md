@@ -16,15 +16,5 @@
 
 [febs_cloud/febs_cloud_base.sql脚本](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/SQL%E8%84%9A%E6%9C%AC/Febs_Cloud/febs_cloud_base.sql)
 
-## Trouble shooting
+## [Trouble shooting](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/Trouble%20shooting/README.md)
 
-1. 不能用vagrant ssh node2连接到远程的 node2计算机，show error message "vagrant@127.0.0.1: Permission denied (publickey, gssapi-keyex,gssapi-wih-mic)
-
-2. 在docker环境上安装redis容器，容器不能运行
-
-3. docker本机启动多台容器导致出现后续容器启动失败
-
-   解决方法：
-   vim /etc/sysctl.conf
-   添加参数 fs.aio-max-nr = 1048576
-   sysctl -p
