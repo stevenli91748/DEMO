@@ -6,6 +6,9 @@
 3. docker本机启动多台容器导致出现后续容器启动失败
 
    解决方法：
+   
    vim /etc/sysctl.conf
+   
    添加参数 fs.aio-max-nr = 1048576
+   
    sysctl -p
