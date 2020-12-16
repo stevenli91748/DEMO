@@ -12,3 +12,6 @@
    添加参数 fs.aio-max-nr = 1048576
    
    sysctl -p
+   
+4. NFSserver安装
+5. Linux免密码登录
