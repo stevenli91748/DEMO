@@ -15,3 +15,4 @@
    
 4. NFSserver安装
 5. Linux免密码登录
+   解决方法：https://www.youtube.com/watch?v=Xbfhl5Okuhc&feature=youtu.be
