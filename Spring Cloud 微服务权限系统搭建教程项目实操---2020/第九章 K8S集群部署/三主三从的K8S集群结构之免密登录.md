@@ -155,7 +155,7 @@
      
           将.ssh目录的权限为700
           
-            [root@master]# chmod 775 /roo/.ssh/
+            [root@master]# chmod 775 /roo/.ssh
           
           将authorized_keys，id_rsa.pub文件的权限为644
 
@@ -252,7 +252,7 @@
      
           将.ssh目录的权限为700
           
-            [root@master2]# chmod 775 /roo/.ssh/
+            [root@master2]# chmod 775 /roo/.ssh
           
           将authorized_keys，id_rsa.pub文件的权限为644
 
@@ -347,7 +347,7 @@
      
           将.ssh目录的权限为700
           
-            [root@master3]# chmod 775 /roo/.ssh/
+            [root@master3]# chmod 775 /roo/.ssh
           
           将authorized_keys，id_rsa.pub文件的权限为644
 
