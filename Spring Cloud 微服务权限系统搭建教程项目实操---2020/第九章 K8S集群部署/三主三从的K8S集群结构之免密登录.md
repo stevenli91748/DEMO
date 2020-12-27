@@ -153,14 +153,15 @@
           rsa_id.pub 及authorized_keys权限一般为644
           rsa_id权限必须为600
      
-          将.ssh目录的权限为700
-          
-            [root@master]# chmod 775 /roo/.ssh
-          
-          将authorized_keys，id_rsa.pub文件的权限为644
+          但是我只有用 将.ssh目录的权限设为700，将authorized_keys，id_rsa.pub文件的权限为600 才能跟远程虚拟机master2联通
 
-            [root@master]# chmod 644 /roo/.ssh/authorized_keys
-            [root@master]# chmod 644 /roo/.ssh/id_rsa.pub
+          
+           [root@master]# chmod 700 /roo/.ssh
+          
+          将authorized_keys，id_rsa.pub文件的权限为600
+
+            [root@master]# chmod 600 /roo/.ssh/authorized_keys
+            [root@master]# chmod 600 /roo/.ssh/id_rsa.pub
             
           将id_rsa文件的权限为600
           
@@ -250,14 +251,16 @@
           rsa_id.pub 及authorized_keys权限一般为644
           rsa_id权限必须为600
      
+          但是我只有用 将.ssh目录的权限设为700，将authorized_keys，id_rsa.pub文件的权限为600 才能跟远程虚拟机master3联通
+     
           将.ssh目录的权限为700
           
-            [root@master2]# chmod 775 /roo/.ssh
+            [root@master2]# chmod 700 /roo/.ssh
           
-          将authorized_keys，id_rsa.pub文件的权限为644
+          将authorized_keys，id_rsa.pub文件的权限为600
 
-            [root@master2]# chmod 644 /roo/.ssh/authorized_keys
-            [root@master2]# chmod 644 /roo/.ssh/id_rsa.pub
+            [root@master2]# chmod 600 /roo/.ssh/authorized_keys
+            [root@master2]# chmod 600 /roo/.ssh/id_rsa.pub
             
           将id_rsa文件的权限为600
           
@@ -345,14 +348,14 @@
           rsa_id.pub 及authorized_keys权限一般为644
           rsa_id权限必须为600
      
-          将.ssh目录的权限为700
+         但是我只有用 将.ssh目录的权限设为700，将authorized_keys，id_rsa.pub文件的权限为600 才能跟远程虚拟机master2联通
           
-            [root@master3]# chmod 775 /roo/.ssh
+            [root@master3]# chmod 700 /roo/.ssh
           
-          将authorized_keys，id_rsa.pub文件的权限为644
+          将authorized_keys，id_rsa.pub文件的权限为600
 
-            [root@master3]# chmod 644 /roo/.ssh/authorized_keys
-            [root@master3]# chmod 644 /roo/.ssh/id_rsa.pub
+            [root@master3]# chmod 600 /roo/.ssh/authorized_keys
+            [root@master3]# chmod 600 /roo/.ssh/id_rsa.pub
             
           将id_rsa文件的权限为600
           
