@@ -1,1 +1,237 @@
 
+# 目录
+---
+
+* [1. 查看master虚拟机的SSH端口配置](#1-查看master虚拟机的SSH端口配置)
+* [2. 生成集群的公钥文件authorized_keys](#2-生成集群的公钥文件authorized_keys)
+* [ 客户机配置](#2-客户机配置)
+
+
+# 1 查看master虚拟机的SSH端口配置
+
+  **配置master到master2、master3之间免密登录, master,master2,master3都是即是客户端也是服务器，这里以master 为客户机， master2 为服务器为例，集群中的master master2 master3虚拟机都必需分别作为服务器执行该操作**
+    
+    查看master虚拟机的SSH端口配置
+     
+       c:\vmcentos8> vagrant ssh-config master
+       host master
+          HostName 127.0.0.1
+          user vagrant
+          port  2222
+          IdentityFile "c::/vagrant_visual_machine/multi8/.vagrant/machines/master/virtualbox/private_key"
+
+       
+      查看master2虚拟机的SSH端口配置
+      
+       c:\vmcentos8> vagrant ssh-config master2
+       host master2
+          HostName 127.0.0.1
+          user vagrant
+          port  2222
+          IdentityFile "c::/vagrant_visual_machine/multi8/.vagrant/machines/master2/virtualbox/private_key"
+     
+      查看master3虚拟机的SSH端口配置
+      
+       c:\vmcentos8> vagrant ssh-config master3
+       host master3
+          HostName 127.0.0.1
+          user vagrant
+          port  2222
+          IdentityFile "c::/vagrant_visual_machine/multi8/.vagrant/machines/master3/virtualbox/private_key"
+     
+     
+     在master , master2, master3 虚拟机上 编辑 /etc/hosts
+     
+      192.168.33.11  master
+      192.168.33.10  master2
+      192.168.33.9   master3
+
+# 2 生成集群的公钥文件authorized_keys
+    
+    以master2为主节点，master master3为从节点为例
+
+    2.1 从各个节点生成公钥 ssh-keygen -t rsa 
+    
+        在master机上生成秘钥
+ 
+         [root@master ]# ssh-keygen -t rsa
+         
+         在master机上的当前登录用户(root)的目录 ~/.ssh/ 上生成 id_rsa（私钥） id_rsa.pub（公钥） 
+         
+         [root@master ]# ls -l /root/.ssh
+         id_rsa    id_rsa.pub
+         
+       
+       在master2机上生成秘钥
+ 
+         [root@master2 ]# ssh-keygen -t rsa
+         
+         在master2机上的当前登录用户(root)的目录 ~/.ssh/ 上生成 id_rsa（私钥） id_rsa.pub（公钥） 
+         
+         [root@master2 ]# ls -l /root/.ssh
+         id_rsa    id_rsa.pub
+
+
+       在master3机上生成秘钥
+ 
+         [root@master3 ]# ssh-keygen -t rsa
+
+         在master3机上的当前登录用户(root)的目录 ~/.ssh/ 上生成 id_rsa（私钥） id_rsa.pub（公钥） 
+         
+         [root@master3 ]# ls -l /root/.ssh
+         id_rsa    id_rsa.pub
+
+
+    2.2 从各个节点拷贝id-rsa.pub到主节点(master2)：
+
+       然后把master,master3 的公钥文件通过共享目录copy 到master2登录用户root路径上的 /root/.ssh/目录下,并命名为 id_rsa_from_master.pub ,id_rsa_from_master3.pub 
+       
+       [root@master2 ]# ls -l /root/.ssh
+       id_rsa   id_rsa.pub   id_rsa_from_master.pub    id_rsa_from_master3.pub
+       
+       在master2上若当前登录用户目录’~/.ssh/authorized_keys’不存在,则在当前登录用户目录下建立.ssh文件夹和authorized_keys文件
+       
+       [root@master2 ]# cd /root/.ssh
+       [root@master2 .ssh]# touch authorized_keys
+       [root@master2 .ssh]# ls -l
+       id_rsa   id_rsa.pub   id_rsa_from_master.pub    id_rsa_from_master3.pub   authorized_keys
+       
+       把各节点的公钥文件追加到authorized_keys,  被登录的服务器上只会有一个公钥文件，叫authorized_keys。如果被登录的服务器有多个客户端要连上来，就会把每个文本密钥存成一行。
+       
+       [root@master2 .ssh]# cat id_rsa.pub>>authorized_keys                          //把master2的公钥文件追加到master2机上的authorized_keys文件
+       [root@master2 .ssh]# cat id_rsa_from_master.pub>>authorized_keys              //把master的公钥文件追加到master2机上的authorized_keys文件 
+       [root@master2 .ssh]# cat id_rsa_from_master3.pub>>authorized_keys             //把master3的公钥文件追加到master2机上的authorized_keys文件
+       
+       现在就生成了master,master2,master3的共同的公钥文件authorized_keys, 把该公钥文件authorized_keys分发到master，master3机上的当前登录用户目录’~/.ssh/下
+       
+         [root@master ]# ls -l /root/.ssh
+         id_rsa    id_rsa.pub   authorized_keys
+
+
+         [root@master3 ]# ls -l /root/.ssh
+         id_rsa    id_rsa.pub  authorized_keys
+
+
+#   各台服务器的配置，即是主机又是客户机
+
+   2.1 master配置
+      
+      在master 虚拟机上 编辑 /etc/hosts
+     
+      192.168.33.11  master
+      192.168.33.10  master2
+      192.168.33.9   master3
+
+      在master机上生成秘钥
+    
+      [root@master ]# ssh-keygen -t rsa
+
+
+
+   2.2 master2配置
+      
+     2.2.1 在master2虚拟机上 编辑 /etc/hosts，添加如下内容
+     
+            192.168.33.11  master
+            192.168.33.10  master2
+            192.168.33.9   master3
+          
+          
+     2.2.2 修改sshd服务的配置文件(/etc/ssh/sshd_config)
+   
+            在使用之前我们需要对ssh服务进行配置，在大多数linux系统中，ssh服务的配置文件为：/etc/ssh/sshd_config 使用vim进行编辑
+            
+            [root@master2]# vi /etc/ssh/sshd_config
+           
+            port 2222                    // 设置master2的 ssh 端口号，在主机上用 vagrant ssh-config master2命令得到,如果不配置会出错： Connection Refused
+            AuthorizedKeysFile     .ssh/authorized_keys
+            PermitRootLogin yes         //是否允许root账户登录
+            PasswordAuthentication no  //是否允许使用密码校验登录,如果使用免密码，用公钥key登录的话，就要设为 No.
+            RSAAuthentication yes      // 允许RSA登录
+            PubkeyAuthentication yes   //允许使用公钥登录
+                          
+     2.2.3 检查公钥文件
+     
+           [root@master2]# ls /root/.ssh
+           id_rsa    id_rsa.pub  authorized_keys
+           
+           
+     2.2.4 配置权限
+     
+          因为sshd为了安全，对属主的目录和文件权限有所要求。如果权限不对，则ssh的免密码登陆不生效。 注意文件夹一般都会赋予 x 权限，不然连进入文件夹的权限都没有。这也就是文件夹一般会赋
+          予 775、755，需要保障other用户不能有w权限，文件会赋予 664、600、644、640 的原因了
+          
+          .ssh目录权限一般为755或者775。
+          rsa_id.pub 及authorized_keys权限一般为644
+          rsa_id权限必须为600
+     
+          将.ssh目录的权限为700
+          
+            [root@master2]# chmod 775 /roo/.ssh/
+          
+          将authorized_keys，id_rsa.pub文件的权限为644
+
+            [root@master2]# chmod 644 /roo/.ssh/authorized_keys
+            [root@master2]# chmod 644 /roo/.ssh/id_rsa.pub
+            
+          将id_rsa文件的权限为600
+          
+            [root@master2]# chmod 600 /roo/.ssh/id_rsa
+     
+     
+     
+     2.2.5 配置 ssh 快捷訪问名
+     
+           可在master2机上用 ssh xxx来訪问远程虚拟机
+           [root@master2]# ssh master3   //訪问远程虚拟机master3 
+           
+           配置如下：
+     
+           配置master2 的ssh，修改登录用户路径 ~/.ssh/config 文件：例如 以root登录  /roo/.ssh/config文件
+
+           Host master
+              HostName 192.168.11.11       // 设置远程服务器master的IP地址 
+              Port 2222                    // 设置远程服务器master的 ssh 端口号，在主机上用 vagrant ssh-config master命令得到
+              User root                    // 设置为远程服务器master的root用户    
+              IdentityFile /root/.ssh/id_rsa  // 指定在本机master2 下root登录用户下生成的私有密钥的地址，并非远程服务器(master)路径
+           Host master3
+              HostName 192.168.33.9       // 设置远程服务器master3 的IP地址
+              Port 2222                   // 设置远程服务器master3 的 ssh 端口号，在主机上用 vagrant ssh-config master3 命令得到
+              User root                   // 设置为远程服务器master3 的root用户    
+              IdentityFile /root/.ssh/id_rsa   // 指定在本机master2 下root登录用户下生成的私有密钥的地址，并非远程服务器(master3)路径
+
+
+           这里的 Host 是我们要登录的服务器的别名，为了方便快捷登录，下面是服务器的信息，最后一项是你的私钥路径,完成这个配置后我们就可以在master2上使用 ssh master 或 ssh master3，进行登录啦
+
+            [root@master2]# ssh master          // 免密登录远程 master虚拟机
+            [root@master2]# ssh master3         // 免密登录远程 master3 虚拟机
+         
+    2.2.6 启动SSH
+    
+            [root@master2]# systemctl restart sshd
+          
+             配置免登录完成后，在客户机(master)中输入
+          
+                 [root@master]# ssh root@master2
+          
+             或者 
+          
+                 [root@master]# ssh root@192.168.33.10  
+
+
+   2.3 master3配置
+
+      在master3 虚拟机上 编辑 /etc/hosts
+     
+      192.168.33.11  master
+      192.168.33.10  master2
+      192.168.33.9   master3
+
+      在master3机上生成秘钥
+     
+      [root@master3 ]# ssh-keygen -t rsa
+
+
+
+
+#  3 服务器配置
