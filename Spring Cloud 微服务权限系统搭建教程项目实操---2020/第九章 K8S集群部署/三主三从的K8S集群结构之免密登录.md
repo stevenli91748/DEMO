@@ -219,7 +219,10 @@
           rsa_id权限必须为600
      
           但是我只有用 将.ssh目录的权限设为700，将authorized_keys，id_rsa.pub文件的权限为600 才能跟远程虚拟机master2联通
-
+          最好整个集群的虚拟机权限都用统一的权限码，就是在master, master2, master3 的机上的
+          
+          登录用户的~/.ssh目录设置 700权限
+          登录用户的~/.ssh/authorized_keys文件设置600权限
           
            [root@master]# chmod 700 /roo/.ssh
           
@@ -343,7 +346,11 @@
           rsa_id权限必须为600
      
           但是我只有用 将.ssh目录的权限设为700，将authorized_keys，id_rsa.pub文件的权限为600 才能跟远程虚拟机master3联通
-     
+          最好整个集群的虚拟机权限都用统一的权限码，就是在master, master2, master3 的机上的
+          
+          登录用户的~/.ssh目录设置 700权限
+          登录用户的~/.ssh/authorized_keys文件设置600权限
+
           将.ssh目录的权限为700
           
             [root@master2]# chmod 700 /roo/.ssh
@@ -473,6 +480,10 @@
           rsa_id权限必须为600
      
          但是我只有用 将.ssh目录的权限设为700，将authorized_keys，id_rsa.pub文件的权限为600 才能跟远程虚拟机master2联通
+         最好整个集群的虚拟机权限都用统一的权限码，就是在master, master2, master3 的机上的
+          
+         登录用户的~/.ssh目录设置 700权限
+         登录用户的~/.ssh/authorized_keys文件设置600权限
           
             [root@master3]# chmod 700 /roo/.ssh
           
