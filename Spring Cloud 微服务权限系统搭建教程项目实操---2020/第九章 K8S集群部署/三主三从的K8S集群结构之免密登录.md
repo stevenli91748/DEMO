@@ -172,7 +172,35 @@
             PasswordAuthentication no  //是否允许使用密码校验登录,如果使用免密码，用公钥key登录的话，就要设为 No.
             RSAAuthentication yes      // 允许RSA登录
             PubkeyAuthentication yes   //允许使用公钥登录
-                          
+
+            如果端口号有冲突，要更改端口号，操作如下
+            
+            [root@master]# vi /etc/ssh/sshd_config
+             
+             更改端口号 从2222 到 2323，   因为主机端口 2222 有冲突，ssh 不能使用，启动ssh失败
+             
+               [root@master]# yum -y install policycoreutils-python-utils
+               [root@master]# semanage port -a -t ssh_port_t -p tcp 2323
+             
+             Restart SSHD service
+
+              [root@master]# systemctl restart sshd.service
+             
+             ssh 端口号 就从2222 更改到 2323
+            
+             在某些情况下，该端口号还要穿透防火墙
+             
+               [root@master]# firewall-cmd --permanent --zone=public --add-port=2323/tcp
+             
+             Reload firewall
+
+               [root@master]# firewall-cmd --reload
+
+             Check listening
+
+               [root@master]# ss -tnlp|grep ssh
+  
+
      3.1.4 检查公钥文件
      
            [root@master]# ls /root/.ssh
@@ -268,7 +296,35 @@
             PasswordAuthentication no  //是否允许使用密码校验登录,如果使用免密码，用公钥key登录的话，就要设为 No.
             RSAAuthentication yes      // 允许RSA登录
             PubkeyAuthentication yes   //允许使用公钥登录
-                          
+
+            如果端口号有冲突，要更改端口号，操作如下
+            
+            [root@master2]# vi /etc/ssh/sshd_config
+             
+             更改端口号 从2222 到 2323，   因为主机端口 2222 有冲突，ssh 不能使用，启动ssh失败
+             
+               [root@master2]# yum -y install policycoreutils-python-utils
+               [root@master2]# semanage port -a -t ssh_port_t -p tcp 2323
+             
+             Restart SSHD service
+
+              [root@master2]# systemctl restart sshd.service
+             
+             ssh 端口号 就从2222 更改到 2323
+            
+             在某些情况下，该端口号还要穿透防火墙
+             
+               [root@master2]# firewall-cmd --permanent --zone=public --add-port=2323/tcp
+             
+             Reload firewall
+
+               [root@master2]# firewall-cmd --reload
+
+             Check listening
+
+               [root@master2]# ss -tnlp|grep ssh
+
+
      3.2.4 检查公钥文件
      
            [root@master2]# ls /root/.ssh
@@ -367,7 +423,38 @@
             PasswordAuthentication no  //是否允许使用密码校验登录,如果使用免密码，用公钥key登录的话，就要设为 No.
             RSAAuthentication yes      // 允许RSA登录
             PubkeyAuthentication yes   //允许使用公钥登录
-                          
+
+            如果主机端口号有冲突，不能启动ssh daemon , 要更改端口号，操作如下
+            
+            [root@master]# vi /etc/ssh/sshd_config
+             
+             更改端口号 从2222 到 2323，   因为主机端口 2222 有冲突，ssh 不能使用，启动ssh失败
+             
+               [root@master]# yum -y install policycoreutils-python-utils
+               [root@master]# semanage port -a -t ssh_port_t -p tcp 2323
+             
+             Restart SSHD service
+
+              [root@master]# systemctl restart sshd.service
+             
+             ssh 端口号 就从2222 更改到 2323
+            
+             在某些情况下，该端口号还要穿透防火墙
+             
+               [root@master]# firewall-cmd --permanent --zone=public --add-port=2323/tcp
+             
+             Reload firewall
+
+               [root@master]# firewall-cmd --reload
+
+             Check listening
+
+               [root@master]# ss -tnlp|grep ssh
+
+
+
+
+
      3.3.4 检查公钥文件
      
            [root@master3]# ls /root/.ssh
