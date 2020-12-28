@@ -4,7 +4,7 @@
 
 * [1. 查看master虚拟机的SSH端口配置](#1-查看master虚拟机的SSH端口配置)
 * [2. 生成集群的公钥文件authorized_keys](#2-生成集群的公钥文件authorized_keys)
-* [3. 各台服务器的配置，即是主机又是客户机](#各台服务器的配置-即是主机又是客户机)
+* [3. 各台服务器的配置，即是主机又是客户机](#3-各台服务器的配置-即是主机又是客户机)
 
 
 # 1 查看master虚拟机的SSH端口配置
@@ -104,6 +104,9 @@
        
        现在就生成了master,master2,master3的共同的公钥文件authorized_keys, 把该公钥文件authorized_keys分发到master，master3机上的当前登录用户目录’~/.ssh/下
        
+         [root@master2]# cp /root/.ssh/authorized_keys root@master: /root/.ssh/authorized_keys 
+         [root@master2]# cp /root/.ssh/authorized_keys root@master3: /root/.ssh/authorized_keys 
+       
          [root@master ]# ls -l /root/.ssh
          id_rsa    id_rsa.pub   authorized_keys
 
@@ -112,64 +115,22 @@
          id_rsa    id_rsa.pub  authorized_keys
 
 
-#   各台服务器的配置 即是主机又是客户机
+#  3 各台服务器的配置 即是主机又是客户机
 
-   2.1 master配置
+ **因为在集群中各台服务器的配置 即是主机又是客户机，所以每一台机同时都需要即要客户机配置又要服务器配置**
+
+
+   3.1 master配置
       
-     2.1.1 在master虚拟机上 编辑 /etc/hosts，添加如下内容
+     //作为客户机配置
+     
+     3.1.1 在master虚拟机上 编辑 /etc/hosts，添加如下内容
      
             192.168.33.11  master
             192.168.33.10  master2
             192.168.33.9   master3
-          
-          
-     2.1.2 修改sshd服务的配置文件(/etc/ssh/sshd_config)
-   
-            在使用之前我们需要对ssh服务进行配置，在大多数linux系统中，ssh服务的配置文件为：/etc/ssh/sshd_config 使用vim进行编辑
-            
-            [root@master]# vi /etc/ssh/sshd_config
-           
-            port 2222                    // 设置master的 ssh 端口号，在主机上用 vagrant ssh-config master命令得到,如果不配置会出错： Connection Refused
-            AuthorizedKeysFile     .ssh/authorized_keys
-            PermitRootLogin yes         //是否允许root账户登录
-            PasswordAuthentication no  //是否允许使用密码校验登录,如果使用免密码，用公钥key登录的话，就要设为 No.
-            RSAAuthentication yes      // 允许RSA登录
-            PubkeyAuthentication yes   //允许使用公钥登录
-                          
-     2.1.3 检查公钥文件
-     
-           [root@master]# ls /root/.ssh
-           id_rsa    id_rsa.pub  authorized_keys
-           
-           如果没有authorized_keys，看 “生成集群的公钥文件authorized_keys” 那一章节
-           
-           
-     2.1.4 配置权限
-     
-          因为sshd为了安全，对属主的目录和文件权限有所要求。如果权限不对，则ssh的免密码登陆不生效。 注意文件夹一般都会赋予 x 权限，不然连进入文件夹的权限都没有。这也就是文件夹一般会赋
-          予 775、755，需要保障other用户不能有w权限，文件会赋予 664、600、644、640 的原因了
-          
-          .ssh目录权限一般为755或者775。
-          rsa_id.pub 及authorized_keys权限一般为644
-          rsa_id权限必须为600
-     
-          但是我只有用 将.ssh目录的权限设为700，将authorized_keys，id_rsa.pub文件的权限为600 才能跟远程虚拟机master2联通
 
-          
-           [root@master]# chmod 700 /roo/.ssh
-          
-          将authorized_keys，id_rsa.pub文件的权限为600
-
-            [root@master]# chmod 600 /roo/.ssh/authorized_keys
-            [root@master]# chmod 600 /roo/.ssh/id_rsa.pub
-            
-          将id_rsa文件的权限为600
-          
-            [root@master]# chmod 600 /roo/.ssh/id_rsa
-     
-     
-     
-     2.1.5 配置 ssh 快捷訪问名
+     3.1.2 配置 ssh 快捷訪问名
      
            可在master机上用 ssh xxx来訪问远程虚拟机
            [root@master]# ssh master3   //訪问远程虚拟机master3 
@@ -194,8 +155,56 @@
 
             [root@master]# ssh master2          // 免密登录远程 master2 虚拟机
             [root@master]# ssh master3         // 免密登录远程 master3 虚拟机
+
+
+
+     // 作为服务器配置
+     
+     3.1.3 修改sshd服务的配置文件(/etc/ssh/sshd_config)
+   
+            在使用之前我们需要对ssh服务进行配置，在大多数linux系统中，ssh服务的配置文件为：/etc/ssh/sshd_config 使用vim进行编辑
+            
+            [root@master]# vi /etc/ssh/sshd_config
+           
+            port 2222                    // 设置master的 ssh 端口号，在主机上用 vagrant ssh-config master命令得到,如果不配置会出错： Connection Refused
+            AuthorizedKeysFile     .ssh/authorized_keys
+            PermitRootLogin yes         //是否允许root账户登录
+            PasswordAuthentication no  //是否允许使用密码校验登录,如果使用免密码，用公钥key登录的话，就要设为 No.
+            RSAAuthentication yes      // 允许RSA登录
+            PubkeyAuthentication yes   //允许使用公钥登录
+                          
+     3.1.4 检查公钥文件
+     
+           [root@master]# ls /root/.ssh
+           id_rsa    id_rsa.pub  authorized_keys
+           
+           如果没有authorized_keys，看 “生成集群的公钥文件authorized_keys” 那一章节
+           
+           
+     3.1.5 配置权限
+     
+          因为sshd为了安全，对属主的目录和文件权限有所要求。如果权限不对，则ssh的免密码登陆不生效。 注意文件夹一般都会赋予 x 权限，不然连进入文件夹的权限都没有。这也就是文件夹一般会赋
+          予 775、755，需要保障other用户不能有w权限，文件会赋予 664、600、644、640 的原因了
+          
+          .ssh目录权限一般为755或者775。
+          rsa_id.pub 及authorized_keys权限一般为644
+          rsa_id权限必须为600
+     
+          但是我只有用 将.ssh目录的权限设为700，将authorized_keys，id_rsa.pub文件的权限为600 才能跟远程虚拟机master2联通
+
+          
+           [root@master]# chmod 700 /roo/.ssh
+          
+          将authorized_keys，id_rsa.pub文件的权限为600
+
+            [root@master]# chmod 600 /roo/.ssh/authorized_keys
+            [root@master]# chmod 600 /roo/.ssh/id_rsa.pub
+            
+          将id_rsa文件的权限为600
+          
+            [root@master]# chmod 600 /roo/.ssh/id_rsa
          
-    2.1.6  启动SSH
+    3.1.6  启动SSH
             
             //在master虚拟机上启动 ssh service
             
@@ -210,65 +219,16 @@
                  [root@master3]# ssh root@192.168.33.11  
 
 
-
-
-   2.2 master2配置
+   3.2 master2配置
       
-     2.2.1 在master2虚拟机上 编辑 /etc/hosts，添加如下内容
+     //作为客户机配置 
+     3.2.1 在master2虚拟机上 编辑 /etc/hosts，添加如下内容
      
             192.168.33.11  master
             192.168.33.10  master2
             192.168.33.9   master3
           
-          
-     2.2.2 修改sshd服务的配置文件(/etc/ssh/sshd_config)
-   
-            在使用之前我们需要对ssh服务进行配置，在大多数linux系统中，ssh服务的配置文件为：/etc/ssh/sshd_config 使用vim进行编辑
-            
-            [root@master2]# vi /etc/ssh/sshd_config
-           
-            port 2222                    // 设置master2的 ssh 端口号，在主机上用 vagrant ssh-config master2命令得到,如果不配置会出错： Connection Refused
-            AuthorizedKeysFile     .ssh/authorized_keys
-            PermitRootLogin yes         //是否允许root账户登录
-            PasswordAuthentication no  //是否允许使用密码校验登录,如果使用免密码，用公钥key登录的话，就要设为 No.
-            RSAAuthentication yes      // 允许RSA登录
-            PubkeyAuthentication yes   //允许使用公钥登录
-                          
-     2.2.3 检查公钥文件
-     
-           [root@master2]# ls /root/.ssh
-           id_rsa    id_rsa.pub  authorized_keys
-           
-           如果没有authorized_keys，看 “生成集群的公钥文件authorized_keys” 那一章节
-           
-           
-     2.2.4 配置权限
-     
-          因为sshd为了安全，对属主的目录和文件权限有所要求。如果权限不对，则ssh的免密码登陆不生效。 注意文件夹一般都会赋予 x 权限，不然连进入文件夹的权限都没有。这也就是文件夹一般会赋
-          予 775、755，需要保障other用户不能有w权限，文件会赋予 664、600、644、640 的原因了
-          
-          .ssh目录权限一般为755或者775。
-          rsa_id.pub 及authorized_keys权限一般为644
-          rsa_id权限必须为600
-     
-          但是我只有用 将.ssh目录的权限设为700，将authorized_keys，id_rsa.pub文件的权限为600 才能跟远程虚拟机master3联通
-     
-          将.ssh目录的权限为700
-          
-            [root@master2]# chmod 700 /roo/.ssh
-          
-          将authorized_keys，id_rsa.pub文件的权限为600
-
-            [root@master2]# chmod 600 /roo/.ssh/authorized_keys
-            [root@master2]# chmod 600 /roo/.ssh/id_rsa.pub
-            
-          将id_rsa文件的权限为600
-          
-            [root@master2]# chmod 600 /roo/.ssh/id_rsa
-     
-     
-     
-     2.2.5 配置 ssh 快捷訪问名
+     3.2.2 配置 ssh 快捷訪问名
      
            可在master2机上用 ssh xxx来訪问远程虚拟机
            [root@master2]# ssh master3   //訪问远程虚拟机master3 
@@ -293,8 +253,55 @@
 
             [root@master2]# ssh master          // 免密登录远程 master虚拟机
             [root@master2]# ssh master3         // 免密登录远程 master3 虚拟机
+     
+     
+     // 作为服务器配置
+     3.2.3 修改sshd服务的配置文件(/etc/ssh/sshd_config)
+   
+            在使用之前我们需要对ssh服务进行配置，在大多数linux系统中，ssh服务的配置文件为：/etc/ssh/sshd_config 使用vim进行编辑
+            
+            [root@master2]# vi /etc/ssh/sshd_config
+           
+            port 2222                    // 设置master2的 ssh 端口号，在主机上用 vagrant ssh-config master2命令得到,如果不配置会出错： Connection Refused
+            AuthorizedKeysFile     .ssh/authorized_keys
+            PermitRootLogin yes         //是否允许root账户登录
+            PasswordAuthentication no  //是否允许使用密码校验登录,如果使用免密码，用公钥key登录的话，就要设为 No.
+            RSAAuthentication yes      // 允许RSA登录
+            PubkeyAuthentication yes   //允许使用公钥登录
+                          
+     3.2.4 检查公钥文件
+     
+           [root@master2]# ls /root/.ssh
+           id_rsa    id_rsa.pub  authorized_keys
+           
+           如果没有authorized_keys，看 “生成集群的公钥文件authorized_keys” 那一章节
+           
+           
+     3.2.5 配置权限
+     
+          因为sshd为了安全，对属主的目录和文件权限有所要求。如果权限不对，则ssh的免密码登陆不生效。 注意文件夹一般都会赋予 x 权限，不然连进入文件夹的权限都没有。这也就是文件夹一般会赋
+          予 775、755，需要保障other用户不能有w权限，文件会赋予 664、600、644、640 的原因了
+          
+          .ssh目录权限一般为755或者775。
+          rsa_id.pub 及authorized_keys权限一般为644
+          rsa_id权限必须为600
+     
+          但是我只有用 将.ssh目录的权限设为700，将authorized_keys，id_rsa.pub文件的权限为600 才能跟远程虚拟机master3联通
+     
+          将.ssh目录的权限为700
+          
+            [root@master2]# chmod 700 /roo/.ssh
+          
+          将authorized_keys，id_rsa.pub文件的权限为600
+
+            [root@master2]# chmod 600 /roo/.ssh/authorized_keys
+            [root@master2]# chmod 600 /roo/.ssh/id_rsa.pub
+            
+          将id_rsa文件的权限为600
+          
+            [root@master2]# chmod 600 /roo/.ssh/id_rsa
          
-    2.2.6 启动SSH
+    3.2.6 启动SSH
     
             //在master2 虚拟机上启动 ssh service
             
@@ -309,61 +316,16 @@
                  [root@master]# ssh root@192.168.33.10  
 
 
-   2.3 master3 配置
+   3.3 master3 配置
 
-     2.3.1 在master3 虚拟机上 编辑 /etc/hosts，添加如下内容
+     //作为客户机配置 
+     3.3.1 在master3 虚拟机上 编辑 /etc/hosts，添加如下内容
      
             192.168.33.11  master
             192.168.33.10  master2
             192.168.33.9   master3
-          
-          
-     2.3.2 修改sshd服务的配置文件(/etc/ssh/sshd_config)
-   
-            在使用之前我们需要对ssh服务进行配置，在大多数linux系统中，ssh服务的配置文件为：/etc/ssh/sshd_config 使用vim进行编辑
-            
-            [root@master3 ]# vi /etc/ssh/sshd_config
-           
-            port 2222                    // 设置master3 的 ssh 端口号，在主机上用 vagrant ssh-config master3 命令得到,如果不配置会出错： Connection Refused
-            AuthorizedKeysFile     .ssh/authorized_keys
-            PermitRootLogin yes         //是否允许root账户登录
-            PasswordAuthentication no  //是否允许使用密码校验登录,如果使用免密码，用公钥key登录的话，就要设为 No.
-            RSAAuthentication yes      // 允许RSA登录
-            PubkeyAuthentication yes   //允许使用公钥登录
-                          
-     2.3.3 检查公钥文件
-     
-           [root@master3]# ls /root/.ssh
-           id_rsa    id_rsa.pub  authorized_keys
-           
-           如果没有authorized_keys，看 “生成集群的公钥文件authorized_keys” 那一章节
-           
-           
-     2.3.4 配置权限
-     
-          因为sshd为了安全，对属主的目录和文件权限有所要求。如果权限不对，则ssh的免密码登陆不生效。 注意文件夹一般都会赋予 x 权限，不然连进入文件夹的权限都没有。这也就是文件夹一般会赋
-          予 775、755，需要保障other用户不能有w权限，文件会赋予 664、600、644、640 的原因了
-          
-          .ssh目录权限一般为755或者775。
-          rsa_id.pub 及authorized_keys权限一般为644
-          rsa_id权限必须为600
-     
-         但是我只有用 将.ssh目录的权限设为700，将authorized_keys，id_rsa.pub文件的权限为600 才能跟远程虚拟机master2联通
-          
-            [root@master3]# chmod 700 /roo/.ssh
-          
-          将authorized_keys，id_rsa.pub文件的权限为600
 
-            [root@master3]# chmod 600 /roo/.ssh/authorized_keys
-            [root@master3]# chmod 600 /roo/.ssh/id_rsa.pub
-            
-          将id_rsa文件的权限为600
-          
-            [root@master3]# chmod 600 /roo/.ssh/id_rsa
-     
-     
-     
-     2.2.5 配置 ssh 快捷訪问名
+     3.3.2 配置 ssh 快捷訪问名
      
            可在master3 机上用 ssh xxx来訪问远程虚拟机
            [root@master3]# ssh master   //訪问远程虚拟机master 
@@ -388,8 +350,58 @@
 
             [root@master3]# ssh master          // 免密登录远程 master虚拟机
             [root@master3]# ssh master2         // 免密登录远程 master2 虚拟机
+
+
+
+     // 作为服务器配置
+     
+     3.3.3 修改sshd服务的配置文件(/etc/ssh/sshd_config)
+   
+            在使用之前我们需要对ssh服务进行配置，在大多数linux系统中，ssh服务的配置文件为：/etc/ssh/sshd_config 使用vim进行编辑
+            
+            [root@master3 ]# vi /etc/ssh/sshd_config
+           
+            port 2222                    // 设置master3 的 ssh 端口号，在主机上用 vagrant ssh-config master3 命令得到,如果不配置会出错： Connection Refused
+            AuthorizedKeysFile     .ssh/authorized_keys
+            PermitRootLogin yes         //是否允许root账户登录
+            PasswordAuthentication no  //是否允许使用密码校验登录,如果使用免密码，用公钥key登录的话，就要设为 No.
+            RSAAuthentication yes      // 允许RSA登录
+            PubkeyAuthentication yes   //允许使用公钥登录
+                          
+     3.3.4 检查公钥文件
+     
+           [root@master3]# ls /root/.ssh
+           id_rsa    id_rsa.pub  authorized_keys
+           
+           如果没有authorized_keys，看 “生成集群的公钥文件authorized_keys” 那一章节
+           
+           
+     3.3.5 配置权限
+     
+          因为sshd为了安全，对属主的目录和文件权限有所要求。如果权限不对，则ssh的免密码登陆不生效。 注意文件夹一般都会赋予 x 权限，不然连进入文件夹的权限都没有。这也就是文件夹一般会赋
+          予 775、755，需要保障other用户不能有w权限，文件会赋予 664、600、644、640 的原因了
+          
+          .ssh目录权限一般为755或者775。
+          rsa_id.pub 及authorized_keys权限一般为644
+          rsa_id权限必须为600
+     
+         但是我只有用 将.ssh目录的权限设为700，将authorized_keys，id_rsa.pub文件的权限为600 才能跟远程虚拟机master2联通
+          
+            [root@master3]# chmod 700 /roo/.ssh
+          
+          将authorized_keys，id_rsa.pub文件的权限为600
+
+            [root@master3]# chmod 600 /roo/.ssh/authorized_keys
+            [root@master3]# chmod 600 /roo/.ssh/id_rsa.pub
+            
+          将id_rsa文件的权限为600
+          
+            [root@master3]# chmod 600 /roo/.ssh/id_rsa
+     
+     
+     
          
-    2.2.6 启动SSH
+    3.3.6 启动SSH
     
             //在master3 虚拟机上启动 ssh service
             
@@ -402,7 +414,4 @@
              或者 
           
                  [root@master2 ]# ssh root@192.168.33.9  
-
-
-
 
