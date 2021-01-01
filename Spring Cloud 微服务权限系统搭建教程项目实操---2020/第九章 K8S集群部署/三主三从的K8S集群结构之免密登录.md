@@ -1,6 +1,8 @@
 
 # 目录
 ---
+[SSH Crash Course ](https://www.youtube.com/watch?v=hQWRp-FdTpc)|
+---|
 
 * [1. 查看master虚拟机的SSH端口配置](#1-查看master虚拟机的SSH端口配置)
 * [2. 生成集群的公钥文件authorized_keys](#2-生成集群的公钥文件authorized_keys)
