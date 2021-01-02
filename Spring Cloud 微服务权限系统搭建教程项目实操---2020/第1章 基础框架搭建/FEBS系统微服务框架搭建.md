@@ -299,6 +299,7 @@ eureka.client.serviceUrl.defaultZone，指定Eureka服务端的地址，这里�
 
 ---
 
+
 # 6 lombok plugin安装
 
 lombok的使用需要安装相关插件（lombok可以通过注解自动生成get，set等方法，不懂的同学可以自行百度lombok），双击Shift，然后输入plugins：
