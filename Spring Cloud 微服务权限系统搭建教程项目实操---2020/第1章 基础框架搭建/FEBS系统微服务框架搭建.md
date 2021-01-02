@@ -295,6 +295,53 @@ eureka.client.serviceUrl.defaultZone，指定Eureka服务端的地址，这里�
 
 # 3A 使用Security保护微服务注册中心
 
+目前Eureka服务端是“裸奔着”的，只要知道了Eureka服务端的地址后便可以将微服务注册进来，我们可以引入spring-cloud-starter-security来保护Eureka服务端。在febs-register模块的pom文件中添加如下依赖
+
+       <dependency>
+           <groupId>org.springframework.cloud</groupId>
+           <artifactId>spring-cloud-starter-security</artifactId>
+       </dependency>
+
+在cc.mrbird.febs.register路径下新建configure包，然后在configure包下新建FebsRegisterWebSecurityConfigure配置类：
+
+        @EnableWebSecurity
+        public class FebsRegisterWebSecurityConfigure extends WebSecurityConfigurerAdapter {
+            @Override
+            protected void configure(HttpSecurity http) throws Exception {
+                http.csrf().ignoringAntMatchers("/eureka/**");
+                super.configure(http);
+            }
+        }
+
+该配置类用于开启Eureka服务端端点保护。在application.yml中配置访问Eureka服务的受保护资源所需的用户名和密码：
+
+        spring:
+          security:
+            user:
+              name: febs
+              password: 123456
+
+由于现在Eureka服务端是受保护的，需要正确的用户名和密码才能访问，所以上面我们配置的eureka.client.serviceUrl.defaultZone路径也要配置上账号密码，否则将抛出com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server异常。将eureka.client.serviceUrl.defaultZone的配置改为如下所示:
+
+
+         eureka:
+           client:
+             serviceUrl:
+               defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}${server.servlet.context-path}/eureka/
+      
+      
+配置的格式为：eureka.client.serviceUrl.defaultZone=http://${userName}:${password}@${hosetname}:${port}${server.servlet.context-path}/eureka/      
+
+
+重启项目，再次访问 http://localhost:8001/register/:
+
+<a href="https://ibb.co/WVRsPwb"><img src="https://i.ibb.co/vXMDQG7/idea15.png" alt="idea15" border="0"></a>
+
+这次需要登录才能访问，输入我们在配置文件中定义的用户名和密码（febs，123456）后便可成功访问注册列表页面。
+
+到这里微服务注册中心febs-register已经搭建完毕，下一节开始着手搭建微服务认证中心febs-auth。
+
+
 
 
 ---
