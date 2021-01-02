@@ -292,6 +292,7 @@ eureka.client.serviceUrl.defaultZone，指定Eureka服务端的地址，这里�
 
 至此，一个简单的微服务注册中心搭建好了，我们运行入口类FebsRegisterApplication的main方法启动项目，启动后访问 http://localhost:8001/register/，出现Eureka页面说明微服务注册中心搭建成功，目前还没有微服务实例注册进来，所以列表是空的。
 
+
 # 3A 使用Security保护微服务注册中心
 
 
