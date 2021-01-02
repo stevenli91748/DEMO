@@ -302,6 +302,7 @@ eureka.client.serviceUrl.defaultZone，指定Eureka服务端的地址，这里�
            <artifactId>spring-cloud-starter-security</artifactId>
        </dependency>
 
+
 在cc.mrbird.febs.register路径下新建configure包，然后在configure包下新建FebsRegisterWebSecurityConfigure配置类：
 
         @EnableWebSecurity
