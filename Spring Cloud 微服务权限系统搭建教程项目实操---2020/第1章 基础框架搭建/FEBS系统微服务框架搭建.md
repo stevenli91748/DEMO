@@ -231,17 +231,17 @@
 
 打开febs-register的入口类FebsRegisterApplication，在类上使用@EnableEurekaServer标注，用以开启Eureka服务端功能：
 
-···java
-EnableEurekaServer
-@SpringBootApplication
-public class FebsRegisterApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(FebsRegisterApplication.class, args);
-    }
-}
+        EnableEurekaServer
+        @SpringBootApplication
+        public class FebsRegisterApplication {
 
-```
+            public static void main(String[] args) {
+                SpringApplication.run(FebsRegisterApplication.class, args);
+            }
+        }
+
+
 
 然后开始编写项目配置文件，由于我个人比较习惯yml格式的配置，所以我将resources目录下的application.properties重命名为application.yml（后面章节搭建的boot项目，配置文件都采用yml格式，请知悉），在该配置文件中编写如下内容：
 
