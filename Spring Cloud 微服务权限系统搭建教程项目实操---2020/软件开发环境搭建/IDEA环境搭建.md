@@ -5,9 +5,6 @@
 * [IDEA-Maven的Dependencies中出现红色波浪线,在IDEA环境中，在Maven Project中 Dependencies 出现红色波浪线，但是查询本地仓库中，资源文件是存在的](https://blog.csdn.net/u014672466/article/details/80211340?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.not_use_machine_learn_pai&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.not_use_machine_learn_pai)
 * [IDEA+MAVEN：踩坑指南](https://zhuanlan.zhihu.com/p/104311658)
 * [IntellJ IDEA配置Maven以及修改默认Repository](https://zhuanlan.zhihu.com/p/28133184)
-* [在IDEA中实战Git](https://blog.csdn.net/autfish/article/details/52513465)
-* [IntelliJ IDEA——提交代码到GitHub远程库](https://blog.csdn.net/rongxiang111/article/details/78120126?utm_medium=distribute.pc_relevant.none-task-blog-searchFromBaidu-1.not_use_machine_learn_pai&depth_1-utm_source=distribute.pc_relevant.none-task-blog-searchFromBaidu-1.not_use_machine_learn_pai)
-* [Intellij IDEA 协同 Git 与 GitHub 进行开发使用](https://www.jianshu.com/p/ea1703adf5cc)
 
 
 # 目录
