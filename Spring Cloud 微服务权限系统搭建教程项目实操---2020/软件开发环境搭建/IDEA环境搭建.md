@@ -1,4 +1,5 @@
 # 参考
+* [Maven pom relativepath子模块找不到父模块路径的问题](https://blog.csdn.net/weixin_44206561/article/details/104875718?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-10&spm=1001.2101.3001.4242)
 * [idea引入spring boot ＜parent＞＜/parent＞父依赖标红问题](https://blog.csdn.net/lingbomanbu_lyl/article/details/109347994)
 * [关于parent.relativePath错误提示解决思路](https://blog.csdn.net/freexiaodong/article/details/97011817?utm_medium=distribute.pc_relevant.none-task-blog-OPENSEARCH-6.not_use_machine_learn_pai&depth_1-utm_source=distribute.pc_relevant.none-task-blog-OPENSEARCH-6.not_use_machine_learn_pai)
 * [IntelliJ IDEA中Maven插件无法更新索引之解决办法](http://codepub.cn/2015/12/09/IntelliJ-IDEA-in-Maven-plugin-could-not-update-the-index-of-the-solution/)
