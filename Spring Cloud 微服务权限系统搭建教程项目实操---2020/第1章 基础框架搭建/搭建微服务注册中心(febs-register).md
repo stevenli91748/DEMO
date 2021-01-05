@@ -84,7 +84,7 @@
 打开febs-register的入口类FebsRegisterApplication，在类上使用@EnableEurekaServer标注，用以开启Eureka服务端功能：
 
 
-        EnableEurekaServer
+        @EnableEurekaServer
         @SpringBootApplication
         public class FebsRegisterApplication {
 
