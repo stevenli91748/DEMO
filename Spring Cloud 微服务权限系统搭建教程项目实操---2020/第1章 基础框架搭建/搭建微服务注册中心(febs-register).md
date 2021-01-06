@@ -60,8 +60,14 @@
                     <groupId>org.springframework.cloud</groupId>
                     <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
                 </dependency>
-            </dependencies>
 
+               <dependency>
+		               <groupId>org.springframework.boot</groupId>
+		               <artifactId>spring-boot-starter-test</artifactId>
+		               <scope>test</scope>
+	              </dependency>
+            </dependencies>
+            
             <build>
                 <plugins>
                     <plugin>
@@ -81,7 +87,7 @@
             <module>../febs-register</module>
         </modules>
 
-打开febs-register的入口类FebsRegisterApplication，在类上使用@EnableEurekaServer标注，用以开启Eureka服务端功能：
+打开febs-register的入口类FebsRegisterApplication.java，在类上使用@EnableEurekaServer标注，用以开启Eureka服务端功能：
 
 
         @EnableEurekaServer
@@ -96,6 +102,8 @@
 
 
 然后开始编写项目配置文件，由于我个人比较习惯yml格式的配置，所以我将resources目录下的application.properties重命名为application.yml（后面章节搭建的boot项目，配置文件都采用yml格式，请知悉），在该配置文件中编写如下内容：
+
+在默认设置下，该服务注册中心也会将自己作为客户端来尝试注册它自己，所以我们需要禁用它的客户端注册行为，在application.yml添加以下配置
 
         server:
           port: 8001
@@ -122,13 +130,14 @@
 
         eureka.instance.hostname，指定了Eureka服务端的地址，因为我们是在本地搭建的，所以填写为localhost即可；
 
-        eureka.client.register-with-eureka，表示是否将服务注册到Eureka服务端，由于我们这里是单节点的Eureka服务端，所以这里指定false；
+        eureka.client.register-with-eureka，表示是否将自己注册到Eureka Server，默认为true，
 
-        eureka.client.fetch-registry，表示是否从Eureka服务端获取服务信息，因为这里是单节点的Eureka服务端，并不需要从别的Eureka服务端同步服务信息，所以这里设置为false；
+        eureka.client.fetch-registry，表示是否从Eureka服务端获取注册信息，因为这里是单节点的Eureka服务端，并不需要从别的Eureka服务端同步服务信息，所以这里设置为false；
 
         eureka.client.instance-info-replication-interval-seconds，微服务更新实例信息的变化到Eureka服务端的间隔时间，单位为秒，这里指定为30秒（这就是微服务启动后，要过一会才能注册到Eureka服务端的原因）。
 
-        eureka.client.serviceUrl.defaultZone，指定Eureka服务端的地址，这里为当前项目地址，即 http://localhost:8001/register/eureka/
+        eureka.client.serviceUrl.defaultZone，指定Eureka服务端的地址，这里为当前项目地址，即 http://localhost:8001/register/eureka/ ， 设置与Eureka Server交互
+                                              的地址，查询服务和注册服务都需要依赖这个地址。默认是http://localhost:8761/eureka ；多个地址可使用 , 分隔
 
 由于要搭建的微服务模块较多，所以为了在项目启动的时候更直观的区分开当前启动的是哪个微服务模块，我们可以自定义一个启动banner。在resources目录下新建一个banner.txt文件，文件内容如下所示：
 
