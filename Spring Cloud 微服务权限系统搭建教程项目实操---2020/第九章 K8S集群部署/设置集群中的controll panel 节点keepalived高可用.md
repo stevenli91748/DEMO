@@ -18,6 +18,35 @@
 # 2 keepalived配置
 
 ## master虚拟机的keepalived配置
+
+           [root@master]# ifconfig
+              docker0:...................................
+              eth0:...................................
+              eth1:.........................................
+              Io:..............................................
+           
+           
+
+           [root@master]# more /etc/keepalived/keepalived.conf 
+           ! Configuration File for keepalived
+           
+           global_defs {
+              router_id master            //master虚拟机的hostname
+           }
+           vrrp_instance VI_1 {
+               state MASTER                // 必需大写，表示在keepalived中
+               interface ens160
+               virtual_router_id 50
+               priority 100
+               advert_int 1
+               authentication {
+                   auth_type PASS
+                   auth_pass 1111
+               }
+               virtual_ipaddress {
+                   172.27.34.130
+               }
+           }
 ## master2虚拟机的keepalived配置
 ## master3虚拟机的keepalived配置
  
