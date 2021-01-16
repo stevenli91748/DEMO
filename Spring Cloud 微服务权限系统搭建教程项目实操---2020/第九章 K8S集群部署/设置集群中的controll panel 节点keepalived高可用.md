@@ -24,7 +24,11 @@
            [root@master]# ifconfig
               docker0:...................................
               eth0:...................................
-              eth1:
+              eth1: <BROADCAST , MULTICAST, UP, LOWER_UP>
+              link/ether 00:0c:23:45:30:fc brd ff:ff:ff:ff:ff:ff
+                 valid——lft forever prefered_lft forever
+              inet 192.168.33.11/24 brd 192.168.33.255 scope global noprefixroute eth1   // 本机网卡eth1绑定IP（192.168.33.11）
+              inet6 fe80::20c:29ff:fe29:fe45/64
                 
               Io:..............................................
            
@@ -99,4 +103,38 @@
 
 # 3 启动keepalived
 
+   **master 启动keepalived**
+   
+   [root@master]# service keepalived start
+   [root@master]# systemctl enable keepalived
+   
+   
+   **master2 启动keepalived **
+   
+   [root@master2]# service keepalived start
+   [root@master2]# systemctl enable keepalived
+   
+   
+   **master3 启动keepalived **
+
+   [root@master3]# service keepalived start
+   [root@master3]# systemctl enable keepalived
+
+
 # 4 VIP查看
+
+    在master上查看 VIP被绑定到那一台机上
+    
+    [root@master]# ip a
+    
+         1:     docker0:...................................
+         2:     eth0:...................................
+         3:     eth1: <BROADCAST , MULTICAST, UP, LOWER_UP>
+                  link/ether 00:0c:23:45:30:fc brd ff:ff:ff:ff:ff:ff
+                      valid——lft forever prefered_lft forever
+                  inet 192.168.33.11/24 brd 192.168.33.255 scope global noprefixroute eth1   // 本机网卡eth1绑定IP（192.168.33.11）
+                  inet 192.168.33.130/24 brd 192.168.33.255 scope global noprefixroute eth1   // 本机网卡eth1绑定IP（192.168.33.11）
+                  inet6 fe80::20c:29ff:fe29:fe45/64
+                
+         4:     Io:..............................................
+
