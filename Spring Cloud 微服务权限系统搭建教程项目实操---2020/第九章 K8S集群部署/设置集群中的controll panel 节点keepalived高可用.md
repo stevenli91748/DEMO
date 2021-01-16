@@ -51,7 +51,7 @@
                    auth_pass 1111
                }
                virtual_ipaddress {
-                   172.27.34.130
+                  192.168.33.130
                }
            }
 ## master2虚拟机的keepalived配置
@@ -73,7 +73,7 @@
                    auth_pass 1111
                }
                virtual_ipaddress {
-                   172.27.34.130
+                  192.168.33.130
                }
            }
 
@@ -96,7 +96,7 @@
                    auth_pass 1111
                }
                virtual_ipaddress {
-                   172.27.34.130
+                  192.168.33.130
                }
            }
 
@@ -132,9 +132,39 @@
          3:     eth1: <BROADCAST , MULTICAST, UP, LOWER_UP>
                   link/ether 00:0c:23:45:30:fc brd ff:ff:ff:ff:ff:ff
                       valid——lft forever prefered_lft forever
-                  inet 192.168.33.11/24 brd 192.168.33.255 scope global noprefixroute eth1   // 本机网卡eth1绑定IP（192.168.33.11）
-                  inet 192.168.33.130/24 brd 192.168.33.255 scope global noprefixroute eth1   // 本机网卡eth1绑定IP（192.168.33.11）
+                  inet 192.168.33.11/24 brd 192.168.33.255 scope global noprefixroute eth1    // master虚拟机网卡eth1绑定物理IP（192.168.33.11）
+                  inet 192.168.33.130/24 brd 192.168.33.255 scope global noprefixroute eth1   // master虚拟机网卡eth1绑定虚拟VIP（192.168.33.130），表明在集群(master,  
+                                                                                                 master2,master3)中现是由master虚拟机接受负载均衡传递过来的流量
                   inet6 fe80::20c:29ff:fe29:fe45/64
                 
          4:     Io:..............................................
+         
+
+   假如master虚拟机出故障了，哪VIP会绑定到那一台机上，可手工模拟一下：
+   
+        先关闭master虚拟机：
+                
+        [root@master]# init 0
+        
+        然后，在master2虚拟机上查看
+        
+        [root@master2]# ip a 
+        
+         1:     docker0:...................................
+         2:     eth0:...................................
+         3:     eth1: <BROADCAST , MULTICAST, UP, LOWER_UP>
+                  link/ether 00:0c:23:45:30:fc brd ff:ff:ff:ff:ff:ff
+                      valid——lft forever prefered_lft forever
+                  inet 192.168.33.10/24 brd 192.168.33.255 scope global noprefixroute eth1   // master2虚拟机网卡eth1绑定物理IP（192.168.33.10）
+                  inet 192.168.33.130/24 brd 192.168.33.255 scope global noprefixroute eth1   // master2虚拟机网卡eth1绑定虚拟VIP（192.168.33.130），表明在
+                                                                                                 集群(master, master2,master3)中现是由master2虚拟机接受负载均
+                                                                                                 衡传递过来的流量
+                  inet6 fe80::20c:29ff:fe29:fe45/64
+                
+         4:     Io:..............................................
+        
+        
+        
+        
+         
 
