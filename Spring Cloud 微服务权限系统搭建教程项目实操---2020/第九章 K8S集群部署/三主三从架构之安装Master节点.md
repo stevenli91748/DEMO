@@ -1,4 +1,11 @@
-# 初始化Master
+
+目录
+* [1. 初始化Master](#1-初始化Master)
+* [2. master初始化](#2-master初始化)
+* [3. 加载环境变量](#3-加载环境变量)
+* []()
+
+# 1 初始化Master
 
   [root@master]# mkdir febs
   [root@master]# cd /febs
@@ -30,8 +37,27 @@
         networking:
           podSubnet: "10.244.0.0/16"
 
-#  master初始化
+#  2 master初始化
 
       [root@master]# kubeadm init --config=kubeadm-config.yaml
       
  <a href="https://ibb.co/fVR2VKj"><img src="https://i.ibb.co/spS2pD8/kube-20210117.jpg" alt="kube-20210117" border="0"></a>
+
+
+  如果初始化失败，可执行kubeadm reset后重新初始化
+  
+    [root@master]# kubeadm reset
+    [root@master]# rm -rf $HOME/.kube/config       // $HOME 就是 /root 目录，因为是以root用户登录的
+    
+# 3 加载环境变量    
+
+    以root用户登录
+ 
+    [root@master]# echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> /root/.bash_profile
+    [root@master]# source /root/.bash_profile
+    
+    非root用户
+    
+    mkdir -p $HOME/.kube                                                // $HOME就是登录用户目录
+    cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    chown $(id -u):$(id -g) $HOME/.kube/config
