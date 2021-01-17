@@ -139,7 +139,7 @@
            
            配置如下：
      
-           配置master2 的ssh，修改登录用户路径 ~/.ssh/config 文件：例如 以root登录  /roo/.ssh/config文件
+           配置master 的ssh，修改登录用户路径 ~/.ssh/config 文件：例如 以root登录  /roo/.ssh/config文件
 
            Host master2
               HostName 192.168.11.10       // 设置远程服务器master2 的IP地址 
