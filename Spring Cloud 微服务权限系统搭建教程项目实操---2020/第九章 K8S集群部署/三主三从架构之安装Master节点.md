@@ -1,8 +1,13 @@
 # 初始化Master
 
+  [root@master]# mkdir febs
+  [root@master]# cd /febs
+  
+  create kubeadmconfig.yaml at /febs
+  
   在master虚拟机设置配置文件
   
-        [root@master]# more kubeadm-config.yaml 
+        [root@master]# vi kubeadm-config.yaml 
         apiVersion: kubeadm.k8s.io/v1beta2
         kind: ClusterConfiguration
         kubernetesVersion: v1.19.3
@@ -24,3 +29,7 @@
         controlPlaneEndpoint: "192.168.33.130:6443"
         networking:
           podSubnet: "10.244.0.0/16"
+
+#  master初始化
+
+      [root@master]# kubeadm init --config=kubeadm-config.yaml
