@@ -109,13 +109,13 @@
    [root@master]# systemctl enable keepalived
    
    
-   **master2 启动keepalived **
+   **master2 启动keepalived**
    
    [root@master2]# service keepalived start
    [root@master2]# systemctl enable keepalived
    
    
-   **master3 启动keepalived **
+   **master3 启动keepalived**
 
    [root@master3]# service keepalived start
    [root@master3]# systemctl enable keepalived
