@@ -5,7 +5,7 @@
   
   create kubeadmconfig.yaml at /febs
   
-  在master虚拟机设置配置文件
+  在master虚拟机设置配置文件， kubeadm-config.yaml 为初始化的配置文件
   
         [root@master]# vi kubeadm-config.yaml 
         apiVersion: kubeadm.k8s.io/v1beta2
