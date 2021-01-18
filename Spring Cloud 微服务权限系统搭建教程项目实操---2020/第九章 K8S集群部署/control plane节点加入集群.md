@@ -23,7 +23,7 @@ Step 2:  在master上建立并运行脚本cert-main-master.sh，将证书分发�
       // CONTROL_PLANE_IPS="192.168.33.10 192.168.33.9"        // 如果设置master2 master3 的 IP 地址会有很多问题
       CONTROL_PLANE_IPS="master2 master3"                      //master2 master3是从三主三从的K8S集群结构之免密登录章节中得来的
       for host in ${CONTROL_PLANE_IPS}; do
-          // scp /etc/kubernetes/pki/ca.crt "${USER}"@$host:/febs      //从master机上copy 指定目录下的文件都远程master2 master3 的/febs目录下  
+          // scp /etc/kubernetes/pki/ca.crt "${USER}"@$host:/febs      //例子：从master机上copy 指定目录下的文件都远程master2 master3 的/febs目录下  
           scp /etc/kubernetes/pki/ca.crt "${USER}"@$host:              //从master机上copy 指定目录下的文件都远程master2 master3 的root用户的目录(/root)下
           scp /etc/kubernetes/pki/ca.key "${USER}"@$host:              //一定不能漏了 “：”冒号，不然会出错的
           scp /etc/kubernetes/pki/sa.key "${USER}"@$host:
