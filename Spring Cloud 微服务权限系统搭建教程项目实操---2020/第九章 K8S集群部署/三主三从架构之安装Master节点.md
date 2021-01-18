@@ -49,6 +49,12 @@
     [root@master]# kubeadm reset
     [root@master]# rm -rf $HOME/.kube/config       // $HOME 就是 /root 目录，因为是以root用户登录的
     
+    然后,重新开始初始化master
+    
+    [root@master]# swapoff -a
+    [root@master]# cd /febs
+    [root@master]# kubeadm init --config=kubeadm-config.yaml   //重新生成一个新的令牌
+    
 # 3 加载环境变量    
 
     以root用户登录
