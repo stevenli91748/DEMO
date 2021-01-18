@@ -41,6 +41,7 @@
 
 #  2 master初始化
 
+      [root@master]# swapoff -a              //清除缓冲区
       [root@master]# kubeadm init --config=kubeadm-config.yaml
       
  <a href="https://ibb.co/fVR2VKj"><img src="https://i.ibb.co/spS2pD8/kube-20210117.jpg" alt="kube-20210117" border="0"></a>
