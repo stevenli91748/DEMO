@@ -64,8 +64,9 @@ Step 2:  在master上建立并运行脚本cert-main-master.sh，将证书分发�
      mv /${USER}/etcd-ca.key /etc/kubernetes/pki/etcd/ca.key
    
    然后
-     [root@master2]# chmod +x cert-other-master.sh
-     [root@master2]# ./cert-other-master.sh
+   
+    [root@master2]# chmod +x cert-other-master.sh
+    [root@master2]# ./cert-other-master.sh
 
 ## 1C master3移动证书至指定目录
 
@@ -83,5 +84,6 @@ Step 2:  在master上建立并运行脚本cert-main-master.sh，将证书分发�
      mv /${USER}/etcd-ca.key /etc/kubernetes/pki/etcd/ca.key
    
    然后
+   
     [root@master3]# chmod +x cert-other-master.sh
     [root@master3]# ./cert-other-master.sh
