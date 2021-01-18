@@ -3,7 +3,9 @@
 * [1. 初始化Master](#1-初始化Master)
 * [2. master初始化](#2-master初始化)
 * [3. 加载环境变量](#3-加载环境变量)
-* []()
+* [4. 安装网络]()
+  * [4.1 安装flannel网络](#4A-安装flannel网络)
+  * [4.2 安装Calico网络](#4B-安装Calico网络)
 
 # 1 初始化Master
 
@@ -73,3 +75,7 @@
     mkdir -p $HOME/.kube                                                // $HOME就是登录用户目录
     cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
     chown $(id -u):$(id -g) $HOME/.kube/config
+
+# 安装网络
+## 4A 安装flannel网络
+## 4B 安装Calico网络
