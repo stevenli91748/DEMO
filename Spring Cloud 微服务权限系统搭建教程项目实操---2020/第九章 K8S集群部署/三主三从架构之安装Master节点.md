@@ -78,7 +78,55 @@
     chown $(id -u):$(id -g) $HOME/.kube/config
 
 # 安装网络
-## [4A 安装flannel网络](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC%E4%B9%9D%E7%AB%A0%20K8S%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/9.3%20%E7%94%A8Kubeadm%E6%90%AD%E5%BB%BAK8S%E9%9B%86%E7%BE%A4.md#%E9%85%8D%E7%BD%AE-flannel-%E7%BD%91%E7%BB%9C#配置flannel网络)
+## 4A 安装flannel网络
+
+     //对于网络插件，可以有许多选择，请参考https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#pod-network的说明。这里我选择的flannel
+     //注意： 为了使Flannel正常工作，执行kubeadm init命令时需要增加--pod-network-cidr=10.244.0.0/16参数。Flannel适用于amd64，arm，arm64和ppc64le上工作，但使用除amd64平台得其他平台，
+     //你必须手动下载并替换amd64。
+     
+        [root@master]# kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml  //一般会出问题 可先下载，
+      
+        ////在master虚拟机上下载flannel配置文件到当前目录下：
+        [root@master]# wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml 
+       
+        //修改kube-flannel.yml：
+        [root@master]# vi kube-flannel.yml
+        
+        containers:
+             - name: kube-flannel
+               image: quay.io/coreos/flannel:v0.11.0-amd64
+               command:
+               - /opt/bin/flanneld
+               args:
+               - --ip-masq
+               - --kube-subnet-mgr
+               - --iface=eth1 # 新增部分
+
+<a href="https://ibb.co/5v50VyM"><img src="https://i.ibb.co/vmJF8Gw/eth1.png" alt="eth1" border="0"></a>
+
+         //Vagrant 在多主机模式下有多个网卡，eth0 网卡用于nat转发访问公网，而eth1网卡才是主机真正的IP，在这种情况下直接部署k8s flannel 插件会导致CoreDNS无法工作，所以我们需要添加上面这条
+           配置强制flannel使用eth1
+           
+        //安装flannel：
+
+        [root@master]# kubectl create -f kube-flannel.yml  
+        
+        输出如下所示时，表示安装成功
+        
+  <a href="https://ibb.co/WgXpnw7"><img src="https://i.ibb.co/f4WGM5Z/flannel.png" alt="flannel" border="0"></a>
+               
+        再次查看节点状态：
+
+        [root@master]# kubectl get nodes       
+        
+  <a href="https://ibb.co/BG3Fd6g"><img src="https://i.ibb.co/hc9whdK/flannel3.png" alt="flannel3" border="0"></a>
+        
+        
+        可以看到所有节点都是Ready状态。
+        
+        执行kubectl get pods --all-namespaces，验证Kubernetes集群的相关Pod是否都正常创建并运行
+        
+  <a href="https://ibb.co/bR35rGH"><img src="https://i.ibb.co/5x9h5JY/flannel4.png" alt="flannel4" border="0"></a>        
 
 
 ## 4B 安装Calico网络
