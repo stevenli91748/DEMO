@@ -4,6 +4,9 @@
   * [1.1 master分发证书](#1A-master分发证书)
   * [1.2 master2移动证书至指定目录](#1B-master2移动证书至指定目录)
   * [1.3 master3移动证书至指定目录](#1C-master3移动证书至指定目录)
+* [2. Control Plane节点加入集群](#2-Control Plane节点加入集群)
+  * [2.1 master2加入集群](#2A-master2加入集群)
+  * [2.2 master3加入集群](#2B-master3加入集群)
 ---
 
 #  1 证书分发
@@ -87,3 +90,10 @@ Step 2:  在master上建立并运行脚本cert-main-master.sh，将证书分发�
    
     [root@master3]# chmod +x cert-other-master.sh
     [root@master3]# ./cert-other-master.sh
+
+
+# 2 Control Plane节点加入集群
+
+## 2A-master2加入集群
+
+## 2B-master3加入集群
