@@ -52,11 +52,11 @@
     [root@master]# kubeadm reset
     [root@master]# rm -rf $HOME/.kube/config       // $HOME 就是 /root 目录，因为是以root用户登录的
 
-    kubeadm reset后，之前flannel创建的bridge device cni0和网口设备flannel.1依然健在。为了保证环境彻底恢复到初始状态，我们可以通过下面命令删除这两个设备：
+    //kubeadm reset后，之前flannel创建的bridge device cni0和网口设备flannel.1依然健在。为了保证环境彻底恢复到初始状态，我们可以通过下面命令删除这两个设备：
 
-    [root@master]# ifconfig  cni0 down
-    [root@master]# brctl delbr cni0
-    [root@master]# ip link delete flannel.1           //flannel1.1 可能每个人都有不同的flannel版本,这里是V1.1
+    //[root@master]# ifconfig  cni0 down
+    //[root@master]# brctl delbr cni0
+    //[root@master]# ip link delete flannel.1           //flannel1.1 可能每个人都有不同的flannel版本,这里是V1.1
     
     然后,重新开始初始化master
     
