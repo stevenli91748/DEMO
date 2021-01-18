@@ -50,4 +50,38 @@ Step 2:  在master上建立并运行脚本cert-main-master.sh，将证书分发�
      
 ## 1B master2移动证书至指定目录
 
+   在master2机上创建 cert-other-master.sh
+   
+     USER=root # customizable
+     mkdir -p /etc/kubernetes/pki/etcd
+     mv /${USER}/ca.crt /etc/kubernetes/pki/
+     mv /${USER}/ca.key /etc/kubernetes/pki/
+     mv /${USER}/sa.pub /etc/kubernetes/pki/
+     mv /${USER}/sa.key /etc/kubernetes/pki/
+     mv /${USER}/front-proxy-ca.crt /etc/kubernetes/pki/
+     mv /${USER}/front-proxy-ca.key /etc/kubernetes/pki/
+     mv /${USER}/etcd-ca.crt /etc/kubernetes/pki/etcd/ca.crt
+     mv /${USER}/etcd-ca.key /etc/kubernetes/pki/etcd/ca.key
+   
+   然后
+     [root@master2]# chmod +x cert-other-master.sh
+     [root@master2]# ./cert-other-master.sh
+
 ## 1C master3移动证书至指定目录
+
+   在master3机上创建 cert-other-master.sh
+   
+     USER=root # customizable
+     mkdir -p /etc/kubernetes/pki/etcd
+     mv /${USER}/ca.crt /etc/kubernetes/pki/
+     mv /${USER}/ca.key /etc/kubernetes/pki/
+     mv /${USER}/sa.pub /etc/kubernetes/pki/
+     mv /${USER}/sa.key /etc/kubernetes/pki/
+     mv /${USER}/front-proxy-ca.crt /etc/kubernetes/pki/
+     mv /${USER}/front-proxy-ca.key /etc/kubernetes/pki/
+     mv /${USER}/etcd-ca.crt /etc/kubernetes/pki/etcd/ca.crt
+     mv /${USER}/etcd-ca.key /etc/kubernetes/pki/etcd/ca.key
+   
+   然后
+    [root@master3]# chmod +x cert-other-master.sh
+    [root@master3]# ./cert-other-master.sh
