@@ -96,9 +96,9 @@ Step 2:  在master上建立并运行脚本cert-main-master.sh，将证书分发�
 
 ## 2A-master2加入集群
 
-      在其余的master节点执行，加入集群命令，注意添加 -experimental-control-plane
+      //在其余的master节点执行，加入集群命令，注意添加 -experimental-control-plane
    
       [root@master2]#kubeadm join 192.168.33.130:6443 --token 5kad4d.1pa4jvjcba4tttsl --discovery-token-ca-cert-hash 
-                    sha256:f1551456908535ed0c6078a199651a01ddf5cfb470a901f3e24701ea996f978e --experimental-control-plane
+                    sha256:f1551456908535ed0c6078a199651a01ddf5cfb470a901f3e24701ea996f978e --control-plane
 
 ## 2B-master3加入集群
