@@ -4,7 +4,7 @@
   * [1.1 master分发证书](#1A-master分发证书)
   * [1.2 master2移动证书至指定目录](#1B-master2移动证书至指定目录)
   * [1.3 master3移动证书至指定目录](#1C-master3移动证书至指定目录)
-* [2. Control Plane节点加入集群](#2-Control Plane节点加入集群)
+* [2. Control Plane节点加入集群](#2-Control-Plane节点加入集群)
   * [2.1 master2加入集群](#2A-master2加入集群)
   * [2.2 master3加入集群](#2B-master3加入集群)
 ---
@@ -95,5 +95,10 @@ Step 2:  在master上建立并运行脚本cert-main-master.sh，将证书分发�
 # 2 Control Plane节点加入集群
 
 ## 2A-master2加入集群
+
+      在其余的master节点执行，加入集群命令，注意添加 -experimental-control-plane
+   
+      [root@master2]#kubeadm join 192.168.33.130:6443 --token 5kad4d.1pa4jvjcba4tttsl --discovery-token-ca-cert-hash 
+                    sha256:f1551456908535ed0c6078a199651a01ddf5cfb470a901f3e24701ea996f978e --experimental-control-plane
 
 ## 2B-master3加入集群
