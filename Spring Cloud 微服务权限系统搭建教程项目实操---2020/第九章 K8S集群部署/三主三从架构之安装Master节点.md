@@ -9,16 +9,18 @@
 
 # 1 初始化Master
 
-  [root@master]# vi /etc/hosts
-  
-  192.168.33.130  cluster.kube.com           // 配置VIP 的域名
+      //添加VIP的域名到 集群中的每一台机(master,master2,master3,node1,node2,node3,client)上的/etc/hosts
+         
+      [root@master]# vi /etc/hosts
+         
+      192.168.33.130  cluster.kube.com           // 配置VIP 的域名
 
-  [root@master]# mkdir febs
-  [root@master]# cd /febs
-  
-  create kubeadmconfig.yaml at /febs
-  
-  在master虚拟机设置配置文件， kubeadm-config.yaml 为初始化的配置文件
+      [root@master]# mkdir febs
+      [root@master]# cd /febs
+
+      create kubeadmconfig.yaml at /febs
+
+      在master虚拟机设置配置文件， kubeadm-config.yaml 为初始化的配置文件
   
         [root@master]# vi kubeadm-config.yaml 
         apiVersion: kubeadm.k8s.io/v1beta2
