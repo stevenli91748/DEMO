@@ -12,7 +12,13 @@
       //添加VIP的域名到 集群中的每一台机(master,master2,master3,node1,node2,node3,client)上的/etc/hosts
          
       [root@master]# vi /etc/hosts
-         
+      [root@master2]# vi /etc/hosts
+      [root@master3]# vi /etc/hosts
+      [root@node1]# vi /etc/hosts
+      [root@node2]# vi /etc/hosts
+      [root@node3]# vi /etc/hosts
+      [root@client]# vi /etc/hosts   
+      
       192.168.33.130  cluster.kube.com           // 配置VIP 的域名
 
       [root@master]# mkdir febs
