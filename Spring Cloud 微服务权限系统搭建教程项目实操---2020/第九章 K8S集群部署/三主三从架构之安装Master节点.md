@@ -46,7 +46,7 @@
           - 192.168.33.12
           - 192.168.33.13
           - 192.168.33.14
-          - 192.168.33.130
+          - 192.168.33.130              //VIP
           or 
           - cluster.kube.com
         controlPlaneEndpoint: "192.168.33.130:6443"  
@@ -54,13 +54,6 @@
         controlPlaneEndpoint: "cluster.kube.com:6443"
         networking:
           podSubnet: "10.244.0.0/16"
-          
-          
-          
-          
-          
-          
-          
           
 
 #  2 master初始化
