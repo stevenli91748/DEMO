@@ -1,13 +1,13 @@
 
 目录
-* [1. 初始化Master](#1-初始化Master)
+* [1. 初始化Master配置文件](#1-初始化Master配置文件)
 * [2. master初始化](#2-master初始化)
 * [3. 加载环境变量](#3-加载环境变量)
 * [4. 安装网络]()
   * [4.1 安装flannel网络](#4A-安装flannel网络)
   * [4.2 安装Calico网络](#4B-安装Calico网络)
 
-# 1 初始化Master
+# 1 初始化Master配置文件
 
       //添加VIP的域名到 集群中的每一台机(master,master2,master3,node1,node2,node3,client)上的/etc/hosts
          
