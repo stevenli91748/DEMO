@@ -1,4 +1,9 @@
+#目录
+  
+  LVS+Keepalived的配置是跟据架构设计的不同而放在不同的地方，如果架构中有有专门的机器就放在该机器上 [例子1](https://blog.51cto.com/3241766/2094750)，[例子2](https://www.kubernetes.org.cn/6632.html),如果没设计专门的机器就放在
+  应用服务器上,[例子](https://www.kubernetes.org.cn/6632.html)
 
+* [0 安装ipvsadm](#安0-装ipvsadm)
 * [1 安装Keepalived](#1-安装Keepalived)
 * [2 keepalived配置](#2-keepalived配置)
   *  [2.1 master虚拟机的keepalived配置](#master虚拟机的keepalived配置)
@@ -6,6 +11,22 @@
   *  [2.3 master3虚拟机的keepalived配置](#master3虚拟机的keepalived配置)
 * [3 启动keepalived](#3-启动keepalived)
 * [4 VIP查看](#4-VIP查看)
+
+# 0 安装ipvsadm
+
+    LVS无需安装，安装的是管理工具，第一种叫ipvsadm，第二种叫keepalive。ipvsadm是通过命令行管理，而keepalive读取配置文件管理
+   
+    分别在三台control plane节点(master, master2,master3)都执行操作
+   
+     [root@master]# yum -y install ipvsadm
+     [root@master2]# yum -y install ipvsadm
+     [root@master3]# yum -y install ipvsadm
+     
+     把ipvsadm模块加载进系统
+     
+     [root@master]# ipvsadm
+     [root@master2]# ipvsadm
+     [root@master3]# ipvsadm
 
 # 1 安装Keepalived
 
