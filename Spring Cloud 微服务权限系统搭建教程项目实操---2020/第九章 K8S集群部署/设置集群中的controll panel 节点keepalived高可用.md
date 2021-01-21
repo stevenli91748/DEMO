@@ -1,7 +1,7 @@
 #目录
   
   LVS+Keepalived的配置是跟据架构设计的不同而放在不同的地方，如果架构中有有专门的机器就放在该机器上 [例子1](https://blog.51cto.com/3241766/2094750)，[例子2](https://www.kubernetes.org.cn/6632.html),如果没设计专门的机器就放在
-  应用服务器上,[例子](https://www.kubernetes.org.cn/6632.html)
+  应用服务器上,[例子3](https://www.kubernetes.org.cn/6632.html)
 
 * [0 安装ipvsadm](#安0-装ipvsadm)
 * [1 安装Keepalived](#1-安装Keepalived)
