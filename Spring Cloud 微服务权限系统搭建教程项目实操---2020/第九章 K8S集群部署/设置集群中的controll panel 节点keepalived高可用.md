@@ -42,28 +42,28 @@
 
    首先，要查看本机的网卡名称，不同Linux系统有不同的名称，我是用 centos8 Linux系统，它的网卡名是 eth1
    
-              [root@master]# ifconfig
+              [root@lvs01]# ifconfig
               docker0:...................................
               eth0:...................................
               eth1: <BROADCAST , MULTICAST, UP, LOWER_UP>
               link/ether 00:0c:23:45:30:fc brd ff:ff:ff:ff:ff:ff
                  valid——lft forever prefered_lft forever
-              inet 192.168.33.11/24 brd 192.168.33.255 scope global noprefixroute eth1   // 本机网卡eth1绑定IP（192.168.33.11）
+              inet 192.168.33.132/24 brd 192.168.33.255 scope global noprefixroute eth1   // lvs01虚拟机网卡eth1绑定物理IP（192.168.33.132）
               inet6 fe80::20c:29ff:fe29:fe45/64
                 
               Io:..............................................
            
            
 
-           [root@master]# more /etc/keepalived/keepalived.conf 
+           [root@lvs01]# more /etc/keepalived/keepalived.conf 
            ! Configuration File for keepalived
            
            global_defs {
-              router_id master            //master虚拟机的hostname, router_id 机器标识，通常为hostname，但不一定非得是hostname。故障发生时，邮件通知会用到
+              router_id lvs01             //lvs01虚拟机的hostname, router_id 机器标识，通常为hostname，但不一定非得是hostname。故障发生时，邮件通知会用到
            }
            vrrp_instance VI_1 {            //vrrp实例定义部分
                state MASTER                // 设置lvs的状态，MASTER和BACKUP两种，必须大写 
-               interface eth1              //设置网卡号
+               interface eth1              //设置lvs01网卡名
                virtual_router_id 50        //设置虚拟路由标示，这个标示是一个数字，同一个vrrp实例使用唯一标示 
                priority 100                //定义优先级，数字越大优先级越高，在一个vrrp——instance下，master的优先级必须大于backup
                advert_int 1                //设定master与backup负载均衡器之间同步检查的时间间隔，单位是秒
@@ -76,31 +76,50 @@
                }
            }
            
-           virtual_server 192.168.33.130 6443      //设置虚拟服务器，需要指定虚拟ip和服务端口
+           virtual_server 192.168.33.130 6443{      //设置虚拟服务器，需要指定虚拟ip和服务端口
                delay_loop 6                        //健康检查时间间隔
                lb_algo wrr                         //负载均衡调度算法
                lb_kind DR                          //负载均衡转发规则
                persistence_timeout 50              //设置会话保持时间，对动态网页非常有用
                protocol TCP                        //指定转发协议类型，有TCP和UDP两种
-               real_server 172.27.9.91 81 {        //配置服务器节点1，需要指定real server的真实IP地址和端口
+               
+               //配置下行服务器 master虚拟机
+               real_server 192.168.33.11 6443 {    //配置服务器节点1(master虚拟机)，需要指定real server(master虚拟机)的真实IP地址和端口
                weight 1                            //设置权重，数字越大权重越高
-              TCP_CHECK {              #realserver的状态监测设置部分单位秒
-                 connect_timeout 10       #连接超时为10秒
-                 retry 3             #重连次数
-                 delay_before_retry 3        #重试间隔
-                 connect_port 81         #连接端口为81，要和上面的保持一致
-                 }
-              }
-               real_server 172.27.9.92 81 {    #配置服务器节点1，需要指定real server的真实IP地址和端口
-               weight 1                  #设置权重，数字越大权重越高
-               TCP_CHECK {               #realserver的状态监测设置部分单位秒
-                 connect_timeout 10         #连接超时为10秒
-                 retry 3               #重连次数
-                 delay_before_retry 3        #重试间隔
-                 connect_port 81          #连接端口为81，要和上面的保持一致
+               TCP_CHECK {                          //realserver的状态监测设置部分单位秒
+                 connect_timeout 10                //连接超时为10秒
+                 retry 3                           //重连次数
+                 delay_before_retry 3              //重试间隔
+                 connect_port 6443                 //连接端口为6443，要和上面的保持一致
                  }
                }
-          }
+              
+               
+               //配置下行服务器 master2虚拟机
+               real_server 192.168.33.10 6443 {    //配置服务器节点2(master2虚拟机)，需要指定real server(master2虚拟机)的真实IP地址和端口
+               weight 1                            //设置权重，数字越大权重越高
+               TCP_CHECK {                         //realserver的状态监测设置部分单位秒
+                 connect_timeout 10                //连接超时为10秒
+                 retry 3                           //重连次数
+                 delay_before_retry 3              //重试间隔
+                 connect_port 6443                 //连接端口为81，要和上面的保持一致
+                 }
+               }
+               
+               //配置下行服务器 master3虚拟机
+               real_server 192.168.33.9 6443 {    //配置服务器节点1(master3虚拟机)，需要指定real server(master3虚拟机)的真实IP地址和端口
+               weight 1                            //设置权重，数字越大权重越高
+               TCP_CHECK {                          //realserver的状态监测设置部分单位秒
+                 connect_timeout 10                //连接超时为10秒
+                 retry 3                           //重连次数
+                 delay_before_retry 3              //重试间隔
+                 connect_port 6443                 //连接端口为6443，要和上面的保持一致
+                 }
+               }
+
+
+               
+          }                                        // virtual_server 192.168.33.130 6443{
            
            
            
