@@ -16,7 +16,8 @@
 
     LVS无需安装，安装的是管理工具，第一种叫ipvsadm，第二种叫keepalive。ipvsadm是通过命令行管理，而keepalive读取配置文件管理
    
-    分别在三台control plane节点(master, master2,master3)都执行操作
+   
+     分别在三台control plane节点(master, master2,master3)都执行操作
    
      [root@master]# yum -y install ipvsadm
      [root@master2]# yum -y install ipvsadm
