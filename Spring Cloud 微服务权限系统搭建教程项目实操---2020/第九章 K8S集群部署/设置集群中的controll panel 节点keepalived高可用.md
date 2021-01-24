@@ -11,9 +11,8 @@
 * [3 启动keepalived](#3-启动keepalived)
 * [4 VIP查看](#4-VIP查看)
 * [5. 安装Nginx](#5-安装Nginx)
-  * [5.1 Nginx安装](#5A-Nginx安装)
-    * [编译安装nginx来定制自己的模块](#编译安装nginx来定制自己的模块)
-    * [yum安装nginx](#yum安装nginx)
+  * [编译安装nginx来定制自己的模块](#编译安装nginx来定制自己的模块)
+  * [yum安装nginx](#yum安装nginx)
     
 # 0 安装ipvsadm
 
@@ -306,11 +305,7 @@
    * [Centos7.3安装nginx](https://blog.51cto.com/3241766/2094315)
    * [如何在 CentOS 8 上安装 Nginx](https://www.jianshu.com/p/9b2dd37a5af9)
    * [nginx服务器安装及配置文件详解](https://www.jianshu.com/p/57eacdaf7392)
-   
-
-   
-  
-## 5A Nginx安装
+ 
     
     使用编译安装nginx可自定制自己的模块，yum安装rpm包会比编译安装简单很多，默认会安装许多模块，但缺点是如果你想以后安装第三方模块那就没办法了    
         
