@@ -67,6 +67,8 @@
      [root@lvs01]# ipvsadm
      [root@lvs02]# ipvsadm
 
+     [root@lvs01]#lsmod | grep ip_vs
+     [root@lvs02]#lsmod | grep ip_vs
 
 # 1 安装Keepalived
 
@@ -81,6 +83,8 @@
 ## lvs01虚拟机的keepalived配置
 
    首先，要查看本机的网卡名称，不同Linux系统有不同的名称，我是用 centos8 Linux系统，它的网卡名是 eth1
+   
+
    
               [root@lvs01]# ifconfig
               docker0:...................................
