@@ -18,28 +18,28 @@
      
      关闭lvs01防火墙
      [root@lvs01]# firewall-cmd-state
-     [root@lvs01]# systemctl stop firewall.service
-     [root@lvs01]# systemctl disable firewall.service     
+     [root@lvs01]# systemctl stop firewalld.service
+     [root@lvs01]# systemctl disable firewalld.service     
      
      关闭lvs02防火墙
      [root@lvs02]# firewall-cmd-state
-     [root@lvs02]# systemctl stop firewall.service
-     [root@lvs02]# systemctl disable firewall.service     
+     [root@lvs02]# systemctl stop firewalld.service
+     [root@lvs02]# systemctl disable firewalld.service     
      
      关闭nginx01防火墙
      [root@nginx01]# firewall-cmd-state
-     [root@nginx01]# systemctl stop firewall.service
-     [root@nginx01]# systemctl disable firewall.service     
+     [root@nginx01]# systemctl stop firewalld.service
+     [root@nginx01]# systemctl disable firewalld.service     
      
      关闭nginx02防火墙
      [root@nginx02]# firewall-cmd-state
-     [root@nginx02]# systemctl stop firewall.service
-     [root@nginx02]# systemctl disable firewall.service     
+     [root@nginx02]# systemctl stop firewalld.service
+     [root@nginx02]# systemctl disable firewalld.service     
 
      关闭nginx03防火墙
      [root@nginx03]# firewall-cmd-state
-     [root@nginx03]# systemctl stop firewall.service
-     [root@nginx03]# systemctl disable firewall.service     
+     [root@nginx03]# systemctl stop firewalld.service
+     [root@nginx03]# systemctl disable firewalld.service     
 
    关闭防selinux:
       
