@@ -10,6 +10,8 @@
   *  [2.2 lvs02虚拟机的keepalived配置](#lvs022虚拟机的keepalived配置)
 * [3 启动keepalived](#3-启动keepalived)
 * [4 VIP查看](#4-VIP查看)
+* [5. 安装Nginx](#5-安装Nginx)
+  * [5.1 Nginx安装准备](#5A-Nginx安装准备)
 
 # 0 安装ipvsadm
 
@@ -297,7 +299,40 @@
          4:     Io:..............................................
         
         
-        
+# 5 安装Nginx     
+   
+   [Centos7.3安装nginx](https://blog.51cto.com/3241766/2094315)
+   
+# 5A Nginx安装准备
+   
+   在nginx集群中的nginx01,nginx02,nginx03配置
+    
+   gcc安装:
+   
+    [root@nginx01]# yum -y install gcc-c++
+    [root@nginx02]# yum -y install gcc-c++
+    [root@nginx03]# yum -y install gcc-c++
+    
+   pcre安装
+
+    [root@nginx01]# yum -y install pcre pcre-devel
+    [root@nginx02]# yum -y install pcre pcre-devel
+    [root@nginx03]# yum -y install pcre pcre-devel
+
+   zlib安装
+
+    [root@nginx01]# yum -y install zlib zlib-devel
+    [root@nginx02]# yum -y install zlib zlib-devel
+    [root@nginx03]# yum -y install zlib zlib-devel
+
+
+   OpenSSL安装
+    
+    [root@nginx01]# yum -y install openssl openssl-devel
+    [root@nginx02]# yum -y install openssl openssl-devel
+    [root@nginx03]# yum -y install openssl openssl-devel
+  
+
         
          
 
