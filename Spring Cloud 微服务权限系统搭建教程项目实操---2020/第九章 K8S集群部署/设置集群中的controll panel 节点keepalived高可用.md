@@ -11,8 +11,8 @@
 * [3 启动keepalived](#3-启动keepalived)
 * [4 VIP查看](#4-VIP查看)
 * [5. 安装Nginx](#5-安装Nginx)
-  * [编译安装nginx来定制自己的模块](#编译安装nginx来定制自己的模块)
-  * [yum安装nginx](#yum安装nginx)
+  * [第一种方法---编译安装nginx来定制自己的模块](#编译安装nginx来定制自己的模块)
+  * [第二种方法---yum安装nginx](#yum安装nginx)
     
 # 0 安装ipvsadm
 
