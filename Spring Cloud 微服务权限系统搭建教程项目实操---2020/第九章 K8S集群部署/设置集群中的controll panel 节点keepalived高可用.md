@@ -13,10 +13,50 @@
 
 # 0 安装ipvsadm
 
-    LVS无需安装，安装的是管理工具，第一种叫ipvsadm，第二种叫keepalive。ipvsadm是通过命令行管理，而keepalive读取配置文件管理
+   关闭防火墙:
+   关闭两台lvs(lvs01,lvs02) 服务器和三台nginx(nginx01,nginx02,nginx03)服务器防火墙
+     
+     关闭lvs01防火墙
+     [root@lvs01]# firewall-cmd-state
+     [root@lvs01]# systemctl stop firewall.service
+     [root@lvs01]# systemctl disable firewall.service     
+     
+     关闭lvs02防火墙
+     [root@lvs02]# firewall-cmd-state
+     [root@lvs02]# systemctl stop firewall.service
+     [root@lvs02]# systemctl disable firewall.service     
+     
+     关闭nginx01防火墙
+     [root@nginx01]# firewall-cmd-state
+     [root@nginx01]# systemctl stop firewall.service
+     [root@nginx01]# systemctl disable firewall.service     
+     
+     关闭nginx02防火墙
+     [root@nginx02]# firewall-cmd-state
+     [root@nginx02]# systemctl stop firewall.service
+     [root@nginx02]# systemctl disable firewall.service     
+
+     关闭nginx03防火墙
+     [root@nginx03]# firewall-cmd-state
+     [root@nginx03]# systemctl stop firewall.service
+     [root@nginx03]# systemctl disable firewall.service     
+
+   关闭防selinux:
+      
+   关闭lvs(lvs01,lvs02) 和 nginx(nginx01,nginx02,nginx03) 服务器的selinux，修改每一台的/etc/selinux/config，将SELINUX由enforcing设置为disabled，重启服务器。
+    
+    [root@lvs01]# sed -i 's/^SELINUX=enforcing$/SELINUX=disabled/' /etc/selinux/config
+    [root@lvs02]# sed -i 's/^SELINUX=enforcing$/SELINUX=disabled/' /etc/selinux/config
+    [root@nginx01]# sed -i 's/^SELINUX=enforcing$/SELINUX=disabled/' /etc/selinux/config
+    [root@nginx02]# sed -i 's/^SELINUX=enforcing$/SELINUX=disabled/' /etc/selinux/config
+    [root@nginx03]# sed -i 's/^SELINUX=enforcing$/SELINUX=disabled/' /etc/selinux/config
+       
+
+   LVS无需安装，安装的是管理工具，第一种叫ipvsadm，第二种叫keepalive。ipvsadm是通过命令行管理，而keepalive读取配置文件管理
    
+   安装ipvsadm
    
-     分别在二台LVS节点(lvs01,lvs02)都执行操作
+   分别在二台LVS节点(lvs01,lvs02)都执行操作
    
      [root@lvs01]# yum -y install ipvsadm
      [root@lvs02]# yum -y install ipvsadm
