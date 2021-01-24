@@ -12,7 +12,7 @@
 * [4 VIP查看](#4-VIP查看)
 * [5. 安装Nginx](#5-安装Nginx)
   * [5.1 Nginx安装准备](#5A-Nginx安装准备)
-
+  * [5.2 Nginx安装](#5B-Nginx安装)
 # 0 安装ipvsadm
 
    关闭防火墙:
@@ -301,9 +301,10 @@
         
 # 5 安装Nginx     
    
-   [Centos7.3安装nginx](https://blog.51cto.com/3241766/2094315)
+   * [Centos7.3安装nginx](https://blog.51cto.com/3241766/2094315)
+   * [如何在 CentOS 8 上安装 Nginx](https://www.jianshu.com/p/9b2dd37a5af9)
    
-# 5A Nginx安装准备
+## 5A Nginx安装准备
    
    在nginx集群中的nginx01,nginx02,nginx03配置
     
@@ -332,7 +333,56 @@
     [root@nginx02]# yum -y install openssl openssl-devel
     [root@nginx03]# yum -y install openssl openssl-devel
   
-
+## 5B Nginx安装
         
-         
-
+   在nginx集群中的nginx01,nginx02,nginx03配置
+   
+   从CentOS 8开始，Nginx软件包在默认的CentOS存储库中可用
+   
+    [root@nginx01]# yum -y install nginx
+    [root@nginx02]# yum -y install nginx
+    [root@nginx03]# yum -y install nginx
+    
+    [root@nginx01]# systemctl enable nginx
+    [root@nginx02]# systemctl enable nginx
+    [root@nginx03]# systemctl enable nginx
+    
+    [root@nginx01]# systemctl start nginx
+    [root@nginx02]# systemctl start nginx
+    [root@nginx03]# systemctl start nginx
+    
+    [root@nginx01]# systemctl status nginx
+    [root@nginx02]# systemctl status nginx
+    [root@nginx03]# systemctl status nginx
+    
+    显示如下：
+    
+      nginx.service - The nginx HTTP and reverse proxy server
+      Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; vendor preset: disabled)
+      Active: active (running) since Sun 2019-10-06 18:35:55 UTC; 17min ago
+      ....
+    
+    
+    
+      
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+  
