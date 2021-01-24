@@ -303,6 +303,7 @@
    
    * [Centos7.3安装nginx](https://blog.51cto.com/3241766/2094315)
    * [如何在 CentOS 8 上安装 Nginx](https://www.jianshu.com/p/9b2dd37a5af9)
+   * [nginx服务器安装及配置文件详解](https://www.jianshu.com/p/57eacdaf7392)
    
 ## 5A Nginx安装准备
    
