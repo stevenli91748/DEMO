@@ -11,8 +11,8 @@
 * [3 启动keepalived](#3-启动keepalived)
 * [4 VIP查看](#4-VIP查看)
 * [5. 安装Nginx](#5-安装Nginx)
-  * [第一种方法---编译安装nginx来定制自己的模块](#编译安装nginx来定制自己的模块)
-  * [第二种方法---yum安装nginx](#yum安装nginx)
+  * [第一种方法---编译安装nginx来定制自己的模块](#第一种方法---编译安装nginx来定制自己的模块)
+  * [第二种方法---yum安装nginx](#第二种方法---yum安装nginx)
     
 # 0 安装ipvsadm
 
@@ -309,7 +309,7 @@
     
     使用编译安装nginx可自定制自己的模块，yum安装rpm包会比编译安装简单很多，默认会安装许多模块，但缺点是如果你想以后安装第三方模块那就没办法了    
         
-### 编译安装nginx来定制自己的模块
+### 第一种方法   编译安装nginx来定制自己的模块
 
    在nginx集群中的nginx01,nginx02,nginx03配置
     
@@ -341,7 +341,7 @@
 
 
 
-### yum安装nginx 
+### 第二种方法   yum安装nginx 
         
         
    在nginx集群中的nginx01,nginx02,nginx03配置
