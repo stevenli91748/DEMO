@@ -161,7 +161,6 @@
                  }
                }
 
-
                
           }                                        // virtual_server 192.168.33.130 6443{
            
@@ -192,6 +191,49 @@
                   192.168.33.130
                }
            }
+
+           virtual_server 192.168.33.130 6443{      //设置虚拟服务器，需要指定虚拟ip和服务端口
+               delay_loop 6                        //健康检查时间间隔
+               lb_algo wrr                         //负载均衡调度算法
+               lb_kind DR                          //负载均衡转发规则
+               persistence_timeout 50              //设置会话保持时间，对动态网页非常有用
+               protocol TCP                        //指定转发协议类型，有TCP和UDP两种
+               
+               //配置下行服务器 master虚拟机
+               real_server 192.168.33.11 6443 {    //配置服务器节点1(master虚拟机)，需要指定real server(master虚拟机)的真实IP地址和端口
+               weight 1                            //设置权重，数字越大权重越高
+               TCP_CHECK {                          //realserver的状态监测设置部分单位秒
+                 connect_timeout 10                //连接超时为10秒
+                 retry 3                           //重连次数
+                 delay_before_retry 3              //重试间隔
+                 connect_port 6443                 //连接端口为6443，要和上面的保持一致
+                 }
+               }
+              
+               
+               //配置下行服务器 master2虚拟机
+               real_server 192.168.33.10 6443 {    //配置服务器节点2(master2虚拟机)，需要指定real server(master2虚拟机)的真实IP地址和端口
+               weight 1                            //设置权重，数字越大权重越高
+               TCP_CHECK {                         //realserver的状态监测设置部分单位秒
+                 connect_timeout 10                //连接超时为10秒
+                 retry 3                           //重连次数
+                 delay_before_retry 3              //重试间隔
+                 connect_port 6443                 //连接端口为81，要和上面的保持一致
+                 }
+               }
+               
+               //配置下行服务器 master3虚拟机
+               real_server 192.168.33.9 6443 {    //配置服务器节点1(master3虚拟机)，需要指定real server(master3虚拟机)的真实IP地址和端口
+               weight 1                            //设置权重，数字越大权重越高
+               TCP_CHECK {                          //realserver的状态监测设置部分单位秒
+                 connect_timeout 10                //连接超时为10秒
+                 retry 3                           //重连次数
+                 delay_before_retry 3              //重试间隔
+                 connect_port 6443                 //连接端口为6443，要和上面的保持一致
+                 }
+               }
+              
+          }                                        // virtual_server 192.168.33.130 6443{
 
 
 
