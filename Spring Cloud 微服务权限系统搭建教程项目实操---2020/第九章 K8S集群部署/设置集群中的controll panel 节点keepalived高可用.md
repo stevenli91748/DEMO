@@ -11,9 +11,8 @@
 * [3 启动keepalived](#3-启动keepalived)
 * [4 VIP查看](#4-VIP查看)
 * [5. 安装Nginx](#5-安装Nginx)
-  * [第一种方法---编译安装nginx来定制自己的模块](#第一种方法---编译安装nginx来定制自己的模块)
-  * [第二种方法---yum安装nginx](#第二种方法---yum安装nginx)
-    
+  * [5.1 Nginx安装准备](#5A-Nginx安装准备)
+  * [5.2 Nginx安装](#5B-Nginx安装)
 # 0 安装ipvsadm
 
    关闭防火墙:
@@ -304,13 +303,9 @@
    
    * [Centos7.3安装nginx](https://blog.51cto.com/3241766/2094315)
    * [如何在 CentOS 8 上安装 Nginx](https://www.jianshu.com/p/9b2dd37a5af9)
-   * [nginx服务器安装及配置文件详解](https://www.jianshu.com/p/57eacdaf7392)
- 
-    
-    使用编译安装nginx可自定制自己的模块，yum安装rpm包会比编译安装简单很多，默认会安装许多模块，但缺点是如果你想以后安装第三方模块那就没办法了    
-        
-### 第一种方法   编译安装nginx来定制自己的模块
-
+   
+## 5A Nginx安装准备
+   
    在nginx集群中的nginx01,nginx02,nginx03配置
     
    gcc安装:
@@ -337,12 +332,8 @@
     [root@nginx01]# yum -y install openssl openssl-devel
     [root@nginx02]# yum -y install openssl openssl-devel
     [root@nginx03]# yum -y install openssl openssl-devel
-
-
-
-
-### 第二种方法   yum安装nginx 
-        
+  
+## 5B Nginx安装
         
    在nginx集群中的nginx01,nginx02,nginx03配置
    
@@ -371,6 +362,19 @@
       Active: active (running) since Sun 2019-10-06 18:35:55 UTC; 17min ago
       ....
     
+    如果已关闭防火墙了，就不用进行下一步
+    
+  调整防火墙：
+     
+     在安装过程中，Nginx使用预定义的规则创建防火墙服务文件，以允许访问HTTP（80）和HTTPS（443）端口。
+
+     使用以下命令永久打开必要的端口：
+
+       firewall-cmd --permanent --zone=public --add-service=http
+       firewall-cmd --permanent --zone=public --add-service=https
+       firewall-cmd --reload
+
+      现在，您可以通过 http://YOUR_IP 在Web浏览器中打开来测试Nginx的安装。 您应该看到默认的Nginx欢迎页面    
     
     
       
