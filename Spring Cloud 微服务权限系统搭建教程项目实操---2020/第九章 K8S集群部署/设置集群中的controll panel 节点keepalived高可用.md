@@ -11,8 +11,8 @@
 * [3 启动keepalived](#3-启动keepalived)
 * [4 VIP查看](#4-VIP查看)
 * [5. 安装Nginx](#5-安装Nginx)
-  * [5.1 源码 Nginx安装](#5A-源码-Nginx安装)
-  * [5.2 Yum Nginx安装](#5B-Yum-Nginx安装)
+  * [5.1 第一种方法 源码 Nginx安装](#5A-源码-Nginx安装)
+  * [5.2 第二种方法 Yum Nginx安装](#5B-Yum-Nginx安装)
 # 0 安装ipvsadm
 
    关闭防火墙:
