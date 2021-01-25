@@ -11,8 +11,8 @@
 * [3 启动keepalived](#3-启动keepalived)
 * [4 VIP查看](#4-VIP查看)
 * [5. 安装Nginx](#5-安装Nginx)
-  * [5.1 Nginx安装准备](#5A-Nginx安装准备)
-  * [5.2 Nginx安装](#5B-Nginx安装)
+  * [5.1 源码 Nginx安装](#5A-源码-Nginx安装)
+  * [5.2 Yum Nginx安装](#5B-Yum-Nginx安装)
 # 0 安装ipvsadm
 
    关闭防火墙:
@@ -305,7 +305,7 @@
    * [如何在 CentOS 8 上安装 Nginx](https://www.jianshu.com/p/9b2dd37a5af9)
    * [Nginx安装---源码编译安装 中文版教程、非常的牛X](https://www.nginx.cn/install?spm=a2c6h.12873639.0.0.7f7c4dd4nyMbub)
    
-## 5A Nginx安装准备
+## 5A 源码 Nginx安装
    
    在nginx集群中的nginx01,nginx02,nginx03配置
     
@@ -334,7 +334,7 @@
     [root@nginx02]# yum -y install openssl openssl-devel
     [root@nginx03]# yum -y install openssl openssl-devel
   
-## 5B Nginx安装
+## 5B Yum Nginx安装]
         
    在nginx集群中的nginx01,nginx02,nginx03配置
    
