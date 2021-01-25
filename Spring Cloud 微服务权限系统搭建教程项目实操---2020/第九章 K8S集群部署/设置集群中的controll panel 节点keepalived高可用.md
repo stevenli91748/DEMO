@@ -303,10 +303,12 @@
    
    * [Centos7.3安装nginx](https://blog.51cto.com/3241766/2094315)
    * [如何在 CentOS 8 上安装 Nginx](https://www.jianshu.com/p/9b2dd37a5af9)
-   * [Nginx安装---源码编译安装 中文版教程、非常的牛X](https://www.nginx.cn/install?spm=a2c6h.12873639.0.0.7f7c4dd4nyMbub)
+
    
 ## 5A 源码 Nginx安装
    
+   * [Nginx安装---源码编译安装 中文版教程、非常的牛X](https://www.nginx.cn/install?spm=a2c6h.12873639.0.0.7f7c4dd4nyMbub)
+
    在nginx集群中的nginx01,nginx02,nginx03配置
     
    gcc安装:
