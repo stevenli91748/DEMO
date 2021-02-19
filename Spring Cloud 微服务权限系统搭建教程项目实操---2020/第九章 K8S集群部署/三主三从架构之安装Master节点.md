@@ -45,7 +45,20 @@
 <a href="https://ibb.co/HGDvnkc"><img src="https://i.ibb.co/P1Zpwf2/Virtual-Box-multi8-master-1610860178204-33726-19-02-2021-12-12-42.png" alt="Virtual-Box-multi8-master-1610860178204-33726-19-02-2021-12-12-42" border="0"></a>
 
 
-  如果初始化失败，可执行kubeadm reset后重新初始化
+**初始化成功，加载环境变量 **
+
+    以root用户登录
+ 
+    [root@master]# echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> /root/.bash_profile
+    [root@master]# source /root/.bash_profile
+    
+    非root用户
+    
+    mkdir -p $HOME/.kube                                                // $HOME就是登录用户目录
+    cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    chown $(id -u):$(id -g) $HOME/.kube/config
+
+ **如果初始化失败，可执行kubeadm reset后重新初始化**
   
     [root@master]# kubeadm reset
     [root@master]# rm -rf $HOME/.kube/config       // $HOME 就是 /root 目录，因为是以root用户登录的
@@ -59,21 +72,14 @@
     然后,重新开始初始化master
     
     [root@master]# swapoff -a
-    [root@master]# cd /febs
-    [root@master]# kubeadm init --config=kubeadm-config.yaml   //重新生成一个新的令牌
-    
-# 3 加载环境变量    
-
-    以root用户登录
+    [root@master]# kubeadm init --control-plane-endpoint "192.168.33.130:6443"       //指定虚拟IP的地址和端口号
+                                --upload-certs                                       //生成证书
+                                --pod-network-cidr 10.244.0.0/16
+                                --apiserver-advertise-address=192.168.33.11         // 当前master虚拟机的IP
+                                --kubernetes-version=v1.19.3
+                                --service-cidr=10.1.0.0/16
  
-    [root@master]# echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> /root/.bash_profile
-    [root@master]# source /root/.bash_profile
     
-    非root用户
-    
-    mkdir -p $HOME/.kube                                                // $HOME就是登录用户目录
-    cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-    chown $(id -u):$(id -g) $HOME/.kube/config
 
 # 安装网络
 ## 4A 安装flannel网络
