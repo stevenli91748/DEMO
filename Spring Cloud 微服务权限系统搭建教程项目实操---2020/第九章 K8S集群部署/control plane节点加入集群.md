@@ -34,6 +34,12 @@
      [root@master2]# sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
      [root@master2]# sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
+     为了确定该master2节点是否加入了集群，可在master2虚拟机上输入
+     
+     [root@master2]# kubectl get nodes
+     
+     可看到该master2 节点的状态，如果是Ready,那就是已经加入集群了，如果是 NotrReady, 哪就是master2虚拟机还没有加入集群，因为master虚拟机还没有配置网络
+           
 
 
 # Master3虚拟机加入集群
@@ -68,4 +74,9 @@
 
 
 
+     为了确定该master3节点是否加入了集群，可在master3虚拟机上输入
+     
+     [root@master3]# kubectl get nodes
+     
+     可看到该master3 节点的状态，如果是Ready,那就是已经加入集群了，如果是 NotrReady, 哪就是master3虚拟机还没有加入集群，因为master虚拟机还没有配置网络
 
