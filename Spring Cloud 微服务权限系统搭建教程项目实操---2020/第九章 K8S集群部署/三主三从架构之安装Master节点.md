@@ -21,47 +21,28 @@
       
       192.168.33.130  cluster.kube.com           // 配置VIP 的域名
 
-      [root@master]# mkdir febs
-      [root@master]# cd /febs
 
-      create kubeadmconfig.yaml at /febs
+      // 在master上起虚拟ip：192.168.33.130
+      [root@master]# ifconfig eth1:2 192.168.33.130 netmask 255.255.255.0 up
+      
+      /如果要取消该虚拟ip：192.168.33.130
+      [root@master]# ifconfig eth1:2 192.168.33.130 netmask 255.255.255.0 down
+      
 
-      在master虚拟机设置配置文件， kubeadm-config.yaml 为初始化的配置文件
-  
-        [root@master]# vi kubeadm-config.yaml 
-        apiVersion: kubeadm.k8s.io/v1beta2
-        kind: ClusterConfiguration
-        kubernetesVersion: v1.19.3
-        apiServer:
-          certSANs:    #填写所有kube-apiserver节点的hostname、IP、VIP
-          - master
-          - master2
-          - master3
-          - node01
-          - node02
-          - node03
-          - 192.168.33.11
-          - 192.168.33.10
-          - 192.168.33.9
-          - 192.168.33.12
-          - 192.168.33.13
-          - 192.168.33.14
-          - 192.168.33.130              //VIP
-          or 
-          - cluster.kube.com
-        controlPlaneEndpoint: "192.168.33.130:6443"  
-        or  
-        controlPlaneEndpoint: "cluster.kube.com:6443"
-        networking:
-          podSubnet: "10.244.0.0/16"
-          
 
 #  2 master初始化
 
-      [root@master]# swapoff -a              //清除缓冲区
-      [root@master]# kubeadm init --config=kubeadm-config.yaml | tee kubeadm-init.log  //# 初始化,并且将标准输出同时写入至kubeadm-init.log文件
+      [root@master]# swapoff -a                 //清除缓冲区
+      [root@master]# kubeadm reset              //清除kubernetes以前的配置
+      [root@master]# rm -rf $HOME/.kube/config  //清除kubernetes以前的配置文件
+      [root@master]# kubeadm init --control-plane-endpoint "192.168.33.130:6443"       //指定虚拟IP的地址和端口号
+                                  --upload-certs                                       //生成证书
+                                  --pod-network-cidr 10.244.0.0/16
+                                  --apiserver-advertise-address=192.168.33.11         // 当前master虚拟机的IP
+                                  --kubernetes-version=v1.19.3
+                                  --service-cidr=10.1.0.0/16
       
- <a href="https://ibb.co/fVR2VKj"><img src="https://i.ibb.co/spS2pD8/kube-20210117.jpg" alt="kube-20210117" border="0"></a>
+<a href="https://ibb.co/HGDvnkc"><img src="https://i.ibb.co/P1Zpwf2/Virtual-Box-multi8-master-1610860178204-33726-19-02-2021-12-12-42.png" alt="Virtual-Box-multi8-master-1610860178204-33726-19-02-2021-12-12-42" border="0"></a>
 
 
   如果初始化失败，可执行kubeadm reset后重新初始化
