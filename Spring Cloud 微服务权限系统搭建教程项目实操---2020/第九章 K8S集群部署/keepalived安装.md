@@ -166,8 +166,8 @@
     [root@lvs02]# systemctl enable keepalived
 
 
-# vip查看
+# 5 vip查看
 
     [root@lvs01]# ip a
     
-    <a href="https://sm.ms/image/YaIUHmMOXc3egBD" target="_blank"><img src="https://i.loli.net/2020/03/09/YaIUHmMOXc3egBD.png" alt="image-20200309164434474.png"></a>
+ <a href="https://sm.ms/image/YaIUHmMOXc3egBD" target="_blank"><img src="https://i.loli.net/2020/03/09/YaIUHmMOXc3egBD.png" alt="image-20200309164434474.png"></a>
