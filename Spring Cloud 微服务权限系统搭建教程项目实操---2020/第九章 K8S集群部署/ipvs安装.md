@@ -12,9 +12,11 @@
   
 ## lvs01虚拟机安装ipvs
 
-   [root@lvs01]# yum -y install ipvsadm
+    [root@lvs01]# yum -y install ipvsadm
    
 ## lvs02虚拟机安装ipvs
+
+    [root@lvs02]# yum -y install ipvsadm
 
 # 2 加载ipvsadm模块
 
