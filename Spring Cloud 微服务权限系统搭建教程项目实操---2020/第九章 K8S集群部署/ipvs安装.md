@@ -1,0 +1,1 @@
+lvs-keepalived01和lvs-keepalived02都执行本操作
