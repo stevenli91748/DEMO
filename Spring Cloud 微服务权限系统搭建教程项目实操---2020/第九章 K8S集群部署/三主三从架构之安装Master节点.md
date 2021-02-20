@@ -36,7 +36,7 @@
       [root@master]# kubeadm reset              //清除kubernetes以前的配置
       [root@master]# rm -rf $HOME/.kube/config  //清除kubernetes以前的配置文件
       [root@master]# kubeadm init --control-plane-endpoint "192.168.33.130:6443"       //指定虚拟IP的地址和端口号
-                                  --upload-certs                                       //生成证书
+                                  --upload-certs                                       //生成证书，就不用手动copy 证书到别的control plane
                                   --pod-network-cidr 10.244.0.0/16
                                   --apiserver-advertise-address=192.168.33.11         // 当前master虚拟机的IP
                                   --kubernetes-version=v1.19.3
