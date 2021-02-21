@@ -9,6 +9,7 @@
 * [3. LVS负载均衡服务器配置](#LVS负载均衡服务器配置)
   * [lvs01负载均衡服务器配置](#lvs01负载均衡服务器配置)
   * [lvs02负载均衡服务器配置](#lvs02负载均衡服务器配置)  
+* [4. 测试验证基于LVS的负载均衡](#测试验证基于LVS的负载均衡)
 # 1 安装ipvs
 
     LVS无需安装，安装的是管理工具，第一种叫ipvsadm，第二种叫keepalive。ipvsadm是通过命令行管理，而keepalive读取配置文件管理。
@@ -69,3 +70,27 @@
     -rr  //轮训调度
     -m   //网络地址转换NAT
 
+# 测试验证基于LVS的负载均衡
+
+     此步骤暂不涉及Keepalived，因此是无法故障自动切换的
+     
+     [root@lvs01]# curl 192.168.33.132:81
+     hello nginx03
+     
+     [root@lvs01]# curl 192.168.33.132:81
+     hello nginx01
+     
+     [root@lvs01]# curl 192.168.33.132:81
+     hello nginx02
+     
+     [root@lvs01]# curl 192.168.33.132:81
+     hello nginx01
+     
+     [root@lvs01]# curl 192.168.33.132:81
+     hello nginx02
+
+
+
+
+     
+  
