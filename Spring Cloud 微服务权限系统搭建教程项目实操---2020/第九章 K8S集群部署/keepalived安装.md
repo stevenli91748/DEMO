@@ -52,14 +52,15 @@
              192.168.33.130
          }
      }
-     virtual_server 192.168.33.130 81 {   #设置虚拟服务器，需要指定虚拟ip和服务端口
+     virtual_server 192.168.33.130 81 {   #设置虚拟服务器，需要指定虚拟ip和服务端口 , 在本例中下行连接的是NGINX 服务器，该nginx服务器连接的端口是已从80 改为 81
          delay_loop 6                     #健康检查时间间隔
          lb_algo wrr                      #负载均衡调度算法
          lb_kind DR                       #负载均衡转发规则
          #persistence_timeout 50          #设置会话保持时间，对动态网页非常有用
          protocol TCP                     #指定转发协议类型，有TCP和UDP两种
          
-         real_server 192.168.33.142 81 {    #配置服务器节点1，需要指定real server的真实IP地址和端口,在本例中该real server指向 nginx01虚拟机 ，可下行指向任何类型server
+         real_server 192.168.33.142 81 {    #配置服务器节点1，需要指定real server的真实IP地址和端口,在本例中该real server指向 nginx01虚拟机 ，可下行指向任何类型server，在本例中下行连
+                                            #接的是NGINX 服务器，该nginx服务器连接的端口是已从80 改为 81
          weight 10                          #设置权重，数字越大权重越高
          TCP_CHECK {                        #realserver的状态监测设置部分单位秒
             connect_timeout 10              #连接超时为10秒
@@ -113,7 +114,7 @@
              192.168.33.130
          }
      }
-     virtual_server 192.168.33.130 81 {   #设置虚拟服务器，需要指定虚拟ip和服务端口
+     virtual_server 192.168.33.130 81 {   #设置虚拟服务器，需要指定虚拟ip和服务端口，在本例中下行连接的是NGINX 服务器，该nginx服务器连接的端口是已从80 改为 81
          delay_loop 6                     #健康检查时间间隔
          lb_algo wrr                      #负载均衡调度算法
          lb_kind DR                       #负载均衡转发规则
