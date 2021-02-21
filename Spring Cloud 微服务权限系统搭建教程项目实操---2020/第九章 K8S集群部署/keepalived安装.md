@@ -154,7 +154,9 @@
   [root@master]# ifconfig eth1:2 192.168.33.130 netmask 255.255.255.0 down
   
   master上去掉初始化使用的ip 192.168.33.130
-  
+
+
+
 # 4 启动keepalived
 
  lvs01和lvs02都启动keepalived并设置为开机启动
