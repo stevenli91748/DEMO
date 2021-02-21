@@ -117,7 +117,7 @@
                    auth_type PASS          //主要有PASS和AH两种
                    auth_pass 1111          //验证密码，同一个vrrp_instance下MASTER和BACKUP密码必须相同
                }
-               virtual_ipaddress {         //设置虚拟ip地址，可以设置多个，每行一个
+               virtual_ipaddress {         //设置虚拟ip地址，可以设置多个，每行一个IP，最多只可 20个IP,如果要放超过20个IP，必须要用 virtual_ipaddress_excluded
                   192.168.33.130
                }
            }
@@ -164,7 +164,7 @@
                }
 
                
-          }                                        // virtual_server 192.168.33.130 6443{
+          }                                       
            
            
            
@@ -189,7 +189,7 @@
                    auth_type PASS
                    auth_pass 1111
                }
-               virtual_ipaddress {
+               virtual_ipaddress {         //设置虚拟ip地址，可以设置多个，每行一个IP，最多只可 20个IP,如果要放超过20个IP，必须要用 virtual_ipaddress_excluded
                   192.168.33.130
                }
            }
