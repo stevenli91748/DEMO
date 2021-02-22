@@ -122,44 +122,44 @@
                }
            }
            
-           virtual_server 192.168.33.130 6443{      //设置虚拟服务器，需要指定虚拟ip和服务端口
+           virtual_server 192.168.33.130 81{      //设置虚拟服务器，需要指定虚拟ip和服务端口,该端口必须对应下行的nginx服务器设置的端口 81
                delay_loop 6                        //健康检查时间间隔
                lb_algo wrr                         //负载均衡调度算法
                lb_kind DR                          //负载均衡转发规则
                persistence_timeout 50              //设置会话保持时间，对动态网页非常有用
                protocol TCP                        //指定转发协议类型，有TCP和UDP两种
                
-               //配置下行服务器 master虚拟机
-               real_server 192.168.33.11 6443 {    //配置服务器节点1(master虚拟机)，需要指定real server(master虚拟机)的真实IP地址和端口
+               //配置下行服务器 nginx01虚拟机
+               real_server 192.168.33.142 81 {    //配置服务器节点1(master虚拟机)，需要指定real server(master虚拟机)的真实IP地址和端口
                weight 1                            //设置权重，数字越大权重越高
                TCP_CHECK {                          //realserver的状态监测设置部分单位秒
                  connect_timeout 10                //连接超时为10秒
                  retry 3                           //重连次数
                  delay_before_retry 3              //重试间隔
-                 connect_port 6443                 //连接端口为6443，要和上面的保持一致
+                 connect_port 81                 //连接端口为81，要和上面的保持一致
                  }
                }
               
                
-               //配置下行服务器 master2虚拟机
-               real_server 192.168.33.10 6443 {    //配置服务器节点2(master2虚拟机)，需要指定real server(master2虚拟机)的真实IP地址和端口
+               //配置下行服务器 nginx02虚拟机
+               real_server 192.168.33.143 81 {      //配置服务器节点2(master2虚拟机)，需要指定real server(master2虚拟机)的真实IP地址和端口
                weight 1                            //设置权重，数字越大权重越高
                TCP_CHECK {                         //realserver的状态监测设置部分单位秒
                  connect_timeout 10                //连接超时为10秒
                  retry 3                           //重连次数
                  delay_before_retry 3              //重试间隔
-                 connect_port 6443                 //连接端口为81，要和上面的保持一致
+                 connect_port 81                   //连接端口为81，要和上面的保持一致
                  }
                }
                
-               //配置下行服务器 master3虚拟机
-               real_server 192.168.33.9 6443 {    //配置服务器节点1(master3虚拟机)，需要指定real server(master3虚拟机)的真实IP地址和端口
+               //配置下行服务器 nginx03虚拟机
+               real_server 192.168.33.144 81 {    //配置服务器节点1(master3虚拟机)，需要指定real server(master3虚拟机)的真实IP地址和端口
                weight 1                            //设置权重，数字越大权重越高
                TCP_CHECK {                          //realserver的状态监测设置部分单位秒
                  connect_timeout 10                //连接超时为10秒
                  retry 3                           //重连次数
                  delay_before_retry 3              //重试间隔
-                 connect_port 6443                 //连接端口为6443，要和上面的保持一致
+                 connect_port 81                 //连接端口为81，要和上面的保持一致
                  }
                }
 
@@ -173,69 +173,70 @@
            
 ## lvs02虚拟机的keepalived配置
 
-           [root@master2]# more /etc/keepalived/keepalived.conf 
+           [root@lvs01]# more /etc/keepalived/keepalived.conf 
            ! Configuration File for keepalived
            
            global_defs {
-              router_id master2            //master虚拟机的hostname，router_id 机器标识，通常为hostname，但不一定非得是hostname。故障发生时，邮件通知会用到
-          }
-           vrrp_instance VI_1 {
+              router_id lvs02             //lvs01虚拟机的hostname, router_id 机器标识，通常为hostname，但不一定非得是hostname。故障发生时，邮件通知会用到
+           }
+           vrrp_instance VI_1 {            //vrrp实例定义部分
                state BACKUP                // 设置lvs的状态，MASTER和BACKUP两种，必须大写 
-               interface eth1
-               virtual_router_id 50
-               priority 90
-               advert_int 1
-               authentication {
-                   auth_type PASS
-                   auth_pass 1111
+               interface eth1              //设置lvs01网卡名
+               virtual_router_id 50        //设置虚拟路由标示，这个标示是一个数字，同一个vrrp实例使用唯一标示 
+               priority 90                //定义优先级，数字越大优先级越高，在一个vrrp——instance下，master的优先级必须大于backup
+               advert_int 1                //设定master与backup负载均衡器之间同步检查的时间间隔，单位是秒
+               authentication {            //设置验证类型和密码
+                   auth_type PASS          //主要有PASS和AH两种
+                   auth_pass 1111          //验证密码，同一个vrrp_instance下MASTER和BACKUP密码必须相同
                }
                virtual_ipaddress {         //设置虚拟ip地址，可以设置多个，每行一个IP，最多只可 20个IP,如果要放超过20个IP，必须要用 
                   192.168.33.130           // virtual_ipaddress_excluded 替代 virtual_ipaddress
                }
            }
-
-           virtual_server 192.168.33.130 6443{      //设置虚拟服务器，需要指定虚拟ip和服务端口
+           
+           virtual_server 192.168.33.130 81{      //设置虚拟服务器，需要指定虚拟ip和服务端口,该端口必须对应下行的nginx服务器设置的端口 81
                delay_loop 6                        //健康检查时间间隔
                lb_algo wrr                         //负载均衡调度算法
                lb_kind DR                          //负载均衡转发规则
                persistence_timeout 50              //设置会话保持时间，对动态网页非常有用
                protocol TCP                        //指定转发协议类型，有TCP和UDP两种
                
-               //配置下行服务器 master虚拟机
-               real_server 192.168.33.11 6443 {    //配置服务器节点1(master虚拟机)，需要指定real server(master虚拟机)的真实IP地址和端口
+               //配置下行服务器 nginx01虚拟机
+               real_server 192.168.33.142 81 {    //配置服务器节点1(master虚拟机)，需要指定real server(master虚拟机)的真实IP地址和端口
                weight 1                            //设置权重，数字越大权重越高
                TCP_CHECK {                          //realserver的状态监测设置部分单位秒
                  connect_timeout 10                //连接超时为10秒
                  retry 3                           //重连次数
                  delay_before_retry 3              //重试间隔
-                 connect_port 6443                 //连接端口为6443，要和上面的保持一致
+                 connect_port 81                 //连接端口为81，要和上面的保持一致
                  }
                }
               
                
-               //配置下行服务器 master2虚拟机
-               real_server 192.168.33.10 6443 {    //配置服务器节点2(master2虚拟机)，需要指定real server(master2虚拟机)的真实IP地址和端口
+               //配置下行服务器 nginx02虚拟机
+               real_server 192.168.33.143 81 {      //配置服务器节点2(master2虚拟机)，需要指定real server(master2虚拟机)的真实IP地址和端口
                weight 1                            //设置权重，数字越大权重越高
                TCP_CHECK {                         //realserver的状态监测设置部分单位秒
                  connect_timeout 10                //连接超时为10秒
                  retry 3                           //重连次数
                  delay_before_retry 3              //重试间隔
-                 connect_port 6443                 //连接端口为81，要和上面的保持一致
+                 connect_port 81                   //连接端口为81，要和上面的保持一致
                  }
                }
                
-               //配置下行服务器 master3虚拟机
-               real_server 192.168.33.9 6443 {    //配置服务器节点1(master3虚拟机)，需要指定real server(master3虚拟机)的真实IP地址和端口
+               //配置下行服务器 nginx03虚拟机
+               real_server 192.168.33.144 81 {    //配置服务器节点1(master3虚拟机)，需要指定real server(master3虚拟机)的真实IP地址和端口
                weight 1                            //设置权重，数字越大权重越高
                TCP_CHECK {                          //realserver的状态监测设置部分单位秒
                  connect_timeout 10                //连接超时为10秒
                  retry 3                           //重连次数
                  delay_before_retry 3              //重试间隔
-                 connect_port 6443                 //连接端口为6443，要和上面的保持一致
+                 connect_port 81                 //连接端口为81，要和上面的保持一致
                  }
                }
-              
-          }                                        // virtual_server 192.168.33.130 6443{
+
+               
+          }                                       
 
 
 
