@@ -5,6 +5,9 @@
   * [Nginx03服务器安装](#Nginx03服务器安装)
 * [2. Nginx服务器配置](#2-Nginx服务器配置)
   * [防火墙配置](#防火墙配置)
+  * [Nginx01服务器配置](#Nginx01服务器配置)
+  * [Nginx02服务器配置](#Nginx02服务器配置)
+  * [Nginx03服务器配置](#Nginx03服务器配置)
 * [3. Nginx服务器管理](#3-Nginx服务器管理) 
 
 # 1 Nginx安装
@@ -93,6 +96,13 @@
     [root@nginx03]# firewall-cmd --permanent --zone=public --add-service=http
     [root@nginx03]# firewall-cmd --permanent --zone=public --add-service=https
     [root@nginx03]# firewall-cmd --reload
+
+## Nginx01服务器配置
+
+## Nginx02服务器配置
+
+## Nginx03服务器配置
+
 
 # 3 Nginx服务器管理
 
