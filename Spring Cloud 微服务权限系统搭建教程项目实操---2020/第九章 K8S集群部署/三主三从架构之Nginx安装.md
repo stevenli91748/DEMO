@@ -4,6 +4,7 @@
   * [Nginx02服务器安装](#Nginx02服务器安装)
   * [Nginx03服务器安装](#Nginx03服务器安装)
 * [2. Nginx服务器配置](#2-Nginx服务器配置)
+  * [防火墙配置](#防火墙配置)
 
 # 1 Nginx安装
 
@@ -69,4 +70,22 @@
     但是，您必须正确配置它，以便公众可以访问您的网站。
 
 
-## 2 Nginx服务器配置
+# 2 Nginx服务器配置
+
+
+## 防火墙配置
+
+   Nginx01虚拟机防火墙配置：
+   
+    [root@nginx01]# firewall-cmd --permanent --zone=public --add-service=http
+    [root@nginx01]# firewall-cmd --permanent --zone=public --add-service=https
+   
+   Nginx02虚拟机防火墙配置：
+
+    [root@nginx02]# firewall-cmd --permanent --zone=public --add-service=http
+    [root@nginx02]# firewall-cmd --permanent --zone=public --add-service=https
+
+   Nginx03虚拟机防火墙配置：
+
+    [root@nginx03]# firewall-cmd --permanent --zone=public --add-service=http
+    [root@nginx03]# firewall-cmd --permanent --zone=public --add-service=https
