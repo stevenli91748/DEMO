@@ -79,13 +79,16 @@
    
     [root@nginx01]# firewall-cmd --permanent --zone=public --add-service=http
     [root@nginx01]# firewall-cmd --permanent --zone=public --add-service=https
-   
+    [root@nginx01]# firewall-cmd --reload
+    
    Nginx02虚拟机防火墙配置：
 
     [root@nginx02]# firewall-cmd --permanent --zone=public --add-service=http
     [root@nginx02]# firewall-cmd --permanent --zone=public --add-service=https
-
+    [root@nginx02]# firewall-cmd --reload
+    
    Nginx03虚拟机防火墙配置：
 
     [root@nginx03]# firewall-cmd --permanent --zone=public --add-service=http
     [root@nginx03]# firewall-cmd --permanent --zone=public --add-service=https
+    [root@nginx03]# firewall-cmd --reload
