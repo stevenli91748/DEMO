@@ -5,9 +5,9 @@
   * [Nginx03服务器安装](#Nginx03服务器安装)
 * [2. Nginx服务器配置](#2-Nginx服务器配置)
   * [防火墙配置](#防火墙配置)
-  * [Nginx01服务器配置](#Nginx01服务器配置)
-  * [Nginx02服务器配置](#Nginx02服务器配置)
-  * [Nginx03服务器配置](#Nginx03服务器配置)
+  * [Nginx01服务器配置文件](#Nginx01服务器配置文件)
+  * [Nginx02服务器配置文件](#Nginx02服务器配置文件)
+  * [Nginx03服务器配置文件](#Nginx03服务器配置文件)
 * [3. 打开Nginx所在服务器的“路由”功能、关闭“ARP查询”功能并设置回环ip](#3-打开Nginx所在服务器的路由功能并关闭ARP查询功能并设置回环IP) 
 * [4. Nginx服务器管理](#4-Nginx服务器管理) 
 
@@ -98,13 +98,13 @@
     [root@nginx03]# firewall-cmd --permanent --zone=public --add-service=https
     [root@nginx03]# firewall-cmd --reload
 
-## Nginx01服务器配置
+## Nginx01服务器配置文件
   
     
 
-## Nginx02服务器配置
+## Nginx02服务器配置文件
 
-## Nginx03服务器配置
+## Nginx03服务器配置文件
 
 # 3 打开Nginx所在服务器的路由功能并关闭ARP查询功能并设置回环IP
 
