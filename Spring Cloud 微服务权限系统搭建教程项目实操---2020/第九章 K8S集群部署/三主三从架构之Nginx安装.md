@@ -5,6 +5,7 @@
   * [Nginx03服务器安装](#Nginx03服务器安装)
 * [2. Nginx服务器配置](#2-Nginx服务器配置)
   * [防火墙配置](#防火墙配置)
+* [3. Nginx服务器管理](#3-Nginx服务器管理) 
 
 # 1 Nginx安装
 
@@ -92,3 +93,35 @@
     [root@nginx03]# firewall-cmd --permanent --zone=public --add-service=http
     [root@nginx03]# firewall-cmd --permanent --zone=public --add-service=https
     [root@nginx03]# firewall-cmd --reload
+
+# 3 Nginx服务器管理
+
+    为了管理您的NGINX服务器，您有多种选择。
+
+    要检查NGINX的状态，您必须运行以下命令
+
+        $ sudo systemctl status nginx
+
+    要停止您的NGINX服务器，请运行
+
+        $ sudo systemctl stop nginx
+
+    如果要重新启动，则必须运行
+
+        $ sudo systemctl start nginx
+
+    如果您对NGINX服务器进行了一些修改，则可以重新加载它而不必停止并重新启动它。
+
+    要重新加载NGINX，您只需运行
+
+        $ sudo systemctl reload nginx
+
+    如果您不想在引导时启动NGINX服务器，则必须通过运行来禁用它
+
+        $ sudo systemctl disable nginx
+
+    静态HTML文件：
+    
+    默认情况下，您的静态HTML文件位于“/usr/share/nginx/html”，因此，如果要导航到此路径，则将找到使用Web浏览器浏览时显示的文件的HTML。
+    
+    
