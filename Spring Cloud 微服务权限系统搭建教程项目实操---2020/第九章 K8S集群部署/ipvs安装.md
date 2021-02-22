@@ -74,20 +74,40 @@
 
      此步骤暂不涉及Keepalived，因此是无法故障自动切换的
      
-     [root@lvs01]# curl 192.168.33.132:81
-     hello nginx03
+     1. 在lvs01虚拟机上测试：
      
-     [root@lvs01]# curl 192.168.33.132:81
-     hello nginx01
+           [root@lvs01]# curl 192.168.33.132:81
+           hello nginx03
+
+           [root@lvs01]# curl 192.168.33.132:81
+           hello nginx01
+
+           [root@lvs01]# curl 192.168.33.132:81
+           hello nginx02
+
+           [root@lvs01]# curl 192.168.33.132:81
+           hello nginx01
+
+           [root@lvs01]# curl 192.168.33.132:81
+           hello nginx02
+
+
+     2. 在lvs01虚拟机上测试：
      
-     [root@lvs01]# curl 192.168.33.132:81
-     hello nginx02
-     
-     [root@lvs01]# curl 192.168.33.132:81
-     hello nginx01
-     
-     [root@lvs01]# curl 192.168.33.132:81
-     hello nginx02
+           [root@lvs02]# curl 192.168.33.133:81
+           hello nginx01
+
+           [root@lvs02]# curl 192.168.33.133:81
+           hello nginx03
+
+           [root@lvs02]# curl 192.168.33.133:81
+           hello nginx01
+
+           [root@lvs02]# curl 192.168.33.133:81
+           hello nginx02
+
+           [root@lvs02]# curl 192.168.33.133:81
+           hello nginx01
 
 
 
