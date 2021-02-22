@@ -1,5 +1,6 @@
 
-**lvs01和lvs02都执行本操作**
+**lvs01和lvs02都执行本操作, 此步骤使用LVS+Keepalived即可做到故障的自动检测及切换**
+
 
 # 目录
 * [1. keepalived安装](#1-keepalived安装)
