@@ -98,6 +98,8 @@
     [root@nginx03]# firewall-cmd --reload
 
 ## Nginx01服务器配置
+  
+   
 
 ## Nginx02服务器配置
 
