@@ -102,12 +102,20 @@
   
     [root@nginx01]# vi /etc/nginx/nginx.conf
     
-      #定义Nginx运行的用户和用户组
-      user www www;
-      error_log /usr/local/nginx/logs/error.log info;
+      #指定运行nginx的用户和用户组，默认情况下该选项关闭（关闭的情况就是nobody）
+      user www www;   or  user nobody nobody;
+      
+      #运行nginx的进程数量，后文详细讲解
+      worker_processes  1; 
+      
+      #nginx运行错误的日志存放位置。当然您还可以指定错误级别
+      error_log  /usr/local/nginx/logs/error.log info;
+      error_log  logs/error.log notice;
+      error_log  logs/error.log ;
 
-      #进程pid文件
+      ##指定主进程id文件的存放位置，虽然worker_processes != 1的情况下，会有很多进程，管理进程只有一个
       pid /usr/local/nginx/logs/nginx.pid;
+            
       worker_rlimit_nofile 65535;       
        
       events
@@ -115,7 +123,10 @@
         #参考事件模型，use [ kqueue | rtsig | epoll | /dev/poll | select | poll ]; epoll模型
         #是Linux 2.6以上版本内核中的高性能网络I/O模型，linux建议epoll，如果跑在FreeBSD上面，就用kqueue模型
         use epoll;
+        
+        #每一个进程可同时建立的连接数量，后问详细讲解
         worker_connections 65535;
+        
         keepalive_timeout 60;
         client_header_buffer_size 4k;
         open_file_cache max=65535 inactive=60s;
@@ -123,18 +134,30 @@
         open_file_cache_min_uses 1;
         open_file_cache_errors on;
       }
-      
+#============================================================================ 以上是全局配置项
+
       #设定http服务器，利用它的反向代理功能提供负载均衡支持
       http
       {
-          #文件扩展名与文件类型映射表
+#================================================================================================以下是 http 协议主配置
+
+          #安装nginx后，在conf目录下除了nginx.conf主配置文件以外，有很多模板配置文件，这里就是导入这些模板文件
           include mime.types;
 
-          #默认文件类型
+          #HTTP核心模块指令，这里设定默认类型为二进制流，也就是当文件类型未定义时使用这种方式
           default_type application/octet-stream;
 
-          #默认编码
-          charset utf-8;
+         #日志格式
+         #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '   
+                            '$status $body_bytes_sent "$http_referer" '
+                           '"$http_user_agent" "$http_x_forwarded_for"';
+         
+         #日志文件存放的位置
+         #access_log  logs/access.log  main;    
+
+
+         #默认编码
+         charset utf-8;
           
           server_names_hash_bucket_size 128;
 
@@ -145,6 +168,7 @@
           #设定通过nginx上传文件的大小
           client_max_body_size 8m;
 
+          #sendfile 规则开启
           sendfile on;
 
           #开启目录列表访问，合适下载服务器，默认关闭。
@@ -155,8 +179,9 @@
      
           tcp_nodelay on;
 
-          #长连接超时时间，单位是秒
-          keepalive_timeout 120;
+          #指定一个连接的等待时间（单位秒），如果超过等待时间，连接就会断掉。注意一定要设置，否则高并发情况下会产生性能问题。
+          keepalive_timeout  65;                      
+          
        
           #FastCGI相关参数是为了改善网站的性能：减少资源占用，提高访问速度。下面参数看字面意思都能理解。
           fastcgi_connect_timeout 300;
@@ -168,7 +193,7 @@
           fastcgi_temp_file_write_size 128k;
  
           #gzip模块设置
-          gzip on; #开启gzip压缩输出
+          gzip on; #开启gzip压缩输出，开启数据压缩，
           gzip_min_length 1k;    #最小压缩文件大小
           gzip_buffers 4 16k;    #压缩缓冲区
           gzip_http_version 1.0;    #压缩版本（默认1.1，前端如果是squid2.5请使用1.0）
@@ -178,16 +203,21 @@
 
           #开启限制IP连接数的时候需要使用
           #limit_zone crawler $binary_remote_addr 10m;
-          
-          
+#=========================================================================================== 以上是 http 协议主配置         
+#===========================================================================================以下是Nginx后端服务配置项          
           #负载均衡配置
           upstream jh.w3cschool.cn {
+            #nginx向后端服务器分配请求任务的方式，默认为轮询；如果指定了ip_hash，就是hash算法（上文介绍的算法内容）
+            #ip_hash    
      
-        #upstream的负载均衡，weight是权重，可以根据机器配置定义权重。weigth参数表示权值，权值越高被分配到的几率越大。
-        server 192.168.80.121:80 weight=3;
-        server 192.168.80.122:80 weight=2;
-        server 192.168.80.123:80 weight=3;
-
+            #upstream的负载均衡，weight是权重，可以根据机器配置定义权重。weigth参数表示权值，权值越高被分配到的几率越大，加权轮询方式。
+            server 192.168.80.121:80 weight=3;
+            server 192.168.80.122:80 weight=2;
+            server 192.168.80.123:80 weight=3;
+            
+            #backup表示，这个是一个备份节点，只有当所有节点失效后，nginx才会往这个节点分配请求任务
+            #server 192.168.220.133:8080 backup;   
+            
         #nginx的upstream目前支持4种方式的分配
         #1、轮询（默认）
         #每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。
@@ -247,17 +277,56 @@
           
           
       }    // http end
-       
+
+ #========================================================================以上是Nginx后端服务配置项
+ #========================================================================以下是一个服务实例的配置
       #虚拟主机的配置
       server
       {
-          #监听端口
+          #这个代理实例的监听端口
           listen 80; 
          
           #域名可以有多个，用空格隔开
           server_name www.w3cschool.cn w3cschool.cn;
           index index.html index.htm index.php;
           root /data/www/w3cschool;
+          
+          #文字格式
+          charset utf-8; 
+
+          #定义本虚拟主机的访问日志
+           #日志格式设定
+           #$remote_addr与$http_x_forwarded_for用以记录客户端的ip地址；
+           #$remote_user：用来记录客户端用户名称；
+           #$time_local： 用来记录访问时间与时区；
+           #$request： 用来记录请求的url与http协议；
+           #$status： 用来记录请求状态；成功是200，
+           #$body_bytes_sent ：记录发送给客户端文件主体内容大小；
+           #$http_referer：用来记录从那个页面链接访问过来的；
+           #$http_user_agent：记录客户浏览器的相关信息；
+           #通常web服务器放在反向代理的后面，这样就不能获取到客户的IP地址了，通过$remote_add拿到的IP地址是反向代理服务器的iP地址。反向代理服务器在转发请求的http头信息中，可以增加x_forwarded_for信息，用以记录原有客户端的IP地址和原来客户端的请求的服务器地址。
+           log_format access '$remote_addr - $remote_user [$time_local] "$request" '
+           '$status $body_bytes_sent "$http_referer" '
+           '"$http_user_agent" $http_x_forwarded_for';
+
+          access_log  /usr/local/nginx/logs/host.access.log  main;
+          access_log  /usr/local/nginx/logs/host.access.404.log  log404;
+
+#===========================================================================以下是 location部份
+
+          #location将按照规则分流满足条件的URL。"location /"您可以理解为“默认分流位置”。
+          location / {
+             #root目录，这个html表示nginx主安装目录下的“html”目录。
+             root   html;   
+             #目录中的默认展示页面
+             index  index.html index.htm;        
+          } 
+
+          #location支持正则表达式，“~” 表示匹配正则表达式。
+          location ~ ^/business/ {   
+              #方向代理。后文详细讲解。
+              proxy_pass http://backendserver1;   
+           }
 
           #对******进行负载均衡
           location ~ .*.(php|php5)?$
@@ -267,37 +336,19 @@
             include fastcgi.conf;
           }
          
-        #图片缓存时间设置
-        location ~ .*.(gif|jpg|jpeg|png|bmp|swf)$
-        {
-            expires 10d;
-        }
+           #图片缓存时间设置
+           location ~ .*.(gif|jpg|jpeg|png|bmp|swf)$
+           {
+               expires 10d;
+           }
          
-        #JS和CSS缓存时间设置
-        location ~ .*.(js|css)?$
-        {
-            expires 1h;
-        }
+           #JS和CSS缓存时间设置
+           location ~ .*.(js|css)?$
+           {
+               expires 1h;
+           }
          
-        #日志格式设定
-        #$remote_addr与$http_x_forwarded_for用以记录客户端的ip地址；
-        #$remote_user：用来记录客户端用户名称；
-        #$time_local： 用来记录访问时间与时区；
-        #$request： 用来记录请求的url与http协议；
-        #$status： 用来记录请求状态；成功是200，
-        #$body_bytes_sent ：记录发送给客户端文件主体内容大小；
-        #$http_referer：用来记录从那个页面链接访问过来的；
-        #$http_user_agent：记录客户浏览器的相关信息；
-        #通常web服务器放在反向代理的后面，这样就不能获取到客户的IP地址了，通过$remote_add拿到的IP地址是反向代理服务器的iP地址。反向代理服务器在转发请求的http头信息中，可以增加x_forwarded_for信息，用以记录原有客户端的IP地址和原来客户端的请求的服务器地址。
-        log_format access '$remote_addr - $remote_user [$time_local] "$request" '
-        '$status $body_bytes_sent "$http_referer" '
-        '"$http_user_agent" $http_x_forwarded_for';
-         
-        #定义本虚拟主机的访问日志
-        access_log  /usr/local/nginx/logs/host.access.log  main;
-        access_log  /usr/local/nginx/logs/host.access.404.log  log404;
-         
-        #对 "/" 启用反向代理
+        #对 "/" 启用反向代理，
         location / {
             proxy_pass http://127.0.0.1:88;
             proxy_redirect off;
@@ -346,18 +397,25 @@
             #设置在写入proxy_temp_path时数据的大小，预防一个工作进程在传递文件时阻塞太长
             #设定缓存文件夹大小，大于这个值，将从upstream服务器传
             proxy_temp_file_write_size 64k;
-      
-      }     // server end
-      
+            
+            
+             #redirect server error pages to the static page /50x.html
+             #error_page  404              /404.html;
+             error_page   500 502 503 504  /50x.html;
+             location = /50x.html {
+                 root   html;
+             }
+      }     //server end
+#========================================================================以上是一个服务实例的配置      
       #设定查看Nginx状态的地址
       location /NginxStatus 
       {
-            stub_status on;
-            access_log on;
-            auth_basic "NginxStatus";
-            auth_basic_user_file confpasswd;
-            #htpasswd文件的内容可以用apache提供的htpasswd工具来产生。
-      }
+         stub_status on;
+         access_log on;
+         auth_basic "NginxStatus";
+         auth_basic_user_file confpasswd;
+         #htpasswd文件的内容可以用apache提供的htpasswd工具来产生。
+       }
       
       
       #本地动静分离反向代理配置
