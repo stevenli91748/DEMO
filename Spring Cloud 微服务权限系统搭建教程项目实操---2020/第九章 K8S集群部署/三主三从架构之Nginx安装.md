@@ -116,7 +116,13 @@
     [root@nginx01]# vi /etc/nginx/nginx.conf
     
       #指定运行nginx的用户和用户组，默认情况下该选项关闭（关闭的情况就是nobody）
-      user www www;   or  user nobody nobody;
+      # 指定可以运行nginx服务的用户和用户组，只能在全局块配置
+      # user [user] [group]
+      # 将user指令注释掉，或者配置成nobody的话所有用户都可以运行
+      # user nobody nobody;
+      # user指令在Windows上不生效，如果你制定具体用户和用户组会报小面警告
+      # nginx: [warn] "user" is not supported, ignored in D:\software\nginx-1.18.0/conf/nginx.conf:2
+      #user www www;   or  user nobody nobody;
       
       #运行nginx的进程数量，后文详细讲解
       worker_processes  1; 
