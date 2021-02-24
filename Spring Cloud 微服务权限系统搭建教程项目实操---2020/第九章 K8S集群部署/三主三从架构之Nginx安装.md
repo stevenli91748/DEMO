@@ -124,15 +124,15 @@
       # nginx: [warn] "user" is not supported, ignored in D:\software\nginx-1.18.0/conf/nginx.conf:2
       #user www www;   or  user nobody nobody;
       
-      #运行nginx的进程数量，后文详细讲解
-      worker_processes  1; 
+      #运行nginx的进程数量，后文详细讲解，这个指令只能在全局块配置
+      worker_processes  1 or auto; 
       
-      #nginx运行错误的日志存放位置。当然您还可以指定错误级别
+      #nginx运行错误的日志存放位置。当然您还可以指定错误级别,此指令可以在全局块、http块、server块以及location块中配置。
       error_log  /usr/local/nginx/logs/error.log info;
       error_log  logs/error.log notice;
       error_log  logs/error.log ;
 
-      ##指定主进程id文件的存放位置，虽然worker_processes != 1的情况下，会有很多进程，管理进程只有一个
+      ##指定主进程id文件的存放位置，虽然worker_processes != 1的情况下，会有很多进程，管理进程只有一个，这个指令只能在全局块配置
       pid /usr/local/nginx/logs/nginx.pid;
             
       worker_rlimit_nofile 65535;       
