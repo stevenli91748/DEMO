@@ -26,7 +26,7 @@
   * [Nginx01服务器配置文件](#Nginx01服务器配置文件)
   * [Nginx02服务器配置文件](#Nginx02服务器配置文件)
   * [Nginx03服务器配置文件](#Nginx03服务器配置文件)
-* [3. 设置Real Server上的回环IP](#3-设置Real Server上的回环IP) 
+* [3. 打开Nginx所在服务器的“路由”功能、关闭“ARP查询”功能并设置回环ip](#3-打开Nginx所在服务器的路由功能并关闭ARP查询功能并设置回环IP) 
 * [4. Nginx服务器管理](#4-Nginx服务器管理) 
 
 # 1 Nginx安装
@@ -647,7 +647,9 @@
 
     参考Nginx01
     
-# 3 设置Real Server上的回环IP
+# 3 打开Nginx所在服务器的路由功能并关闭ARP查询功能并设置回环IP
+
+    接下来，我们开始设置Real Server上的回环IP，首先关闭这台机器进行ARP查询的功能，否则，Real Server会在路由器或者交换机上去查询192.168.33.130这个IP对应的MAC地址
 
 # 4 Nginx服务器管理
 
