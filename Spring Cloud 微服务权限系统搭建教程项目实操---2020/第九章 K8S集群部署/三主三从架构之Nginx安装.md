@@ -273,11 +273,23 @@
  
           #gzip模块设置
           gzip on; #开启gzip压缩输出，开启数据压缩，
-          gzip_min_length 1k;    #最小压缩文件大小
-          gzip_buffers 4 16k;    #压缩缓冲区
-          gzip_http_version 1.0;    #压缩版本（默认1.1，前端如果是squid2.5请使用1.0）
+          
+          #进行压缩的原始文件的最小大小值，也就是说如果原始文件小于5K，那么就不会进行压缩了
+          gzip_min_length 5k;    #最小压缩文件大小
+          
+          #gzip压缩是要申请临时内存空间的，假设前提是压缩后大小是小于等于压缩前的。例如，如果原始文件大小为10K，那么它超过了8K，所以分配的内存是8 * 2 = 16K;再例如，原始文件大小为18K，
+          很明显16K也是不够的，那么按照 8 * 2 * 2 = 32K的大小申请内存。如果没有设置，默认值是申请跟原始数据相同大小的内存空间去存储gzip压缩结果。
+          gzip_buffers 2 8k;    #压缩缓冲区
+          
+          
+          #gzip压缩基于的http协议版本，默认就是HTTP 1.1
+          gzip_http_version 1.1;    #压缩版本（默认1.1，前端如果是squid2.5请使用1.0）
+          
+          # gzip压缩级别1-9，级别越高压缩率越大，压缩时间也就越长CPU越高
           gzip_comp_level 2;    #压缩等级
-          gzip_types text/plain application/x-javascript text/css application/xml;    #压缩类型，默认就已经包含textml，所以下面就不用再写了，写上去也不会有问题，但是会有一个warn。
+          
+          #需要进行gzip压缩的Content-Type的Header的类型。建议js、text、css、xml、json都要进行压缩；图片就没必要了，gif、jpge文件已经压缩得很好了，就算再压，效果也不好，而且还耗费cpu
+          gzip_types text/plain application/x-javascript text/css application/xml;    
           gzip_vary on;
 
           #开启限制IP连接数的时候需要使用
