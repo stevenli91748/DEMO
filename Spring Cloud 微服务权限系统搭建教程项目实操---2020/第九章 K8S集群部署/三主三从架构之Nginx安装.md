@@ -13,9 +13,14 @@
 # 目录
 
 * [1. Nginx安装](#1-Nginx安装)
-  * [Nginx01服务器安装](#Nginx01服务器安装)
-  * [Nginx02服务器安装](#Nginx02服务器安装)
-  * [Nginx03服务器安装](#Nginx03服务器安装)
+  * [用源码安装nginx](#用源码安装nginx)
+    * [Nginx01服务器源码安装](#Nginx01服务器源码安装)
+    * [Nginx02服务器源码安装](#Nginx02服务器源码安装)
+    * [Nginx03服务器源码安装](#Nginx03服务器源码安装)
+  * [用包安装nginx](#用包安装nginx)
+    * [Nginx01服务器包安装](#Nginx01服务器包安装)
+    * [Nginx02服务器包安装](#Nginx02服务器包安装)
+    * [Nginx03服务器包安装](#Nginx03服务器包安装)
 * [2. Nginx服务器配置](#2-Nginx服务器配置)
   * [防火墙配置](#防火墙配置)
   * [Nginx01服务器配置文件](#Nginx01服务器配置文件)
@@ -26,7 +31,19 @@
 
 # 1 Nginx安装
 
-## Nginx01服务器安装
+## 用源码安装nginx
+
+### Nginx01服务器源码安装
+
+
+### Nginx02服务器源码安装
+
+
+### Nginx03服务器源码安装
+
+
+## 用包安装nginx
+### Nginx01服务器包安装
 
     [root@nginx01]# yum install -y nginx
     [root@nginx01]# systemctl enable nginx
@@ -46,7 +63,7 @@
 
     但是，您必须正确配置它，以便公众可以访问您的网站。
   
-## Nginx02服务器安装
+### Nginx02服务器包安装
 
     [root@nginx02]# yum install -y nginx
     [root@nginx02]# systemctl enable nginx
@@ -67,7 +84,7 @@
     但是，您必须正确配置它，以便公众可以访问您的网站。
 
 
-## Nginx03服务器安装
+### Nginx03服务器包安装
 
     [root@nginx03]# yum install -y nginx
     [root@nginx03]# systemctl enable nginx
