@@ -26,7 +26,7 @@
   * [Nginx01服务器配置文件](#Nginx01服务器配置文件)
   * [Nginx02服务器配置文件](#Nginx02服务器配置文件)
   * [Nginx03服务器配置文件](#Nginx03服务器配置文件)
-* [3. 打开Nginx所在服务器的“路由”功能、关闭“ARP查询”功能并设置回环ip](#3-打开Nginx所在服务器的路由功能并关闭ARP查询功能并设置回环IP) 
+* [3. 设置Real Server上的回环IP](#3-设置Real Server上的回环IP) 
 * [4. Nginx服务器管理](#4-Nginx服务器管理) 
 
 # 1 Nginx安装
@@ -647,7 +647,7 @@
 
     参考Nginx01
     
-# 3 打开Nginx所在服务器的路由功能并关闭ARP查询功能并设置回环IP
+# 3 设置Real Server上的回环IP
 
 # 4 Nginx服务器管理
 
