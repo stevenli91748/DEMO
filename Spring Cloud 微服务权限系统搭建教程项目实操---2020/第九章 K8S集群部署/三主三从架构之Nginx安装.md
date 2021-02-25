@@ -35,12 +35,83 @@
 
 ### Nginx01服务器源码安装
 
+    1. Install dependent packages
+    
+       [root@vip]# yum -y install make zlib zlib-devel gcc gcc-c++ libtool openssl openssl-devel
+    
+    2.  install PCRE
+    
+       [root@vip]# yum -y install wget
+       [root@vip]# wget http://downloads.sourceforge.net/project/pcre/pcre/8.37/pcre-8.37.tar.gz
+       [root@vip]# tar -zxvf pcre-8.37.tar.gz
+       [root@vip]# cd pcre-8.37
+       [root@vip]# ./configure
+       [root@vip]# make && make install
+       [root@vip]# pcre-config --version
+       
+       If the version number can be displayed correctly, it means success!
+       
+    3. download the nginx source package
+
+       [root@vip]# yum -y install wget
+       [root@vip]# wget http://nginx.org/download/nginx-1.12.2.tar.gz
+       [root@vip]# tar -zxvf nginx-1.12.2.tar.gz
+       [root@vip]# cd /nginx-1.12.2
+       [root@vip nginx-1.12.2]# ./configure
+       [root@vip nginx-1.12.2]# make && make install
+
+<a href="https://ibb.co/3SBxTxL"><img src="https://i.ibb.co/1R8C0Cw/19111819528462.png" alt="19111819528462" border="0"></a>
+
+       错误1：
+           cause of the problem: Don’t know
+           Solution: Go to the nginx-1.6.3 directory (the unzipped directory) 
+           
+           [root@vip nginx-1.12.2]# cd /objs
+           [root@vip nginx-1.12.2]# vi Makefile
+           
+              CFLAGS =  -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g　
+           
+           删除 -Werror 就OK
+       
+       错误2：
+           
+           Reason for error: Don’t know
+           Solution: Edit this file
+           
+           [root@vip nginx-1.12.2]# vi /nginx-1.2.2/src/os/unix/ngx_user.c
+           
+           Comment out this line (around line 35)
+           
+           注消 35行的这句程序
+           
+            /* cd.current_salt[0]=~salt[0];*/
+           
+           然后重新编译
+           
+           [root@vip nginx-1.12.2]# make
+           [root@vip nginx-1.12.2]# make install 
+           
+           启动nginx server
+           
+           [root@vip nginx-1.12.2]# cd /usr/local/nginx/sbin
+           [root@vip sbin]# ./nginx
+           
+           Access service ip, its default port is port 80
+           
+           http://nginx server ip 
+           
+<a href="https://ibb.co/9bC3kPg"><img src="https://i.ibb.co/zX0HTdx/19111819528462.png" alt="19111819528462" border="0"></a>           
+           
+**从源码安装Nginx 就成功完成了，但是，您必须正确配置它，以便公众可以访问您的网站。**       
+
 
 ### Nginx02服务器源码安装
-
+    
+    参考Nginx01
 
 ### Nginx03服务器源码安装
 
+    参考Nginx01
 
 ## 用包安装nginx
 ### Nginx01服务器包安装
