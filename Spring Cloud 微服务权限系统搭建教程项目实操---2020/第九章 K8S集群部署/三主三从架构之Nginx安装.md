@@ -179,7 +179,7 @@
       # nginx: [warn] "user" is not supported, ignored in D:\software\nginx-1.18.0/conf/nginx.conf:2
       #user www www;   or  user nobody nobody;
 
-[worker_processes](#worker_processes)
+[worker_processes解析](#worker_processes)
 
       #运行nginx的进程数量，后文详细讲解，这个指令只能在全局块配置
       worker_processes  1 or auto; 
@@ -201,6 +201,9 @@
         use epoll;
         
         #每一个进程可同时建立的连接数量，后问详细讲解
+
+[worker_connections解析](#worker_connections)        
+
         worker_connections 65535;
         
         keepalive_timeout 60;
@@ -523,10 +526,106 @@
 
 <a href="https://ibb.co/3SBxTxL"><img src="https://i.ibb.co/xG4XPgQ/19111819528462.png  " alt="19111819528462" border="0"></a>
 
+        图中可以看到1个nginx主进程，master process；还有四个工作进程，worker process。主进程负责监控端口，协调工作进程的工作状态，分配工作任务，工作进程负责进行任务处理。一般这个参
+        数要和操作系统的CPU内核数成倍数
  
+ ### worker_connections
+   
+   * [1. 更改操作系统级别的进程最大可打开文件数的设置](#更改操作系统级别的进程最大可打开文件数的设置)
+   * [2. 更改Nginx软件级别的进程最大可打开文件数的设置](#更改Nginx软件级别的进程最大可打开文件数的设置)
+   * [3. 验证Nginx的进程最大可打开文件数是否起作用](#验证Nginx的进程最大可打开文件数是否起作用)
+
+
+       这个属性是指单个工作进程可以允许同时建立外部连接的数量。无论这个连接是外部主动建立的，还是内部建立的。这里需要注意的是，一个工作进程建立一个连接后，进程将打开一个文件副本。所以这个
+       数量还受操作系统设定的，进程最大可打开的文件数有关。网上50%的文章告诉了您这个事实，并要求您修改worker_connections属性的时候，一定要使用ulimit -n 修改操作系统对进程最大文件数的限
+       制，但是这样更改只能在当次用户的当次shell回话中起作用，并不是永久了。接着您继续Google/百度，发现30%的文章还告诉您，要想使“进程最大可打开的文件数”永久有效，还需要修 
+       改/etc/security/limits.conf这个主配置文件，但是您应该如何正确检查“进程的最大可打开文件”的方式，却没有说。
+
+       下面本文告诉您全面的、正确的设置方式:
+      
+
+      
+      
+ ####  更改操作系统级别的进程最大可打开文件数的设置：
+      
+       首先您需要操作系统的root权限：叫您的操作系统管理员给您。
+
+       修改limits.conf主配置文件
+
+         vim /etc/security/limits.conf
+
+      在主配置文件最后加入下面两句：
+
+      * soft nofile 65535
+      * hard nofile 65535
+
+      加到文件里面的。这两句话的含义是soft（应用软件）级别限制的最大可打开文件数的限制，hard表示操作系统级别限制的最大可打开文件数的限制，“”表示所有用户都生效。保存这个文件
+      （只有root用户能够有权限）。
+
+      保存这个文件后，配置是不会马上生效的，为了保证本次shell会话中的配置马上有效，我们需要通过ulimit命令更改本次的shell会话设置（当然您如果要重启系统，我也不能说什么）。
+
+      [root@master]# ulimit -n 65535
+
+      执行命令后，配置马上生效。您可以用ulimit -a 查看目前会话中的所有核心配置：
  
+      [root@master]ulimit -a
+      core file size (blocks, -c) 0
+      data seg size (kbytes, -d) unlimited
+      scheduling priority (-e) 0
+      file size (blocks, -f) unlimited
+      pending signals (-i) 7746
+      max locked memory (kbytes, -l) 64
+      max memory size (kbytes, -m) unlimited
+      open files (-n) 65535                        //请注意open files这一项
+      pipe size (512 bytes, -p) 8
+      POSIX message queues (bytes, -q) 819200
+      real-time priority (-r) 0
+      stack size (kbytes, -s) 10240
+      cpu time (seconds, -t) unlimited
+      max user processes (-u) 7746
+      virtual memory (kbytes, -v) unlimited
+      file locks (-x) unlimited
  
+ #### 更改Nginx软件级别的进程最大可打开文件数的设置：
  
+     刚才更改的只是操作系统级别的“进程最大可打开文件”的限制，作为Nginx来说，我们还要对这个软件进行更改。打开nginx.conf主陪文件。您需要配合worker_rlimit_nofile属性。如下
+     
+     user root root;
+     worker_processes 4;
+     worker_rlimit_nofile 65535;
+
+     #error_log logs/error.log;
+     #error_log logs/error.log notice;
+     #error_log logs/error.log info;
+
+     #pid logs/nginx.pid;
+     events {
+     use epoll;
+     worker_connections 65535;
+     }
+
+    这里只粘贴了部分代码，其他的配置代码和主题无关，也就不需要粘贴了。请注意代码行中加粗的两个配置项，请一定两个属性全部配置。配置完成后，请通过nginx -s reload命令重新启动Nginx
+    
+#### 验证Nginx的进程最大可打开文件数是否起作用    
+ 
+    那么我们如何来验证配置是否起作用了呢？在linux系统中，所有的进程都会有一个临时的核心配置文件描述，存放路径在/pro/进程号/limit。首先我们来看一下，没有进行参数优化前的进程配置信息：
+
+     ps -elf | grep nginx
+     1 S root 1594 1 0 80 0 - 6070 rt_sig 05:06 ? 00:00:00 nginx: master process /usr/nginx-1.8.0/sbin/nginx
+     5 S root 1596 1594 0 80 0 - 6176 ep_pol 05:06 ? 00:00:00 nginx: worker process
+     5 S root 1597 1594 0 80 0 - 6176 ep_pol 05:06 ? 00:00:00 nginx: worker process
+     5 S root 1598 1594 0 80 0 - 6176 ep_pol 05:06 ? 00:00:00 nginx: worker process
+     5 S root 1599 1594 0 80 0 - 6176 ep_pol 05:06 ? 00:00:00 nginx: worker process
+
+     可以看到，nginx工作进程的进程号是：1596 1597 1598 1599。我们选择一个进程，查看其核心配置信息：
+     
+     cat /proc/1598/limits
+     
+<a href="https://ibb.co/tYMxQZT"><img src="https://i.ibb.co/dk0Ljbw/19111819528462.png" alt="19111819528462" border="0"></a>
+
+     请注意其中的Max open files ，分别是1024和4096。那么更改配置信息，并重启Nginx后，配置信息就是下图所示了
+     
+<a href="https://ibb.co/XFHHQ8d"><img src="https://i.ibb.co/VM661mh/19111819528462.png" alt="19111819528462" border="0"></a>     
       
 ## Nginx02服务器配置文件
 
