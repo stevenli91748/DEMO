@@ -50,7 +50,8 @@
        [root@vip]# pcre-config --version
        
        If the version number can be displayed correctly, it means success!
-       
+
+
     3. download the nginx source package
 
        [root@vip]# yum -y install wget
