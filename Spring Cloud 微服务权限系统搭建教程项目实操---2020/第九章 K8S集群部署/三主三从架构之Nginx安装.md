@@ -136,45 +136,11 @@
   
 ### Nginx02服务器包安装
 
-    [root@nginx02]# yum install -y nginx
-    [root@nginx02]# systemctl enable nginx
-    [root@nginx02]# systemctl start nginx
-
-    使用status命令确保正确启动了NGINX
-    
-    [root@nginx01]# systemctl status nginx
-    
-<a href="https://ibb.co/XD91sJJ"><img src="https://i.ibb.co/Sc2bnvv/Virtual-Box-multi8-master-1610860178204-33726-19-02-2021-12-12-42.png" alt="Virtual-Box-multi8-master-1610860178204-33726-19-02-2021-12-12-42" border="0"></a>
-
-    打开浏览器  http://192.168.33.143
-
-<a href="https://ibb.co/F0F0CHP"><img src="https://i.ibb.co/mX3XgNx/19111819528462.png" alt="19111819528462" border="0"></a>
-
-    您已在CentOS 8上成功安装了NGINX。
-
-    但是，您必须正确配置它，以便公众可以访问您的网站。
-
+     参考Nginx01
 
 ### Nginx03服务器包安装
 
-    [root@nginx03]# yum install -y nginx
-    [root@nginx03]# systemctl enable nginx
-    [root@nginx03]# systemctl start nginx
-
-    使用status命令确保正确启动了NGINX
-    
-    [root@nginx01]# systemctl status nginx
-    
-<a href="https://ibb.co/XD91sJJ"><img src="https://i.ibb.co/Sc2bnvv/Virtual-Box-multi8-master-1610860178204-33726-19-02-2021-12-12-42.png" alt="Virtual-Box-multi8-master-1610860178204-33726-19-02-2021-12-12-42" border="0"></a>
-
-    打开浏览器  http://192.168.33.144
-
-<a href="https://ibb.co/F0F0CHP"><img src="https://i.ibb.co/mX3XgNx/19111819528462.png" alt="19111819528462" border="0"></a>
-
-    您已在CentOS 8上成功安装了NGINX。
-
-    但是，您必须正确配置它，以便公众可以访问您的网站。
-
+     参考Nginx01
 
 # 2 Nginx服务器配置
 
@@ -202,7 +168,8 @@
 ## Nginx01服务器配置文件
   
     [root@nginx01]# vi /etc/nginx/nginx.conf
-    
+
+
       #指定运行nginx的用户和用户组，默认情况下该选项关闭（关闭的情况就是nobody）
       # 指定可以运行nginx服务的用户和用户组，只能在全局块配置
       # user [user] [group]
@@ -211,7 +178,9 @@
       # user指令在Windows上不生效，如果你制定具体用户和用户组会报小面警告
       # nginx: [warn] "user" is not supported, ignored in D:\software\nginx-1.18.0/conf/nginx.conf:2
       #user www www;   or  user nobody nobody;
-      
+
+[worker_processes](#worker_processes)
+
       #运行nginx的进程数量，后文详细讲解，这个指令只能在全局块配置
       worker_processes  1 or auto; 
       
@@ -546,11 +515,26 @@
             expires 1h;
       }
  } 
+ 
+ ### worker_processes
+ 
+        worker_processes：操作系统启动多少个工作进程运行Nginx。注意是工作进程，不是有多少个nginx工程。在Nginx运行的时候，会启动两种进程，一种是主进程master process；一种是工作
+        进程worker process。例如我在配置文件中将worker_processes设置为4，启动Nginx后，使用进程查看命令观察名字叫做nginx的进程信息，我会看到如下结果：
+        
+https://ibb.co/5v7GtjV        
+ 
+ 
+ 
+ 
       
 ## Nginx02服务器配置文件
 
+    参考Nginx01
+
 ## Nginx03服务器配置文件
 
+    参考Nginx01
+    
 # 3 打开Nginx所在服务器的路由功能并关闭ARP查询功能并设置回环IP
 
 # 4 Nginx服务器管理
