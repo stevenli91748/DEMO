@@ -34,7 +34,7 @@
 
 ### 检查Nginx状态     
 
-     [root@lvs01]# vi /usr/keepalived-1.2.17/bin/checknginx.sh
+     [root@lvs01]# vi /usr/keepalived-1.2.17/bin/checknginx.sh             //可自定义目录
      
      #!/bin/sh
      if [ $(ps -C nginx --no-header | wc -l) -eq 0 ]; then
