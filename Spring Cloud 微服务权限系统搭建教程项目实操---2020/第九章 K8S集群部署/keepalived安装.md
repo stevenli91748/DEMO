@@ -302,11 +302,19 @@
  
 ## lvs01虚拟机启动keepalived
 
+    接下来，我们要开始启动Master节点和Backup节点了，为了准确的查看日志状态，您需要观察系统日志。系统日志所在的位置：
+    [root@lvs01]# tail -f /var/log/messages
+    
+    启动Master节点
     [root@lvs01]# service keepalived start
     [root@lvs01]# systemctl enable keepalived
 
 ## lvs02虚拟机启动keepalived
 
+    接下来，我们要开始启动Master节点和Backup节点了，为了准确的查看日志状态，您需要观察系统日志。系统日志所在的位置：
+    [root@lvs02]# tail -f /var/log/messages
+    
+    启动BACKUP节点
     [root@lvs02]# service keepalived start
     [root@lvs02]# systemctl enable keepalived
 
