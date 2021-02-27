@@ -32,27 +32,55 @@
 
 ## lvs01虚拟机keepalived配置
 
+     
+     [root@lvs01]# vi 
 
      [root@lvs01]# more /etc/keepalived/keepalived.conf
 
      ! Configuration File for keepalived
      global_defs {
+        
         router_id lvs01              #router_id 机器标识，通常为hostname，但不一定非得是hostname。故障发生时，邮件通知会用到。
      }
+     
+     #这个是我们在上一小结讲到的nginx检查脚本，我们保存在这个文件中（注意文件权限）
+     vrrp_script chknginx {
+     script "/usr/keepalived-1.2.17/bin/checknginx.sh"
+     #每10秒钟，检查一次
+     interval 10
+     }
+     
+     #keepalived实例设置，是最重要的设置信息
      vrrp_instance VI_1 {            #vrrp实例定义部分
          state MASTER                #设置lvs的状态，MASTER和BACKUP两种，必须大写 
          interface eth1              #设置对外服务的接口
          virtual_router_id 100       #设置虚拟路由标示，这个标示是一个数字，同一个vrrp实例使用唯一标示 
          priority 100                #定义优先级，数字越大优先级越高，在一个vrrp——instance下，master的优先级必须大于backup
          advert_int 1                #设定master与backup负载均衡器之间同步检查的时间间隔，单位是秒
+         
+         #实际的eth1上的固定ip地址
+         #mcast_src_ip=192.168.33.132               //当前机器lvs01的IP， 可加也可不加
+         
+         #验证信息，只有验证信息相同，才能被加入到一个组中
          authentication {            #设置验证类型和密码
              auth_type PASS          #主要有PASS和AH两种
              auth_pass 1111          #验证密码，同一个vrrp_instance下MASTER和BACKUP密码必须相同
          }
-         virtual_ipaddress {         #设置虚拟ip地址，可以设置多个，每行一个
-             192.168.33.130
+         virtual_ipaddress {         #设置虚拟ip地址，可以设置多个，每行一个，dev 是指定浮动IP要绑定的网卡设备号 ， 当前网卡设备号是eth1
+             192.168.33.130    or  192.168.33.130 dev eth1
+
          }
-     }
+         
+         
+         #设置的检查脚本
+         #关联上方的“vrrp_script chknginx”
+         track_script {
+                    chknginx
+         }
+         
+     }            //vrrp_instance vi_1 end
+     
+     
      virtual_server 192.168.33.130 81 {   #设置虚拟服务器，需要指定虚拟ip和服务端口 , 在本例中下行连接的是NGINX 服务器，该nginx服务器连接的端口是已从80 改为 81
          delay_loop 6                     #健康检查时间间隔
          lb_algo wrr                      #负载均衡调度算法
