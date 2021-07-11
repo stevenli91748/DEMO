@@ -31,6 +31,13 @@
      * [父模块搭建和通用模块搭建](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC1%E7%AB%A0%20%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA/%E7%88%B6%E6%A8%A1%E5%9D%97%E6%90%AD%E5%BB%BA%E5%92%8C%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9D%97%E6%90%AD%E5%BB%BA.md)
      * [搭建微服务注册中心(febs-register)](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC1%E7%AB%A0%20%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA/%E6%90%AD%E5%BB%BA%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83(febs-register).md)
 ## 第9章 K8S集群部署
+   * [凤凰架构部署例子: 部署 Docker CE 容器环境](https://icyfenix.cn/appendix/deployment-env-setup/setup-docker.html)
+   * [凤凰架构部署例子: 部署 Kubernetes 集群](https://icyfenix.cn/appendix/deployment-env-setup/setup-kubernetes/)
+   * [凤凰架构部署例子: 部署 Istio](https://icyfenix.cn/appendix/istio.html)
+   * [凤凰架构部署例子: 部署 Elastic Stack](https://icyfenix.cn/appendix/operation-env-setup/elk-setup.html)
+   * [凤凰架构部署例子: 部署 Prometheus](https://icyfenix.cn/appendix/operation-env-setup/prometheus-setup.html)
+
+
    * [9.0 集群环境准备](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC%E4%B9%9D%E7%AB%A0%20K8S%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/9.1%20%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.md)
    * [9.1 安装第三方服务 --- Docker MySQL Docker Compose Redis ELK](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC%E4%B9%9D%E7%AB%A0%20K8S%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/9.2%20%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1.md)
    * [9.2 用Kubeadm搭建业务微服务K8S集群--- 一主三从的K8S集群结构 MySQL Redis ELK 都是单节点](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC%E4%B9%9D%E7%AB%A0%20K8S%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/9.3%20%E7%94%A8Kubeadm%E6%90%AD%E5%BB%BAK8S%E9%9B%86%E7%BE%A4.md) 
