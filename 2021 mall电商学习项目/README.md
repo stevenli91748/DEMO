@@ -14,6 +14,7 @@
 
 * Mock.js 支持的纯前端演示
 * [以Vue.js 2 实现前端工程项目实战](https://github.com/stevenli91748/DEMO/blob/master/2021%20mall%E7%94%B5%E5%95%86%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE/Vue.js%202%20%E5%AE%9E%E7%8E%B0%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/README.md)
+* 以APP实现前端工程项目实战
 
 ## 后端工程
 
