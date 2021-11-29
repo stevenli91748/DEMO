@@ -32,6 +32,9 @@
   * 部署  
 * 运维
   * 环境搭建
+    * 部署 Docker CE 容器环境
+    * 部署 Kubernetes 集群
+    * 部署 Elastic Stack
   * 项目启动
     * 后台微服务启动
       * 云环境启动
