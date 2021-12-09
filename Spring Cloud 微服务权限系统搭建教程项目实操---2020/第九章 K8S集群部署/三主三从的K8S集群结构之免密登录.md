@@ -142,7 +142,7 @@
            配置master 的ssh，修改登录用户路径 ~/.ssh/config 文件：例如 以root登录  /roo/.ssh/config文件
 
            Host master2
-              HostName 192.168.11.10       // 设置远程服务器master2 的IP地址 
+              HostName 192.168.33.10       // 设置远程服务器master2 的IP地址 
               Port 2222                    // 设置远程服务器master2 的 ssh 端口号，在主机上用 vagrant ssh-config master2 命令得到
               User root                    // 设置为远程服务器master2 的root用户    
               IdentityFile /root/.ssh/id_rsa  // 指定在本机master 下root登录用户下生成的私有密钥的地址，并非远程服务器(master2)路径
