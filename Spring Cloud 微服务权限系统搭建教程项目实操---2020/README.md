@@ -49,7 +49,7 @@
      * 9.3.4 用Kubeadm搭建三节点Nacos服务注册中心集群
      * 9.3.5 用Kubeadm搭建三节点服务监控中心(Spring Boot Admin + Zipkin + Sleuth + Skywaking)集群
      * 9.3.6 用Kubeadm搭建三节点监控报警系统中心集群( Prometheu + Grafanas + AlertManager)
-     * 9.3.7 用Kubeadm搭建三节点AlertManager系统中心集群(AlertManager)
+     * 
      * 9.3.8 用Kubeadm搭建三节点SpringCloud Config配置中心集群 OR Nacos配置中心集群
      * 9.3.9 用Kubeadm搭建多层业务微服务集群
      * 9.3.10 用Kubeadm搭建三节点分布式事务集群(Seata)
