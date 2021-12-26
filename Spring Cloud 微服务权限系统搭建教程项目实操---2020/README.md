@@ -60,7 +60,7 @@
        * [9.3.9.2 NFS服务器搭建](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC%E4%B9%9D%E7%AB%A0%20K8S%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/9.6%20NFS%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA.md) 
      * 9.3.10 用Kubeadm搭建三节点分布式事务集群(Seata)
      * 9.3.11 用Kubeadm搭建三节点分布式任务调度集群
-     * 9.3.12 用Kubeadm搭建三节点Redis缓冲数据库集群
+     * [9.3.12 用Kubeadm搭建三节点Redis缓冲数据库集群](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC%E4%B9%9D%E7%AB%A0%20K8S%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/%E7%94%A8Kubeadm%E6%90%AD%E5%BB%BA%E4%B8%89%E8%8A%82%E7%82%B9Redis%E7%BC%93%E5%86%B2%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9B%86%E7%BE%A4.md)
      * [9.3.13 用Kubeadm搭建四节点MySQL数据库集群](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC%E4%B9%9D%E7%AB%A0%20K8S%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/%E4%B8%89%E4%B8%BB%E4%B8%89%E4%BB%8E%E7%9A%84K8S%E9%9B%86%E7%BE%A4%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95.md)
      * 9.3.14 用Kubeadm搭建三节点消息队列集群
        * 9.3.14.1 用Kubeadm搭建三节点RabbinMQ消息队列集群
