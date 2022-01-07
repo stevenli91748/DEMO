@@ -67,17 +67,10 @@
     * 后台微服务启动
       * 云环境启动
       * 本地环境启动 
+        * [K8S集群环境部署](#K8S集群环境部署)
     * 后台管理前端启动
 
-### 第1章 项目说明
-
-### 第2章 基础框架搭建
-* 
-
-
-
-
-### 第9章 K8S集群环境部署
+### K8S集群环境部署
    * [凤凰架构部署例子: 部署 Docker CE 容器环境 ](https://icyfenix.cn/appendix/deployment-env-setup/setup-docker.html)
    * [凤凰架构部署例子: 部署 Kubernetes 集群](https://icyfenix.cn/appendix/deployment-env-setup/setup-kubernetes/)
    * [凤凰架构部署例子: 部署 Istio](https://icyfenix.cn/appendix/istio.html)
