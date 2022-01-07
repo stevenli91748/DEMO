@@ -20,9 +20,6 @@
 <a href="https://ibb.co/7VhTp2H"><img src="https://i.ibb.co/K7nQsFY/lvs-keepalived-nginx.png" alt="lvs-keepalived-nginx" border="0"></a>
 
 
-# 系统分析
-
-# 系统设计
 
 # 系统开发
 
@@ -33,19 +30,20 @@
 
 ## [后端开发环境]
 
-* 线上预览地址
-* 项目信息
-  * 项目简介
-  * 项目特色 
-  * 项目架构图
+* 1. 线上预览地址
+* 2. 项目信息
+  * [项目简介](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC1%E7%AB%A0%20%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA/%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B.md)
+  * [核心功能](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC1%E7%AB%A0%20%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA/%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD.md)
+  * [架构预览](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC1%E7%AB%A0%20%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA/%E6%9E%B6%E6%9E%84%E9%A2%84%E8%A7%88.md)
+  * [运行环境](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC1%E7%AB%A0%20%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA/%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83.md)
   * 分支说明---说明每一组件的版本（eureka分支，使用 Eureka 作为服务注册发现中心，Nacos分支，使用 Nacos 作为服务注册发现中心） 
   * 技术栈
     * 前端技术栈
     * 后端技术栈
-  * 工具
+  * [工具](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E5%B7%A5%E5%85%B7/README.md)
   * 项目地址
   * 项目结构 
-* 项目开发
+* 3. 项目开发
   * 需求分析
   * 需求设计
   * 概念架构设计==分层架构设计和API设计
@@ -63,7 +61,7 @@
       * 登录认证接口  
   * CI/CD
   * 部署  
-* 运维
+* 4. 运维
   * 环境搭建
   * 项目启动
     * 后台微服务启动
@@ -72,13 +70,6 @@
     * 后台管理前端启动
 
 ### 第1章 项目说明
-   * [架构预览](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC1%E7%AB%A0%20%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA/%E6%9E%B6%E6%9E%84%E9%A2%84%E8%A7%88.md)
-   * [项目声明](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC1%E7%AB%A0%20%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA/%E9%A1%B9%E7%9B%AE%E5%A3%B0%E6%98%8E.md)
-   * [项目简介](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC1%E7%AB%A0%20%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA/%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B.md)
-   * [核心功能](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC1%E7%AB%A0%20%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA/%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD.md)
-   * [运行环境](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC1%E7%AB%A0%20%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA/%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83.md)
-   * [工具](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E5%B7%A5%E5%85%B7/README.md)
-
 
 ### 第2章 基础框架搭建
 * 
