@@ -9,6 +9,8 @@
   * 必要基础框架 
     * 搭建微服务网关 
     * 搭建微服务注册中心
+      * [搭建Alibaba Nacos注册中心](https://www.kancloud.cn/mrbird/spring-cloud/1271133)
+      * [搭建Eureka微服务注册中心](https://www.kancloud.cn/mrbird/spring-cloud/1263688)
     * 搭建认证服务器
     * 搭建配置中心集群 OR Nacos配置中心集群
     * 搭建多层业务微服务
