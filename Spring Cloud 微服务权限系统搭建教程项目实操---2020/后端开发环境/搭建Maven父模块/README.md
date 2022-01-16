@@ -16,6 +16,15 @@ pom.xml 文件
     <groupId>com.mybird</groupId>
     <artifactId>febs-cloud</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>../febs-common</module>
+        <module>../febs-register-nacos</module>
+        <module>../febs-auth</module>
+        <module>../febs-gateway-zuul</module>
+        <module>../febs-microservice</module>
+    </modules>
+
     <packaging>pom</packaging>
 
     <name>FEBS-Cloud</name>
@@ -30,12 +39,11 @@ pom.xml 文件
 
     <properties>
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
-        <spring-cloud-alibaba.version>0.2.2.RELEASE</spring-cloud-alibaba.version>
+        <spring-cloud-alibaba.version>2.2.0.RELEASE</spring-cloud-alibaba.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -45,15 +53,18 @@ pom.xml 文件
             </dependency>
 
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
+                <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-        
+
         </dependencies>
     </dependencyManagement>
+
+
+
 </project>
 
 
