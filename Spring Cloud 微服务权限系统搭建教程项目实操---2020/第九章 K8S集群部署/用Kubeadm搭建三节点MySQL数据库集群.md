@@ -10,6 +10,7 @@
 # 在4台虚拟机上建立MySQL数据库
 
 IP | visual machine name |
+---|---|
 192.168.33.180	MySQL01	
 192.168.33.181	MySQL02	
 192.168.33.182	MySQL03	
