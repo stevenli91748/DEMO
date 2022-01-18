@@ -7,7 +7,7 @@
 * [你还在代码里做读写分离么，试试这个中间件吧！](http://www.macrozheng.com/#/reference/gaea)
 
 
-# 在4台虚拟机上建立MySQL数据库
+# [在4台虚拟机上建立MySQL数据库](https://github.com/stevenli91748/Database/blob/master/MySQL/MySQL%20Linux%E5%AE%89%E8%A3%85/README.md)
 
 IP | visual machine name |
 ---|---|
