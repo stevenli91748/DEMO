@@ -8,43 +8,8 @@
 ip | name |
 ---|---|
 192.168.33.100|	 [spring cloud alibaba nacos register1](#spring-cloud-alibaba-nacos-register1)	|
-192.168.33.101|	 [spring cloud alibaba nacos register2]()  |
-192.168.33.102| [spring cloud alibaba nacos register3]()  |
-
-
-dsf
-
-fsd
-
-sdf
-sf
-sf
-d
-df
-sdf
-fs
-sf
-sf
-
-sf
-sf
-sf
-
-sf
-sf
-sf
-sf
-sf
-sf
-sf
-sf
-sf
-sf
-sf
-sf
-sf
-sf
-
+192.168.33.101|	 [spring cloud alibaba nacos register2](#spring-cloud-alibaba-nacos-register2)  |
+192.168.33.102| [spring cloud alibaba nacos register3](#spring-cloud-alibaba-nacos-register3)  |
 
 
 ## spring cloud alibaba nacos register1
@@ -59,3 +24,8 @@ db.num=1
 db.url.0=jdbc:mysql://localhost:3306/nacos?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
 db.user=root
 db.password=123456
+
+
+## spring cloud alibaba nacos register2
+
+## spring cloud alibaba nacos register3
