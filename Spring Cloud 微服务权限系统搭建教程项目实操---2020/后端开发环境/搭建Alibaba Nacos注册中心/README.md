@@ -7,9 +7,47 @@
 
 ip | name |
 ---|---|
-192.168.33.100|	spring cloud alibaba nacos register1	|
-192.168.33.101|	spring cloud alibaba nacos register2  |
-192.168.33.102|  spring cloud alibaba nacos register3  |
+192.168.33.100|	 [spring cloud alibaba nacos register1](#spring-cloud-alibaba-nacos-register1)	|
+192.168.33.101|	 [spring cloud alibaba nacos register2]()  |
+192.168.33.102| [spring cloud alibaba nacos register3]()  |
+
+
+dsf
+
+fsd
+
+sdf
+sf
+sf
+d
+df
+sdf
+fs
+sf
+sf
+
+sf
+sf
+sf
+
+sf
+sf
+sf
+sf
+sf
+sf
+sf
+sf
+sf
+sf
+sf
+sf
+sf
+sf
+
+
+
+##  安装 spring cloud alibaba nacos register1
 
 
 因为Spring Cloud Alibaba 2.2.0.RELEASE内置的Nacos client版本为1.1.4，所以我们使用这个版本的Nacos。Nacos下载地址：https://github.com/alibaba/nacos/releases，选择nacos-server-1.1.4.zip 下载并解压：
