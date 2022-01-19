@@ -4,6 +4,7 @@
 # Nacos安装
 
 在以下三台虚拟机上安装Nacos server
+
 ip| name|
 192.168.33.100|	spring cloud alibaba nacos register1	|
 192.168.33.101|	spring cloud alibaba nacos register2  |
