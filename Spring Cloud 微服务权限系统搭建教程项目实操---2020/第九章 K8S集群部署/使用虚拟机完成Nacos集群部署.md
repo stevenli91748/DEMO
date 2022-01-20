@@ -12,7 +12,7 @@
 
       配置完JAVA_HOME環境变量后，要重启(reboot)
       
-     2 通过https://github.com/alibaba/nacos/releases链接可以下载Nacos的最新发行版，解压到指定目录
+    2 通过https://github.com/alibaba/nacos/releases链接可以下载Nacos的最新发行版，解压到指定目录
 
 
 # 2 在同一虚拟机上使用不同的端口搭建Nacos集群
