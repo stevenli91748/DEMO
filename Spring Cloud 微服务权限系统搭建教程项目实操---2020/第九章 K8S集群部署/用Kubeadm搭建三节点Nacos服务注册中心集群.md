@@ -8,9 +8,11 @@
 
 服务器IP	|部署服务| 端口|	备注|
 ---|---|---|---|
-192.168.33.100 |nacos| 8848| nacos register1	server|
-192.168.33.101	|nacos| 8847| nacos register2	server|
-192.168.33.102 |nacos| 8846| nacos register3 server|
+192.168.33.180|MySQL|3306|测试，使用单机 MySQL，[高可用参考：MySQL 5.7.28 主从复制实现](https://blog.csdn.net/lzb348110175/article/details/103081631)|
+192.168.33.142 |Nginx01|8087 |测试，使用单机 Nginx，Nginx集群搭建请自行了解(Nginx默认端口为80，此处负载均衡使用8087端口)|
+192.168.33.100 |nacos| 8848| 集群节点01：nacos 01|
+192.168.33.101	|nacos| 8848| 集群节点02：nacos 02|
+192.168.33.102 |nacos| 8848| 集群节点03：nacos 03|
 
 
 
