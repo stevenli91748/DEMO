@@ -7,6 +7,7 @@
 
 
 |服务器IP	|部署服务| 端口|	备注|
+---|---|---|---|---|
 |192.168.33.100 |nacos| 8848| nacos register1	server|
 |192.168.33.101	|nacos| 8847| nacos register2	server|
 |192.168.33.102 |nacos| 8846| nacos register3 server|
