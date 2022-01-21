@@ -98,7 +98,7 @@ IP|端口|名字|
 
               # 数据库实例数量
                 db.num=1
-                db.url.0=jdbc:mysql://192.168.33.180:3306/nacos?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+                db.url.0=jdbc:mysql://192.168.33.180:3306/nacos_config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true  //nacos_config 是数据库名
                 db.user=root                    //mysql root用户名
                 db.password=Gz@19731108         //mysql 数据库密码
 
