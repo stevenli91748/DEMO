@@ -64,9 +64,9 @@
 
     将Nacos的解压包复制分成3份，建立三个目录分别是:
 
-    [nacos-server1](#1-配置nacos-server1)
-    [nacos-server2](#2-配置nacos-server2)
-    [nacos-server3](#3-配置nacos-server3)
+  [nacos-server1](#1-配置nacos-server1)
+  [nacos-server2](#2-配置nacos-server2)
+  [nacos-server3](#3-配置nacos-server3)
     
  ## 1 配置nacos server1
    
