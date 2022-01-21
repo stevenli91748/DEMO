@@ -80,7 +80,7 @@ IP|端口|名字|
  
  **Nacos server1数据库支持**
  
-   **derby 切换 mysql 数据库配置**   
+   **从derby 切换到 mysql 数据库配置**   
    
       在 192.168.33.180（MySQL01）虚拟机上设置MySQL 数据库
       
@@ -102,7 +102,19 @@ IP|端口|名字|
                 db.user=root                    //mysql root用户名
                 db.password=Gz@19731108         //mysql 数据库密码
 
- 
+   **cluster.conf 配置**
+   
+      在192.168.33.100（nacos register1）虚拟机进入nacos-server1目录的子conf 目录，使用命令：cp cluster.conf.example cluster.conf 拷贝一份，重命名为 cluster.conf，在 cluster.conf 中
+      进行配置，说明哪几台机器组成集群（填写的是 nacos 集群3个节点所在 IP:端口号，不要写 127.0.0.1，必须是Linux的真实IP），增加3个节点的信息，格式为IP:PORT，三个目录都一致即可
+      
+            192.168.33.100：8848
+            192.168.33.100：8847
+            192.168.33.100：8846
+      
+   **启动的话直接到nacos-server1目录的子bin目录下，执行./startup.sh就可以了，默认就是集群模式，不需要加任何参数**
+   
+           [root@register1]# ./startup.sh
+   
  **Nacos server1集群部署搭建**
  
  
