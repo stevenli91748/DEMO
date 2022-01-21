@@ -60,19 +60,45 @@
  
 # 2 在同一虚拟机上使用不同的端口搭建Nacos集群
 
+    在当前例子中我用了两台虚拟机
+    
+IP|端口|名字|
+192.168.33.100 |8848， 8847， 8846|nacos register1|
+192.168.33.180	|3306|MySQL01|
+
+
     通常如果我们只是为了体验的话直接在本地起动3个实例就可以了，没必要真的去搞三台服务器，下面我们就以同一虚拟机上使用不同的端口搭建Nacos集群  
 
-    将Nacos的解压包复制分成3份，建立三个目录分别是:
+    在192.168.33.100 （nacos register1）将Nacos的解压包复制分成3份，建立三个目录分别是:
 
  * [nacos-server1](#1-配置nacos-server1)
  * [nacos-server2](#2-配置nacos-server2)
  * [nacos-server3](#3-配置nacos-server3)
     
- ## 1 配置nacos server1
-   
- ## 2 配置nacos server2
+ ## 1 配置nacos server1目录
  
- ## 3 配置nacos server3
+ **Nacos server1数据库支持**
+   
+      
+      
+      进入nacos的conf目录，编辑application.properties文件，增加数据库配置
+  
+        # 指定数据源为Mysql
+          spring.datasource.platform=mysql
+
+        # 数据库实例数量
+          db.num=1
+          db.url.0=jdbc:mysql://localhost:3306/nacos?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+          db.user=root
+          db.password=123456
+
+ 
+ **Nacos server1集群部署搭建**
+ 
+ 
+ ## 2 配置nacos server2目录
+ 
+ ## 3 配置nacos server3目录
 
 
 
