@@ -9,7 +9,7 @@
 
 # [1 在4台虚拟机上建立MySQL数据库](https://github.com/stevenli91748/Database/blob/master/MySQL/MySQL%20Linux%E5%AE%89%E8%A3%85/README.md)
 
-# 2 在同一台虚拟机(192.168.33.180)上建立4个MySQL数据库
+# 2 在同一台虚拟机(192.168.33.180)上建立4个Docker MySQL数据库
 
 IP |role|visual machine name |
 ---|---|---|
