@@ -17,6 +17,7 @@
 
 
 # 参考
+* [docker swarm 搭建 nacos 集群](https://www.jianshu.com/p/23d2c145423e)
 * [ Nacos集群搭建可以看看这篇实例教程](https://os.51cto.com/article/649179.html)
 * [Spring Cloud Alibaba Nacos注册中心](https://mrbird.cc/Spring-Cloud-Alibaba-Nacos%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83.html)
 * [Nacos集群搭建过程详解](https://juejin.cn/post/6844903907706011662) 
