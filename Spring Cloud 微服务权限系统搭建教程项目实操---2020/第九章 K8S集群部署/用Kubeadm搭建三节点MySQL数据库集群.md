@@ -13,7 +13,7 @@
 
 IP |role|visual machine name |
 ---|---|---|
-192.168.33.180:33306|master1|	MySQL01	|
-192.168.33.180:33307|master2|	MySQL02	|
-192.168.33.180:33308|slave1|	MySQL03	|
-192.168.33.180:33309|slave2|	MySQL04	|
+192.168.33.180:33306|master|	MySQL01-master	|
+192.168.33.180:33307|master|	MySQL02-master	|
+192.168.33.180:33308|slave|	MySQL03-slave	|
+192.168.33.180:33309|slave|	MySQL04-slave	|
