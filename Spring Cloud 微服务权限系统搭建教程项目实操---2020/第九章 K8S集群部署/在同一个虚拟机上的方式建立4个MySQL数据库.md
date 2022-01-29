@@ -10,6 +10,42 @@
 
 ## 建立 MySQL-master01（192.168.33.180:33305） 数据库
 
+             [root]# systemctl start docker
+
+             [root]# docker pull mysql/mysql-server:tag
+
+             [root]# docker run --name=mysql-master01 
+
+                                -p 33305:3306 
+
+                                -v /mydata/mysql-master01/conf:/etc/mysql/conf.d  将主机/mydata/mysql-master01/目录下的conf/my.cnf挂载到容器的/etc/mysql/conf.d   
+
+                                -v /mydata/mysql-master01/logs:/log               将主机/mydata/mysql-master01/目录下的log目录挂载到容器的/logs 
+
+                                -v /mydata/mysql-master01/data:/var/lib/mysql     将主机/mydata/mysql-master01/目录下的data目录挂载到容器的/var/lib/mysql 
+
+                                -d mysql/mysql-server:tag
+
+             //The container initialization might take some time. When the server is ready for use, the STATUS of the container in the output of the docker ps command changes 
+               from (health: starting) to (healthy).
+
+             [root]# docker ps
+             CONTAINER ID   IMAGE                COMMAND                  CREATED             STATUS                              PORTS                NAMES
+             a24888f0d6f4   mysql/mysql-server   "/entrypoint.sh my..."   14 seconds ago      Up 13 seconds (health: starting)    3306/tcp, 33060/tcp  mysql1
+
+             [root]# docker logs mysql-master01
+
+             [root]#  docker logs mysql-master01 2>&1 | grep GENERATED
+             GENERATED ROOT PASSWORD: Axegh3kAJyDLaRuBemecis&EShOs
+
+             // 进入到MYSQL容器中
+             [root]#  docker exec -it mysql-master01 mysql -uroot -p
+             the password: 输入以上的原始密码
+
+             //更改在mysql-master01容器中的数据库的root用户密码
+             mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'gz@19731108';
+             mysql> FLUSH PRIVILEGES
+             mysql> exit
 
 ## 建立 MySQL-master02（192.168.33.180:33307） 数据库
 ## 建立 MySQL-slave01（192.168.33.180:33308） 数据库
