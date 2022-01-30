@@ -45,7 +45,11 @@
              //更改在mysql-master01容器中的数据库的root用户密码
              mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'gz@19731108';
              mysql> FLUSH PRIVILEGES
-             mysql> exit
+
+            //  Mysql8开放远程访问
+            mysql> create user 'root'@'%' identified by 'Gz@19731108'; //1、先创建权限记录
+            mysql> grant all privileges on *.* to 'root'@'%' with grant option; //2、授权
+            mysql> exit
 
 ## 建立 MySQL-master02（192.168.33.180:33307） 数据库
              [root]# systemctl start docker
@@ -83,6 +87,11 @@
              //更改在mysql-master02容器中的数据库的root用户密码
              mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'gz@19731108';
              mysql> FLUSH PRIVILEGES
+
+            //  Mysql8开放远程访问
+            mysql> create user 'root'@'%' identified by 'Gz@19731108'; //1、先创建权限记录
+            mysql> grant all privileges on *.* to 'root'@'%' with grant option; //2、授权
+             
              mysql> exit
 
 
@@ -123,6 +132,11 @@
              //更改在mysql-slave01容器中的数据库的root用户密码
              mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'gz@19731108';
              mysql> FLUSH PRIVILEGES
+
+            //  Mysql8开放远程访问
+            mysql> create user 'root'@'%' identified by 'Gz@19731108'; //1、先创建权限记录
+            mysql> grant all privileges on *.* to 'root'@'%' with grant option; //2、授权
+             
              mysql> exit
 
 ## 建立 MySQL-slave02（192.168.33.180:33309） 数据库
@@ -162,5 +176,10 @@
              //更改在mysql-slave02容器中的数据库的root用户密码
              mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'gz@19731108';
              mysql> FLUSH PRIVILEGES
+            
+            //  Mysql8开放远程访问
+            mysql> create user 'root'@'%' identified by 'Gz@19731108'; //1、先创建权限记录
+            mysql> grant all privileges on *.* to 'root'@'%' with grant option; //2、授权
+             
              mysql> exit
 
