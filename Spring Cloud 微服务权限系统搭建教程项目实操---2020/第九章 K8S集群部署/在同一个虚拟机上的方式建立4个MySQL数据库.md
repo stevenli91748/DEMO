@@ -24,7 +24,7 @@
 
                                 -v /mydata/mysql-master01/data:/var/lib/mysql       将主机/mydata/mysql-master01/目录下的data目录挂载到容器的/var/lib/mysql 
 
-                                -d mysql/mysql-server:tag                    //      /bin/bash -c "tail -f /dev/null"
+                                -dit mysql/mysql-server:tag                       // 必需要加 -dit 参数( -it 参数交互运行, -d 参数后台运行), 这样就能启动一个一直停留在后台运行的mysql了    
 
              //The container initialization might take some time. When the server is ready for use, the STATUS of the container in the output of the docker ps command changes 
                from (health: starting) to (healthy).
@@ -32,6 +32,9 @@
              [root]# docker ps
              CONTAINER ID   IMAGE                COMMAND                  CREATED             STATUS                              PORTS                NAMES
              a24888f0d6f4   mysql/mysql-server   "/entrypoint.sh my..."   14 seconds ago      Up 13 seconds (health: starting)    3306/tcp, 33060/tcp  mysql1
+
+             // 将容器启动方式改为always
+             [root]# docker container update --restart=always mysql-master01
 
              [root]# docker logs mysql-master01
 
@@ -66,7 +69,7 @@
 
                                 -v /mydata/mysql-master02/data:/var/lib/mysql       将主机/mydata/mysql-master02/目录下的data目录挂载到容器的/var/lib/mysql 
 
-                                -d mysql/mysql-server:tag
+                                -dit mysql/mysql-server:tag
 
              //The container initialization might take some time. When the server is ready for use, the STATUS of the container in the output of the docker ps command changes 
                from (health: starting) to (healthy).
@@ -74,6 +77,9 @@
              [root]# docker ps
              CONTAINER ID   IMAGE                COMMAND                  CREATED             STATUS                              PORTS                NAMES
              a24888f0d6f4   mysql/mysql-server   "/entrypoint.sh my..."   14 seconds ago      Up 13 seconds (health: starting)    3306/tcp, 33060/tcp  mysql1
+
+             // 将容器启动方式改为always
+             [root]# docker container update --restart=always mysql-master02
 
              [root]# docker logs mysql-master02
 
@@ -111,7 +117,7 @@
 
                                 -v /mydata/mysql-slave01/data:/var/lib/mysql       将主机/mydata/mysql-slave01/目录下的data目录挂载到容器的/var/lib/mysql 
 
-                                -d mysql/mysql-server:tag
+                                -dit mysql/mysql-server:tag
 
              //The container initialization might take some time. When the server is ready for use, the STATUS of the container in the output of the docker ps command changes 
                from (health: starting) to (healthy).
@@ -119,6 +125,10 @@
              [root]# docker ps
              CONTAINER ID   IMAGE                COMMAND                  CREATED             STATUS                              PORTS                NAMES
              a24888f0d6f4   mysql/mysql-server   "/entrypoint.sh my..."   14 seconds ago      Up 13 seconds (health: starting)    3306/tcp, 33060/tcp  mysql1
+
+             // 将容器启动方式改为always
+             [root]# docker container update --restart=always mysql-slave01
+
 
              [root]# docker logs mysql-slave01
 
@@ -155,7 +165,7 @@
 
                                 -v /mydata/mysql-slave02/data:/var/lib/mysql       将主机/mydata/mysql-slave02/目录下的data目录挂载到容器的/var/lib/mysql 
 
-                                -d mysql/mysql-server:tag
+                                -dit mysql/mysql-server:tag
 
              //The container initialization might take some time. When the server is ready for use, the STATUS of the container in the output of the docker ps command changes 
                from (health: starting) to (healthy).
@@ -164,7 +174,12 @@
              CONTAINER ID   IMAGE                COMMAND                  CREATED             STATUS                              PORTS                NAMES
              a24888f0d6f4   mysql/mysql-server   "/entrypoint.sh my..."   14 seconds ago      Up 13 seconds (health: starting)    3306/tcp, 33060/tcp  mysql1
 
-             [root]# docker logs mysql-slave01
+
+             // 将容器启动方式改为always
+             [root]# docker container update --restart=always mysql-slave02
+
+
+             [root]# docker logs mysql-slave02
 
              [root]#  docker logs mysql-slave02 2>&1 | grep GENERATED
              GENERATED ROOT PASSWORD: Axegh3kAJyDLaRuBemecis&EShOs
