@@ -18,11 +18,11 @@
 
                                 -p 33305:3306 
 
-                                -v /mydata/mysql-master01/conf:/etc/mysql/conf.d  将主机/mydata/mysql-master01/目录下的conf/my.cnf挂载到容器的/etc/mysql/conf.d   
+                                -v /mydata/mysql-master01/conf:/etc/mysql/          将主机/mydata/mysql-master01/目录下的conf/挂载到容器的/etc/mysql/   
 
-                                -v /mydata/mysql-master01/logs:/log               将主机/mydata/mysql-master01/目录下的log目录挂载到容器的/logs 
+                                -v /mydata/mysql-master01/logs:/var/log/mysql       将主机/mydata/mysql-master01/目录下的log目录挂载到容器的/logs 
 
-                                -v /mydata/mysql-master01/data:/var/lib/mysql     将主机/mydata/mysql-master01/目录下的data目录挂载到容器的/var/lib/mysql 
+                                -v /mydata/mysql-master01/data:/var/lib/mysql       将主机/mydata/mysql-master01/目录下的data目录挂载到容器的/var/lib/mysql 
 
                                 -d mysql/mysql-server:tag
 
@@ -60,11 +60,11 @@
 
                                 -p 33307:3306 
 
-                                -v /mydata/mysql-master02/conf:/etc/mysql/conf.d  将主机/mydata/mysql-master02/目录下的conf/my.cnf挂载到容器的/etc/mysql/conf.d   
+                                -v /mydata/mysql-master02/conf:/etc/mysql/          将主机/mydata/mysql-master02/目录下的conf/挂载到容器的/etc/mysql/   
 
-                                -v /mydata/mysql-master02/logs:/log               将主机/mydata/mysql-master02/目录下的log目录挂载到容器的/logs 
+                                -v /mydata/mysql-master02/logs:/var/log/mysql       将主机/mydata/mysql-master02/目录下的log目录挂载到容器的/logs 
 
-                                -v /mydata/mysql-master02/data:/var/lib/mysql     将主机/mydata/mysql-master02/目录下的data目录挂载到容器的/var/lib/mysql 
+                                -v /mydata/mysql-master02/data:/var/lib/mysql       将主机/mydata/mysql-master02/目录下的data目录挂载到容器的/var/lib/mysql 
 
                                 -d mysql/mysql-server:tag
 
@@ -105,11 +105,11 @@
 
                                 -p 33308:3306 
 
-                                -v /mydata/mysql-slave01/conf:/etc/mysql/conf.d  将主机/mydata/mysql-slave01/目录下的conf/my.cnf挂载到容器的/etc/mysql/conf.d   
+                                -v /mydata/mysql-slave01/conf:/etc/mysql/          将主机/mydata/mysql-slave01/目录下的conf/挂载到容器的/etc/mysql/   
 
-                                -v /mydata/mysql-slave01/logs:/log               将主机/mydata/mysql-slave01/目录下的log目录挂载到容器的/logs 
+                                -v /mydata/mysql-slave01/logs:/var/log/mysql       将主机/mydata/mysql-slave01/目录下的log目录挂载到容器的/logs 
 
-                                -v /mydata/mysql-slave01/data:/var/lib/mysql     将主机/mydata/mysql-slave01/目录下的data目录挂载到容器的/var/lib/mysql 
+                                -v /mydata/mysql-slave01/data:/var/lib/mysql       将主机/mydata/mysql-slave01/目录下的data目录挂载到容器的/var/lib/mysql 
 
                                 -d mysql/mysql-server:tag
 
@@ -149,11 +149,11 @@
 
                                 -p 33309:3306 
 
-                                -v /mydata/mysql-slave02/conf:/etc/mysql/conf.d  将主机/mydata/mysql-slave02/目录下的conf/my.cnf挂载到容器的/etc/mysql/conf.d   
+                                -v /mydata/mysql-slave02/conf:/etc/mysql/          将主机/mydata/mysql-slave02/目录下的conf/挂载到容器的/etc/mysql/   
 
-                                -v /mydata/mysql-slave02/logs:/log               将主机/mydata/mysql-slave02/目录下的log目录挂载到容器的/logs 
+                                -v /mydata/mysql-slave02/logs:/var/log/mysql       将主机/mydata/mysql-slave02/目录下的log目录挂载到容器的/logs 
 
-                                -v /mydata/mysql-slave02/data:/var/lib/mysql     将主机/mydata/mysql-slave02/目录下的data目录挂载到容器的/var/lib/mysql 
+                                -v /mydata/mysql-slave02/data:/var/lib/mysql       将主机/mydata/mysql-slave02/目录下的data目录挂载到容器的/var/lib/mysql 
 
                                 -d mysql/mysql-server:tag
 
