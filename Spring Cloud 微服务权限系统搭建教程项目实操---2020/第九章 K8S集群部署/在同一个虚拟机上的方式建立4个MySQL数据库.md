@@ -24,7 +24,7 @@
 
                                 -v /mydata/mysql-master01/data:/var/lib/mysql       将主机/mydata/mysql-master01/目录下的data目录挂载到容器的/var/lib/mysql 
 
-                                -d mysql/mysql-server:tag
+                                -d mysql/mysql-server:tag /bin/bash -c "tail -f /dev/null"
 
              //The container initialization might take some time. When the server is ready for use, the STATUS of the container in the output of the docker ps command changes 
                from (health: starting) to (healthy).
