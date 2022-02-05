@@ -24,7 +24,8 @@
 
                                 -v /mydata/mysql-master01/data:/var/lib/mysql       将主机/mydata/mysql-master01/目录下的data目录挂载到容器的/var/lib/mysql 
 
-                                -dit mysql/mysql-server:tag                       // 必需要加 -dit 参数( -it 参数交互运行, -d 参数后台运行), 这样就能启动一个一直停留在后台运行的mysql了    
+                                -dit mysql/mysql-server:tag                       // 必需要加 -dit 参数( -it 参数交互运行, -d 参数后台运行), 这样就能启动一个一直停留在后台运行的
+                                                                                     mysql了, 就不会在下次启动容器后就马上退出
 
              //The container initialization might take some time. When the server is ready for use, the STATUS of the container in the output of the docker ps command changes 
                from (health: starting) to (healthy).
