@@ -10,6 +10,10 @@
 # 步骤
 
 * 环境准备
+* 主库配置
+* 主从同步测试
+
+## 环境准备
 
       主库   192.168.33.180:33305 ------>  从库  192.168.33.180:33308     
       操作系统：centos 8 stream
@@ -21,7 +25,7 @@
       从库数据存储位置  192.168.33.180中的 /mydata/mysql-slave01/
       
       
-* 主库配置
+## 主库配置
   
   （1）配置 my.cnf
   
@@ -91,8 +95,38 @@
 
 <a href="https://ibb.co/2NmMVs4"><img src="https://i.ibb.co/vYgdyQn/SLAVE.jpg" alt="SLAVE" border="0"></a>
                                
-**只要 Slave_IO_Running 和 Slave_SQL_Running 都是 yes,就表明 主从配置成功了，这两个进程的状态需全部为 YES，只要有一个为 NO，则复制就会停止**                              
+**只要 Slave_IO_Running 和 Slave_SQL_Running 都是 yes,就表明 主从配置成功了，这两个进程的状态需全部为 YES，只要有一个为 NO，则复制就会停止**       
+
+## 主从同步测试
+
+   在主库建表并插入数据
+   
+   [root]# docker exec -it mysql-master01 mysql -uroot -p
+   password:
+   
+   mysql> CREATE DATABASE test CHARACTER SET utf8mb4;
+   mysql> USE test;
+   mysql> CREATE TABLE 'person' (
+                 'id' int NOT NULL AUTO_INCREMENT
+                 'name' varchar(255) NOT NULL,
+                 PRIMARY KEY ('id')
+   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+   
+   插入两条数据:
+   
+   INSERT INTO `test`.`person` (` id`, `name`, `age`) VALUES ('1', '小明', '28');
+   INSERT INTO `test`.`person` (` id`, `name`, `age`) VALUES ('2', '李华', '30');
+
+   在从库查询
+   
+   [root]# docker restart mysql-slave01
+   [root]# docker exec -it mysql-slave01 mysql -uroot -p
+   password:
+   
+   mysql> select * from person;
+   
+   如果能看到小明和李华两条记录就表示主从复制成功了
+   
+   
    
 
-* 主从同步测试
-* 
