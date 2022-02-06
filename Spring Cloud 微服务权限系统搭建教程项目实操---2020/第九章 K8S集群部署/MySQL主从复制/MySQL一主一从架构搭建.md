@@ -36,6 +36,13 @@
   File| Position|Binlog_Do_DB|Binlog_Ignore_db|
   ---|---|---|---|
 
+               File：binglog 文件名，每次重启 mysql 服务都会生成一个新的 binlog 文件（序号递增），当文件大小超过限制（默认1G）时也会
+                     生产一个新的 binlog 文件。
+               Position：binlog 文件偏移量，等于binglog文件大小（字节数）
+               Binlog_Do_DB：要同步的数据库。不设置的话默认同步所有的数据库，包括 mysql 默认的数据库。
+               Binlog_Ignore_DB：不需要同步的数据库。
+
+
 
 
 
