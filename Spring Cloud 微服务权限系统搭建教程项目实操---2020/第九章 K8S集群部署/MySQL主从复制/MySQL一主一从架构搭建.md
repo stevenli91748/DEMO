@@ -2,7 +2,7 @@
 # 参考
 * [MySQL一主一从架构搭建](https://juejin.cn/post/6920477753368117261)
 * [细说show slave status参数详解（最全）【转】](https://www.cnblogs.com/paul8339/p/7615310.html)
-
+* [MySQL Binlog 介绍](https://juejin.cn/post/6844903794073960455)
 # 目录
 
 
