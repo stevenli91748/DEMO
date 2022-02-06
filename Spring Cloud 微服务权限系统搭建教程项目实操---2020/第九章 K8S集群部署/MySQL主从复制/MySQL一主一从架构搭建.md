@@ -89,7 +89,7 @@
          
          mysql> show slave status\G;
 
-<a href="https://ibb.co/LgmhMx0"><img src="https://i.ibb.co/B6bKmyf/SLAVE.jpg" alt="SLAVE" border="0"></a>
+<a href="https://ibb.co/2NmMVs4"><img src="https://i.ibb.co/vYgdyQn/SLAVE.jpg" alt="SLAVE" border="0"></a>
                                
 **只要 Slave_IO_Running 和 Slave_SQL_Running 都是 yes,就表明 主从配置成功了，这两个进程的状态需全部为 YES，只要有一个为 NO，则复制就会停止**                              
    
