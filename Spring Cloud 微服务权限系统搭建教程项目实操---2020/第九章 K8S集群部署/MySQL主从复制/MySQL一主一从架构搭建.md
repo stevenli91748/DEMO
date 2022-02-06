@@ -34,6 +34,7 @@
       mysql> show master status;
  
 File| Position|Binlog_Do_DB|Binlog_Ignore_db|
+---|---|---|---|
 
 
 
