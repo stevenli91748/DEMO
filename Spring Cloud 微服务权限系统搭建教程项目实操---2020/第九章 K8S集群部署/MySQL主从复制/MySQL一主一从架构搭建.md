@@ -83,8 +83,13 @@
                                 master_log_file='mysql-bin.000002',           \      master_log_file： 对应主库中 show master status命令输出
                                 master_log_pos=156;              \                   master_log_pos：  对应主库中 show master status命令输出
  
-                               
+     3)  开启从库
 
+         mysql> start slave;
+         
+         mysql> show slave status\G;
+
+<a href="https://ibb.co/LgmhMx0"><img src="https://i.ibb.co/B6bKmyf/SLAVE.jpg" alt="SLAVE" border="0"></a>
                                
                                  
 
