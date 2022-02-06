@@ -42,6 +42,7 @@
  
   File| Position|Binlog_Do_DB|Binlog_Ignore_db|
   ---|---|---|---|
+  mysql-bin.000002|156|||
 
                File：binglog 文件名，每次重启 mysql 服务都会生成一个新的 binlog 文件（序号递增），当文件大小超过限制（默认1G）时也会
                      生产一个新的 binlog 文件。
@@ -49,10 +50,44 @@
                Binlog_Do_DB：要同步的数据库。不设置的话默认同步所有的数据库，包括 mysql 默认的数据库。
                Binlog_Ignore_DB：不需要同步的数据库。
 
+   （3）处于数据安全的考虑，添加专门用于主从复制的用户，并仅授予其复制的权限创建用户
+        创建用户名为 backup，密码 123456
+        
+       mysql> CREATE USER 'backup'@'%' IDENTIFIED BY '123456'; 
+       mysql> grant replication slave on *.* to 'backup'@'%' with grant option;
 
 
-
-
+   （4） 设置 backup 远程连接的密码验证方式
+   
+        mysql> ALTER USER 'backup'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+        
 * 从库配置
+
+    1）配置 my.cnf 
+
+       在从库数据存储位置/mydata/mysql-slave01/conf目录下，创建my.cnf配置文件
+       
+       [mysqld]
+       sever_id=33307
+       
+       重启从库 
+       [root]# docker restart mysql-slave01
+       [root]# docker exec -it mysql-slave01 mysql -uroot -p
+       
+    2)  指定主库
+        
+        mysql> change master to master_host='192.168.33.180', \
+                                master_user='backup',         \
+                                master_port=33305,            \
+                                master_password='123456',     \
+                                master_log_file='mysql-bin.000002',           \      master_log_file： 对应主库中 show master status命令输出
+                                master_log_pos=156;              \                   master_log_pos：  对应主库中 show master status命令输出
+ 
+                               
+
+                               
+                                 
+
+
 * 主从同步测试
 * 
