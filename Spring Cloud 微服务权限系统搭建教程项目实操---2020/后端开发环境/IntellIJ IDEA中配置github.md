@@ -9,3 +9,6 @@
   *  [第二种方法：使用Maven插件为SpringBoot应用构建Docker镜像](http://www.macrozheng.com/#/reference/docker_maven)
   *  [第三种方法: 使用Docker Compose部署SpringBoot应用](http://www.macrozheng.com/#/reference/docker_compose)
   *  [第三种方法: 使用Jenkins一键打包部署SpringBoot应用](http://www.macrozheng.com/#/reference/jenkins)
+* 配置Restful接口测试工具
+  *  第一种方法：Postman
+  *  [第二种方法：HTTP Client](https://www.cnblogs.com/crazymakercircle/p/14317222.html)
