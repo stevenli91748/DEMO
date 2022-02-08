@@ -55,6 +55,35 @@
             mysql> grant all privileges on *.* to 'root'@'%' with grant option; //2、授权
             mysql> exit
 
+
+   **导入外部的sql文件到容器中**
+   
+           1） 安装上传下载插件，并将Windows上的目录dockument/sql/mall.sql 上传到虚拟机 mysql01 的 目录 /SQL下
+           
+              [root]# yum -y install lrzsz
+              
+           2) 将mall.sql 文件拷贝到 mysql-master01容器的 /container/sql目录下
+           
+              [root]# docker cp /sql/mall.sql mysql-master01:/container/sql
+              
+           3) 将sql文件导入到数据库
+           
+              [root]# docker exec -it mysql-master01 mysql -uroot -p
+              password:
+           
+              mysql> use mall;
+              mysql> source /container/sql/mall.sql;
+              
+              
+              
+          
+          
+
+
+
+
+
+
 ## 建立 MySQL-master02（192.168.33.180:33307） 数据库
              [root]# systemctl start docker
 
