@@ -6,6 +6,7 @@
   * [Intellij IDEA 协同 Git 与 GitHub 进行开发使用](https://www.jianshu.com/p/ea1703adf5cc)
 * 配置IntelliJ IDEA部署SpringBoot项目到Docker
   *  [第一种方法：使用Dockerfile为SpringBoot应用构建Docker镜像](http://www.macrozheng.com/#/reference/docker_file)
+     * [SpringBoot打包成Docker镜像](https://www.cnblogs.com/niceyoo/p/13796792.html)  
   *  [第二种方法：使用Maven插件为SpringBoot应用构建Docker镜像](http://www.macrozheng.com/#/reference/docker_maven)
   *  [第三种方法: 使用Docker Compose部署SpringBoot应用](http://www.macrozheng.com/#/reference/docker_compose)
   *  [第三种方法: 使用Jenkins一键打包部署SpringBoot应用](http://www.macrozheng.com/#/reference/jenkins)
