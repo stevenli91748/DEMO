@@ -13,3 +13,5 @@
 * 配置Restful接口测试工具
   *  [第一种方法：Postman](https://www.cnblogs.com/softwaretesterpz/p/13205666.html)
   *  [第二种方法：HTTP Client](https://www.cnblogs.com/crazymakercircle/p/14317222.html)
+* 配置线上调试環境
+  * [线上项目出BUG没法调试？推荐这款阿里开源的诊断神器！](http://www.macrozheng.com/#/reference/arthas_start) 
