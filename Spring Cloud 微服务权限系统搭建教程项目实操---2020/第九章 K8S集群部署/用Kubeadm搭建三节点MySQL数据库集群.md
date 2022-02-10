@@ -14,7 +14,7 @@ IP |role|visual machine name |
 * 2个写节点，每个写节点下又是2个读节点
 
 # 参考
-
+* [微服务架构---部署Mysql集群](https://www.kancloud.cn/xiaohuamao/micro/1444699)
 * [MySql主从复制，从原理到实践！](http://www.macrozheng.com/#/reference/mysql_master_slave)
 * [LVS+Keepalived实现mysql的负载均衡](https://www.cnblogs.com/tangyanbo/p/4305589.html)
 * [你还在代码里做读写分离么，试试这个中间件吧！](http://www.macrozheng.com/#/reference/gaea)
