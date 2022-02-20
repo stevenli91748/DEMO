@@ -12,7 +12,8 @@
      * [官方插件也增加了对Docker的支持](http://www.macrozheng.com/#/reference/springboot_docker_plugin) 
      * [使用Maven插件一键打包并推送到自建的Harbor镜像仓库中](http://www.macrozheng.com/#/reference/harbor_start) 
   *  [第三种方法: 使用Docker Compose部署SpringBoot应用](http://www.macrozheng.com/#/reference/docker_compose)
-  *  [第三种方法: 使用Jenkins一键打包部署SpringBoot应用](http://www.macrozheng.com/#/reference/jenkins)
+  *  [第四种方法: 使用Jenkins一键打包部署SpringBoot应用](http://www.macrozheng.com/#/reference/jenkins)
+  *  [第五种方法: 使用DockerFile+Jar+自动化脚本的形式来部署](http://www.macrozheng.com/#/technology/springboot_auto_deploy)
 * 配置Restful接口测试工具
   *  [第一种方法：Postman](https://www.cnblogs.com/softwaretesterpz/p/13205666.html)
   *  [第二种方法：HTTP Client](https://www.cnblogs.com/crazymakercircle/p/14317222.html)
