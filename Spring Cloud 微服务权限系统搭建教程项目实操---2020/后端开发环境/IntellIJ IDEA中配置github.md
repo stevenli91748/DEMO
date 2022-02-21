@@ -20,3 +20,5 @@
   *  [第二种方法：HTTP Client](https://www.cnblogs.com/crazymakercircle/p/14317222.html)
 * 配置线上调试環境
   * [线上项目出BUG没法调试？推荐这款阿里开源的诊断神器！](http://www.macrozheng.com/#/reference/arthas_start) 
+* 微服务如何聚合 API 文档
+  * [微服务如何聚合 API 文档](https://developer.51cto.com/article/701318.html) 
