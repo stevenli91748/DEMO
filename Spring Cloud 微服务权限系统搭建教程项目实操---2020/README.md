@@ -74,7 +74,7 @@
    * [凤凰架构部署例子: 部署 Istio](https://icyfenix.cn/appendix/istio.html)
    * [凤凰架构部署例子: 部署 Elastic Stack](https://icyfenix.cn/appendix/operation-env-setup/elk-setup.html)
    * [凤凰架构部署例子: 部署 Prometheus](https://icyfenix.cn/appendix/operation-env-setup/prometheus-setup.html)
-
+   * 本项目使用Kubernetes部署请参考：[mall-swarm微服务项目在K8S下的实践！](http://www.macrozheng.com/#/deploy/mall_swarm_deploy_k8s)
 ---
 
    * [9.0 集群环境准备](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E7%AC%AC%E4%B9%9D%E7%AB%A0%20K8S%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/9.1%20%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.md)
