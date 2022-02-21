@@ -64,13 +64,9 @@
     * [Windows环境部署](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E9%83%A8%E7%BD%B2/README.md)
     * [Docker环境部署 ](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E9%83%A8%E7%BD%B2/README.md)
     * [K8S集群环境部署](#K8S集群环境部署)   
-* 4 运维
-  * 环境搭建
-  * 项目启动
-    * 后台微服务启动
-      * 云环境启动
-      * 本地环境启动 
-    * 后台管理前端启动
+
+
+---
 
 ### K8S集群环境部署
    * [凤凰架构部署例子: 部署 Docker CE 容器环境 ](https://icyfenix.cn/appendix/deployment-env-setup/setup-docker.html)
