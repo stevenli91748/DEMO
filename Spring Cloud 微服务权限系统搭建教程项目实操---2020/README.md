@@ -114,6 +114,7 @@
        * [Prometheus+InfluxDB+Grafana 打造高逼格监控平台](https://mp.weixin.qq.com/s/1Iomp4GtMHgfVTwvGrFw4g)        
      * [9.3.19 用Kubeadm搭建三节点消息队列 Kafka系统集群](https://www.kancloud.cn/xiaohuamao/micro/1444699)
      * [9.3.20 用Kubeadm搭建三节点对象存储服务集群OSS](http://www.macrozheng.com/#/reference/minio)
+       * [自建对象存储服务（OSS）如何结合SpringBoot和Vue来实现文件存储](http://www.macrozheng.com/#/technology/minio_use) 
 ### SQL脚本
 
 [febs_cloud/febs_cloud_base.sql脚本](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/SQL%E8%84%9A%E6%9C%AC/Febs_Cloud/febs_cloud_base.sql)
