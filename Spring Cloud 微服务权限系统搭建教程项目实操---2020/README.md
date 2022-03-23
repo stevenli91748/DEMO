@@ -45,22 +45,41 @@
   * 项目结构 
 * 3 项目开发
   * 需求分析
+    * 用例视图
+      * 用例图---采用用例图描述需求 
   * 需求设计
-  * 概念架构设计==分层架构设计和API设计
-    * API设计
-      * REST API设计
-      * WEB API设计 
-  * 细化架构设计==模块设计 
-  * 数据库设计
+    * 设计视图
+      * 类图---描述静态结构
+      * 对象图 
+    * 进程视图
+      * 有状态图---描述动态行为
+      * 活动图---描述动态行为
+      * 序列图---描述动态行为
+      * 协作图---描述动态行为 
+  * 设计阶段
+    * 类图---对类的接口进行设计
+    * 概念架构设计==分层架构设计和API设计
+      * API设计
+        * REST API设计
+        * WEB API设计 
+    * 细化架构设计==模块设计 
+    * 数据库设计
   * 代码开发
     * [前端开发](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/README.md)
     * [后端开发](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/README.md)
   * 测试
+    * 单元测试--采用类图和类的规格说明书
+    * 集成测试--采用类图、协作图
+    * 系统测试--采用用例图
     * 接口测试
       * 前后端接口测试
       * 登录认证接口  
   * CI/CD
   * 部署
+    * 实现视图
+      * 构件图 
+    * 拓扑视图
+      * 部署图 
     * [Windows环境部署](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E9%83%A8%E7%BD%B2/README.md)
     * [Docker环境部署 ](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E9%83%A8%E7%BD%B2/README.md)
     * [K8S集群环境部署](#K8S集群环境部署)   
