@@ -27,6 +27,22 @@
   * 常见架构与工具
     * [各种开发工具](https://weread.qq.com/web/reader/71032d60719ad5af7104ca2k6f4322302126f4922f45dec) 
     * [Java中的常见架构与工具](https://weread.qq.com/web/reader/6ba32c40726e7c066bad7edk73532580243735b90b45ac8)
+      * 自动化测试架构
+      * 自动化持续集成部署架构
+      * 高并发架构
+      * 响应式编程架构
+      * 负载均衡架构
+      * 监控工具与监控架构
+      * 其他工具与架构 
+      * 代码分析和审查工具
+        * 代码分析和审查
+          * [java静态代码分析工具](https://weread.qq.com/web/reader/71032d60719ad5af7104ca2kaab325601eaab3238922e53)
+            * Checkstyle
+            * FindBugs
+            * P3C---相对于FindBugs等其他工具，阿里巴巴推出的P3C插件对代码缺陷的描述及改进意见十分详细，是开发人员提升代码质量的必备工具
+          * [代码审查](https://weread.qq.com/web/reader/71032d60719ad5af7104ca2k9bf32f301f9bf31c7ff0a60)
+            * [Phabricator---Facebook的内部审查工具](https://weread.qq.com/web/reader/71032d60719ad5af7104ca2k9bf32f301f9bf31c7ff0a60)
+            * [Gerrit---是Google为Android系统研发量身定制的一套免费的开源代码审查系统 ](https://weread.qq.com/web/reader/71032d60719ad5af7104ca2k9bf32f301f9bf31c7ff0a60)
   * [Maven环境搭建](https://github.com/stevenli91748/Engineering-special/blob/master/Maven/Maven%E9%85%8D%E7%BD%AE.md)
   * [IDEA环境搭建](https://github.com/stevenli91748/DEMO/blob/master/Spring%20Cloud%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%93%8D---2020/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/IntellIJ%20IDEA%E4%B8%AD%E9%85%8D%E7%BD%AEgithub.md)
   * Docker
