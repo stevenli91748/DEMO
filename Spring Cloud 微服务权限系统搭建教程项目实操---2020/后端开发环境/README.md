@@ -28,6 +28,7 @@
     * [各种开发工具](https://weread.qq.com/web/reader/71032d60719ad5af7104ca2k6f4322302126f4922f45dec) 
     * [Java中的常见架构与工具](https://weread.qq.com/web/reader/6ba32c40726e7c066bad7edk73532580243735b90b45ac8)
       * 自动化测试架构
+        * [测试人员必备：常用自动化测试工具](https://cloud.tencent.com/developer/article/1897392)
       * 自动化持续集成部署架构
       * 高并发架构
       * 响应式编程架构
